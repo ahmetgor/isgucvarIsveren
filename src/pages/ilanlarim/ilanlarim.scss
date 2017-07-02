@@ -1,0 +1,30 @@
+page-ilanlarim {
+  .firma{
+    color: blue;
+  }
+
+  .my-class {
+  color: red;
+  }
+
+  .spinner-container {
+      text-align: center;
+      padding: 10px;
+
+  }
+
+  ion-avatar {
+    // font-size:100px; /* as big size as you want */
+    // max-height: 100px !important;
+
+  //   max-width: 50px;
+  //   max-height: 50px;
+  img {
+    // top: 10px;
+    // left: 0px;
+    min-width: 60px ;
+    min-height: 60px ;
+      // font-size: 100px !important;
+  }
+  }
+}
