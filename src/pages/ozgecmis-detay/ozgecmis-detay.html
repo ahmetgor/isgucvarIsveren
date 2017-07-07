@@ -14,5 +14,36 @@
 
 
 <ion-content padding>
+  <ion-row>
+    <ion-col>
+  <!-- <div *ngIf="!checkBasvuru(ilan)"> -->
+  <button ion-button block icon-left color="primary" (click)="basvur(ilan)">
+    <ion-icon name="eye"></ion-icon>
+    Okundu</button>
+  <!-- </div> -->
+  <!-- <div *ngIf="checkBasvuru(ilan)">
+  <button ion-button block icon-left color="secondary" (click)="deleteBasvur(ilan)">
+    <ion-icon name="ios-arrow-dropleft"></ion-icon>
+    Başvuru İptal</button>
+  </div> -->
+  </ion-col>
+  <ion-col>
+  <!-- <div *ngIf="!checkKaydedilen(ilan)"> -->
+  <button ion-button block icon-left color="yellow" (click)="kaydet(ilan)">
+    <ion-icon name="checkmark-circle"></ion-icon>
+    Beğen</button>
+  <!-- </div> -->
+  <!-- <div *ngIf="checkKaydedilen(ilan)">
+  <button ion-button block icon-left color="primary" (click)="deleteKaydet(ilan)">
+    <ion-icon name="ios-arrow-dropleft"></ion-icon>
+    Kayıt İptal</button>
+  </div> -->
+  </ion-col>
+  <ion-col>
+    <button ion-button block icon-left color="secondary" (click)="kaydet(ilan)">
+      <ion-icon name="thumbs-up"></ion-icon>
+      Çok Beğen</button>
+  </ion-col>
+  </ion-row>
 
 </ion-content>

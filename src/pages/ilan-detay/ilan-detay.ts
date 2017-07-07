@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { OzgecmislerimPage } from '../ozgecmislerim/ozgecmislerim';
+
 
 /**
  * Generated class for the IlanDetayPage page.
@@ -30,6 +32,14 @@ export class IlanDetayPage {
     //   this.ilanSer.getIlan(this.ilanId)
     //   .then((ilan) => this.ilan = ilan)
     // }
+  }
+
+  toOzgecmis() {
+    // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
+    console.log(JSON.stringify(this.ilan)+'ilan');
+    this.navCtrl.push(OzgecmislerimPage, {
+      ilan: this.ilan.id
+    });
   }
   getDays(d1) {
     // console.log(Date.parse(d1)+' date');

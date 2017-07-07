@@ -17,5 +17,14 @@
 
 
 <ion-content padding>
+  <ion-list text-wrap>
+    <button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="itemTapped($event)">
+      <ion-thumbnail item-left>
+        <img [src]="ozgecmis.resim.link">
+      </ion-thumbnail>
+
+      <h1>{{ozgecmis.isim}} {{ozgecmis.soyisim}}</h1>
+      <p>{{ozgecmis.unvan}}</p>
+      <p>{{getAge(ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.yilTecrube}} yıl tecrübe</p>
 
 </ion-content>

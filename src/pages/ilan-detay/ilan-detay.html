@@ -14,6 +14,9 @@
 </ion-buttons>
     <ion-title>İlan Detayı</ion-title>
   </ion-navbar>
+</ion-header>
+
+<ion-content>
 
   <div *ngIf="ilan">
 
@@ -48,11 +51,13 @@
     </ion-col>
   </ion-row>
 </ion-item>
-</div>
-</ion-header>
+<!-- <ion-toolbar> -->
+<button ion-button block icon-left color="primary" (click)="toOzgecmis()">
+  <ion-icon name="person"></ion-icon>
+  Özgeçmişler</button>
+<!-- </ion-toolbar> -->
 
-<ion-content>
-  <div *ngIf="ilan">
+  <!-- <div *ngIf="ilan"> -->
 
   <ion-card>
   <ion-card-header>

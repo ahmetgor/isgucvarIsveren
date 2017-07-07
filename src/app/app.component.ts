@@ -16,7 +16,7 @@ import { TumIlanlarPage } from '../pages/tum-ilanlar/tum-ilanlar';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = IlanlarimPage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
