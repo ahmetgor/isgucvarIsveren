@@ -14,10 +14,10 @@ import { UserSerProvider } from './user-ser';
 @Injectable()
 export class OzgecmisSerProvider {
 
-  url : string = 'https://serverisgucvar.herokuapp.com/api/ozgecmis/';
-  url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/avatar/';
-  // url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
-  // url1: string = 'http://127.0.0.1:8080/api/tools/avatar/';
+  // url : string = 'https://serverisgucvar.herokuapp.com/api/ozgecmis/';
+  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/avatar/';
+  url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
+  url1: string = 'http://127.0.0.1:8080/api/tools/avatar/';
   ozgecmisId: string;
   user: any;
   loading: any;

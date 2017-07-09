@@ -16,15 +16,37 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-searchbar  [(ngModel)]="searchTerm"  [formControl]="searchControl"></ion-searchbar>
+  <div *ngIf="searching" class="spinner-container">
+      <ion-spinner></ion-spinner>
+  </div>
   <ion-list text-wrap>
-    <button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="itemTapped($event)">
+    <button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis.ozgecmis)">
+      <!-- <div *ngIf="ozgecmis.ozgecmis.resim"> -->
       <ion-thumbnail item-left>
-        <img [src]="ozgecmis.resim.link">
+        <img [src]="ozgecmis.ozgecmis.resim.link">
       </ion-thumbnail>
+    <!-- </div> -->
+    <!-- <div item-content> -->
 
-      <h1>{{ozgecmis.isim}} {{ozgecmis.soyisim}}</h1>
-      <p>{{ozgecmis.unvan}}</p>
-      <p>{{getAge(ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.yilTecrube}} yıl tecrübe</p>
+    <!-- <ion-row>
+      <ion-col> -->
+      <h2>{{ozgecmis.ozgecmis.isim}} {{ozgecmis.ozgecmis.soyisim}}</h2>
+    <!-- </ion-col>
+  </ion-row>
+      <ion-row>
+        <ion-col> -->
+      <p>{{ozgecmis.ozgecmis.unvan}}</p>
+    <!-- </ion-col>
+  </ion-row>
+      <ion-row>
+        <ion-col> -->
+      <p>{{getAge(ozgecmis.ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.ozgecmis.yilTecrube}} yıl tecrübe</p>
+    <!-- </ion-col>
+  </ion-row> -->
+<!-- </div> -->
+    </button>
+  </ion-list>
 
 </ion-content>

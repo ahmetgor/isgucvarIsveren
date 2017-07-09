@@ -19,6 +19,10 @@ import { OzgecmisSerProvider } from '../providers/ozgecmis-ser';
 import { UserSerProvider } from '../providers/user-ser';
 import { AktiviteSerProvider } from '../providers/aktivite-ser';
 import { HttpModule } from '@angular/http';
+import { IonicStorageModule } from '@ionic/storage';
+
+import { DatePipe } from '../pipes/date-pipe';
+
 
 @NgModule({
   declarations: [
@@ -30,11 +34,13 @@ import { HttpModule } from '@angular/http';
     TumOzgecmislerPage,
     IlanlarimPage,
     IlanDetayPage,
-    TumIlanlarPage
+    TumIlanlarPage,
+    DatePipe
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     HttpModule
   ],
   bootstrap: [IonicApp],

@@ -13,12 +13,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'ozgecmis-detay.html',
 })
 export class OzgecmisDetayPage {
+  ozgecmis: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.ozgecmis = this.navParams.get('ozgecmisTapped');
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OzgecmisDetayPage');
   }
-
+  
+  getAge(date) {
+    return ~~(((new Date()).getTime() - (new Date(date)).getTime()) / (31557600000));
+  }
 }

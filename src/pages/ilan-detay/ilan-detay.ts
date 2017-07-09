@@ -38,7 +38,7 @@ export class IlanDetayPage {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(this.ilan)+'ilan');
     this.navCtrl.push(OzgecmislerimPage, {
-      ilan: this.ilan.id
+      ilanId: this.ilan._id
     });
   }
   getDays(d1) {
