@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, NavParams, ModalController, Events, IonicPage} from 'ionic-angular';
 import { IlanSerProvider } from '../../providers/ilan-ser';
 import { IlanDetayPage } from '../ilan-detay/ilan-detay';
 import { FormControl } from '@angular/forms';
 import { UserSerProvider} from '../../providers/user-ser';
-
-// import { BasvuruSer } from '../../providers/basvuru-ser';
-
 import 'rxjs/add/operator/debounceTime';
 /**
  * Generated class for the IlanlarimPage page.

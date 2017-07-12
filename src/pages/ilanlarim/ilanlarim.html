@@ -16,8 +16,8 @@
 </ion-header>
 
 
-<ion-content >
-  <ion-searchbar  [(ngModel)]="searchTerm"  [formControl]="searchControl"></ion-searchbar>
+<ion-content>
+  <ion-searchbar  [(ngModel)]="searchTerm"  [formControl]="searchControl" autocomplete="on"></ion-searchbar>
   <div *ngIf="searching" class="spinner-container">
       <ion-spinner></ion-spinner>
   </div>

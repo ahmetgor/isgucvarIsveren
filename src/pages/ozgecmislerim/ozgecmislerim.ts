@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { FormControl } from '@angular/forms';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
-
 
 /**
  * Generated class for the OzgecmislerimPage page.
@@ -18,6 +17,7 @@ import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
 })
 export class OzgecmislerimPage {
 
+  aktivite: string = 'okunan';
   ilanId: string;
   ozgecmisList: any;
   searching: boolean = false;
@@ -28,7 +28,8 @@ export class OzgecmislerimPage {
   scrollEnable: boolean = true;
   detayAra: any = {};
   sirala: any = '{}';
-
+  showSearchbar: boolean = true;
+  @ViewChild('content') content: Content;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ozgecmisSer: OzgecmisSerProvider) {
@@ -68,6 +69,17 @@ export class OzgecmislerimPage {
       ozgecmisTapped: ozgecmis
     });
   }
+
+  toggleSearchbar() {
+    this.showSearchbar = !this.showSearchbar;
+    // this.content.resize();
+  }
+
+  toggleSegment() {
+    this.showSearchbar = !this.showSearchbar;
+    this.content.resize();
+  }
+
 
   getAge(date) {
     return ~~(((new Date()).getTime() - (new Date(date)).getTime()) / (31557600000));
