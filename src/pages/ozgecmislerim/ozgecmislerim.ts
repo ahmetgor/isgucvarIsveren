@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { FormControl } from '@angular/forms';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the OzgecmislerimPage page.
@@ -17,7 +18,8 @@ import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
 })
 export class OzgecmislerimPage {
 
-  aktivite: string = 'okunan';
+  userId: string
+  aktivite: string = 'okundu';
   ilanId: string;
   ozgecmisList: any;
   searching: boolean = false;
@@ -32,9 +34,14 @@ export class OzgecmislerimPage {
   @ViewChild('content') content: Content;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ozgecmisSer: OzgecmisSerProvider) {
+              public ozgecmisSer: OzgecmisSerProvider, public storage: Storage) {
     this.searchControl = new FormControl();
     this.ilanId = this.navParams.get('ilanId');
+    // this.storage.get('user')
+    //     .then((user) => {
+    //       this.userId = user._id;
+    //     });
+    this.userId = "59163aa74be8d6e2c51b8647";
 
   }
 
@@ -53,6 +60,8 @@ export class OzgecmislerimPage {
 
   ozgecmisListele(){
     this.detayAra.basvuruId = this.ilanId;
+    this.detayAra.segment = this.aktivite;
+    this.detayAra.userId = this.userId;
     this.searching = true;
     this.ozgecmisSer.getOzgecmisler(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ozgecmisler => {

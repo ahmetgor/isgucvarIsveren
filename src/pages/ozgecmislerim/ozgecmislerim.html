@@ -18,11 +18,11 @@
 </ion-buttons>
   </ion-navbar>
   <ion-toolbar >
-    <ion-segment [(ngModel)]="aktivite" color="dark">
+    <ion-segment [(ngModel)]="aktivite" color="dark" (ionChange)="ozgecmisListele()">
       <ion-segment-button value="okunmayan">
         <ion-icon name="briefcase"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="okunan">
+      <ion-segment-button value="okundu">
         <ion-icon name="eye"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="begen">
@@ -40,32 +40,67 @@
   <div *ngIf="searching" class="spinner-container">
       <ion-spinner></ion-spinner>
   </div>
+
+  <!-- <div [ngSwitch]="aktivite">
+    <div  *ngSwitchCase="'okunmadı'"> -->
   <ion-list text-wrap>
     <button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis.ozgecmis)">
-      <!-- <div *ngIf="ozgecmis.ozgecmis.resim"> -->
       <ion-thumbnail item-left>
         <img [src]="ozgecmis.ozgecmis.resim.link">
       </ion-thumbnail>
-    <!-- </div> -->
-    <!-- <div item-content> -->
 
-    <!-- <ion-row>
-      <ion-col> -->
       <h2>{{ozgecmis.ozgecmis.isim}} {{ozgecmis.ozgecmis.soyisim}}</h2>
-    <!-- </ion-col>
-  </ion-row>
-      <ion-row>
-        <ion-col> -->
       <p>{{ozgecmis.ozgecmis.unvan}}</p>
-    <!-- </ion-col>
-  </ion-row>
-      <ion-row>
-        <ion-col> -->
       <p>{{getAge(ozgecmis.ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.ozgecmis.yilTecrube}} yıl tecrübe</p>
-    <!-- </ion-col>
-  </ion-row> -->
-<!-- </div> -->
+
     </button>
   </ion-list>
+<!-- </div> -->
+
+<!-- <div  *ngSwitchCase="'okundu'">
+<ion-list text-wrap>
+<button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis.ozgecmis)">
+  <ion-thumbnail item-left>
+    <img [src]="ozgecmis.ozgecmis.resim.link">
+  </ion-thumbnail>
+
+  <h2>{{ozgecmis.ozgecmis.isim}} {{ozgecmis.ozgecmis.soyisim}}</h2>
+  <p>{{ozgecmis.ozgecmis.unvan}}</p>
+  <p>{{getAge(ozgecmis.ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.ozgecmis.yilTecrube}} yıl tecrübe</p>
+
+</button>
+</ion-list>
+</div>
+
+<div  *ngSwitchCase="'begen'">
+<ion-list text-wrap>
+<button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis.ozgecmis)">
+  <ion-thumbnail item-left>
+    <img [src]="ozgecmis.ozgecmis.resim.link">
+  </ion-thumbnail>
+
+  <h2>{{ozgecmis.ozgecmis.isim}} {{ozgecmis.ozgecmis.soyisim}}</h2>
+  <p>{{ozgecmis.ozgecmis.unvan}}</p>
+  <p>{{getAge(ozgecmis.ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.ozgecmis.yilTecrube}} yıl tecrübe</p>
+
+</button>
+</ion-list>
+</div>
+
+<div  *ngSwitchCase="'cokbegen'">
+<ion-list text-wrap>
+<button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis.ozgecmis)">
+  <ion-thumbnail item-left>
+    <img [src]="ozgecmis.ozgecmis.resim.link">
+  </ion-thumbnail>
+
+  <h2>{{ozgecmis.ozgecmis.isim}} {{ozgecmis.ozgecmis.soyisim}}</h2>
+  <p>{{ozgecmis.ozgecmis.unvan}}</p>
+  <p>{{getAge(ozgecmis.ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.ozgecmis.yilTecrube}} yıl tecrübe</p>
+
+</button>
+</ion-list>
+</div>
+</div> -->
 
 </ion-content>
