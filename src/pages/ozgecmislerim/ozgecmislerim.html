@@ -19,16 +19,17 @@
   </ion-navbar>
   <ion-toolbar >
     <ion-segment [(ngModel)]="aktivite" color="dark" (ionChange)="ozgecmisListele()">
-      <ion-segment-button value="okunmayan">
-        <ion-icon name="briefcase"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="okundu">
+      <ion-segment-button value="okunmadı">
         <ion-icon name="eye"></ion-icon>
       </ion-segment-button>
+      <ion-segment-button value="okundu">
+        <ion-icon name="thumbs-down"></ion-icon>
+      </ion-segment-button>
       <ion-segment-button value="begen">
-        <ion-icon name="checkmark-circle"></ion-icon>
+        <ion-icon name="thumbs-up"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="cokbegen">
+        <ion-icon name="thumbs-up"></ion-icon>
         <ion-icon name="thumbs-up"></ion-icon>
       </ion-segment-button>
     </ion-segment>

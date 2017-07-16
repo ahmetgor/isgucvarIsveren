@@ -12,9 +12,7 @@
 
 </ion-header>
 
-
 <ion-content>
-
   <div *ngIf="ozgecmis">
 
   <ion-card class="item">
@@ -29,13 +27,12 @@
   </ion-item>
 </ion-card>
 
+<div *ngIf="aktivite=='okunmadı'">
 <ion-row>
   <ion-col>
-<!-- <div *ngIf="!checkBasvuru(ilan)"> -->
-<button ion-button block icon-left color="primary" (click)="basvur(ilan)">
-  <ion-icon name="eye"></ion-icon>
-  Okundu</button>
-<!-- </div> -->
+<button ion-button block icon-left color="danger" (click)="ozgecmisBegen('okundu', 'begen')">
+  <ion-icon name="thumbs-down"></ion-icon>
+  Beğenme</button>
 <!-- <div *ngIf="checkBasvuru(ilan)">
 <button ion-button block icon-left color="secondary" (click)="deleteBasvur(ilan)">
   <ion-icon name="ios-arrow-dropleft"></ion-icon>
@@ -44,8 +41,8 @@
 </ion-col>
 <ion-col>
 <!-- <div *ngIf="!checkKaydedilen(ilan)"> -->
-<button ion-button block icon-left color="yellow" (click)="kaydet(ilan)">
-  <ion-icon name="checkmark-circle"></ion-icon>
+<button ion-button block icon-left color="yellow" (click)="ozgecmisBegen('begen', 'begen')">
+  <ion-icon name="thumbs-up"></ion-icon>
   Beğen</button>
 <!-- </div> -->
 <!-- <div *ngIf="checkKaydedilen(ilan)">
@@ -55,11 +52,18 @@
 </div> -->
 </ion-col>
 <ion-col>
-  <button ion-button block icon-left color="secondary" (click)="kaydet(ilan)">
+  <button ion-button block icon-left color="secondary" (click)="ozgecmisBegen('cokbegen', 'begen')">
+    <ion-icon name="thumbs-up"></ion-icon>
     <ion-icon name="thumbs-up"></ion-icon>
     Çok Beğen</button>
 </ion-col>
 </ion-row>
+</div>
+<div *ngIf="aktivite!='okunmadı'">
+<button ion-button block icon-left color="primary" (click)="ozgecmisBegen(aktivite, 'begenme')">
+  <ion-icon name="ios-arrow-dropleft"></ion-icon>
+  Tercih iptal</button>
+</div>
 
 <div [class.ozgecmis]="!ozgecmis.enabled">
 

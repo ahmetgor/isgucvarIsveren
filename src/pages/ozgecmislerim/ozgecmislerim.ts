@@ -18,8 +18,8 @@ import { Storage } from '@ionic/storage';
 })
 export class OzgecmislerimPage {
 
-  userId: string
-  aktivite: string = 'okundu';
+  userId: any;
+  aktivite: string = 'okunmadı';
   ilanId: string;
   ozgecmisList: any;
   searching: boolean = false;
@@ -42,7 +42,6 @@ export class OzgecmislerimPage {
     //       this.userId = user._id;
     //     });
     this.userId = "59163aa74be8d6e2c51b8647";
-
   }
 
   ionViewDidLoad() {
@@ -75,7 +74,8 @@ export class OzgecmislerimPage {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ozgecmis)+'ozgecmisDetay');
     this.navCtrl.push(OzgecmisDetayPage, {
-      ozgecmisTapped: ozgecmis
+      ozgecmisTapped: ozgecmis,
+      aktivite: this.aktivite
     });
   }
 

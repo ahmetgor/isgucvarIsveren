@@ -68,6 +68,27 @@ export class OzgecmisSerProvider {
   });
   }
 
+  begenOzgecmis(ozgecmisId: string, kayit: any, begen: string){
+    this.showLoader();
+    return new Promise((resolve, reject) => {
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', this.authService.token);
+
+      this.http.post(this.url+begen+'/' + ozgecmisId, JSON.stringify(kayit), {headers: headers})
+        .map(res => res.json())
+        .subscribe(res => {
+
+          this.loading.dismiss();
+          resolve(res);
+        }, (err) => {
+          this.loading.dismiss();
+          this.presentToast('Özgeçmiş güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+        });
+    });
+  }
+
 presentToast(message) {
 let toast = this.toastCtrl.create({
   message: message,
@@ -80,5 +101,13 @@ toast.onDidDismiss(() => {
   // console.log('Dismissed toast');
 });
 toast.present();
+}
+
+showLoader(){
+
+    this.loading = this.loadingCtrl.create({
+        content: 'İşlem yapılıyor...'
+    });
+    this.loading.present();
 }
 }
