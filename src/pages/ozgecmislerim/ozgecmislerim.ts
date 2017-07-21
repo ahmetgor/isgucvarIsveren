@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, Events } from 'ionic-angular';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { FormControl } from '@angular/forms';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
@@ -17,7 +17,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'ozgecmislerim.html',
 })
 export class OzgecmislerimPage {
-
+  olusturan: any;
   userId: any;
   aktivite: string = 'okunmadı';
   ilanId: string;
@@ -34,14 +34,17 @@ export class OzgecmislerimPage {
   @ViewChild('content') content: Content;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ozgecmisSer: OzgecmisSerProvider, public storage: Storage) {
+              public ozgecmisSer: OzgecmisSerProvider, public storage: Storage,
+              public events: Events) {
     this.searchControl = new FormControl();
-    this.ilanId = this.navParams.get('ilanId');
+    // this.ilanId = this.navParams.get('ilanId');
     // this.storage.get('user')
     //     .then((user) => {
     //       this.userId = user._id;
+    //       this.olusturan = user.isim;
     //     });
     this.userId = "59163aa74be8d6e2c51b8647";
+    this.olusturan = "agor1@agor.com";
   }
 
   ionViewDidLoad() {
@@ -55,10 +58,25 @@ export class OzgecmislerimPage {
     console.log('ilanlistele searchkontrol çağrıldı');
     this.ozgecmisListele();
 });
+
+this.events.subscribe('ozgecmis:begen', (a) => {
+  this.scrollEnable = true;
+  // this.infiniteScroll.enable(true);
+  this.skip = 0;
+  // if(a) {
+  //   this.detayAra = {};
+  //   this.sirala = '{}';
+  // }
+  console.log('ozgecmis begen event çağrıldı');
+  this.ozgecmisListele();
+});
   }
 
   ozgecmisListele(){
-    this.detayAra.basvuruId = this.ilanId;
+    // let basvurular = [];
+    // basvurular.push(this.ilanId);
+    // this.detayAra.basvuruId = this.ilanId;
+    this.detayAra.olusturan = this.olusturan;
     this.detayAra.segment = this.aktivite;
     this.detayAra.userId = this.userId;
     this.searching = true;
@@ -88,7 +106,6 @@ export class OzgecmislerimPage {
     this.showSearchbar = !this.showSearchbar;
     this.content.resize();
   }
-
 
   getAge(date) {
     return ~~(((new Date()).getTime() - (new Date(date)).getTime()) / (31557600000));

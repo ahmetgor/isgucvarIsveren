@@ -33,7 +33,8 @@ export class IlanlarimPage {
     public ilanSer: IlanSerProvider, public modalCtrl: ModalController,
     public events: Events, public userAuth: UserSerProvider) {
 
-      this.detayAra.olusturan = this.userAuth.token.email;
+      // this.detayAra.olusturan = this.userAuth.user.email;
+      this.detayAra.olusturan = "agor@agor.com";
       this.searchControl = new FormControl();
 
   }

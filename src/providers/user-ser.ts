@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserSerProvider {
   token: any = {};
+  user: any = {};
   url : string = 'https://serverisgucvar.herokuapp.com/api/auth/';
   url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
 

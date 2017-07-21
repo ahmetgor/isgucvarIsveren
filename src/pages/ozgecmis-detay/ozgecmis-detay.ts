@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 
 /**
@@ -19,7 +19,7 @@ export class OzgecmisDetayPage {
   begenBody: any = {};
   aktivite: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ozgecmisSer: OzgecmisSerProvider) {
+              public ozgecmisSer: OzgecmisSerProvider, public events: Events) {
     this.ozgecmis = this.navParams.get('ozgecmisTapped');
     this.aktivite = this.navParams.get('aktivite');
     // this.storage.get('user')
@@ -39,6 +39,7 @@ export class OzgecmisDetayPage {
     this.ozgecmisSer.begenOzgecmis(this.ozgecmis._id, this.begenBody, begen);
     if (this.aktivite=="okunmadı") this.aktivite = segment;
     else this.aktivite = "okunmadı";
+    this.events.publish('ozgecmis:begen');
 
   }
 
