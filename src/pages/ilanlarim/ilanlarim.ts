@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { NavController, NavParams, ModalController, Events, IonicPage} from 'ionic-angular';
 import { IlanSerProvider } from '../../providers/ilan-ser';
 import { IlanDetayPage } from '../ilan-detay/ilan-detay';
+import { IlanFiltrelePage } from '../ilan-filtrele/ilan-filtrele';
 import { FormControl } from '@angular/forms';
 import { UserSerProvider} from '../../providers/user-ser';
 import 'rxjs/add/operator/debounceTime';
@@ -53,6 +54,20 @@ export class IlanlarimPage {
     console.log('searchkontrol çağrıldı');
   // }
 });
+this.events.subscribe('ilan:filtered', (a) => {
+  this.scrollEnable = true;
+  // this.infiniteScroll.enable(true);
+  this.skip = 0;
+  if(a) {
+    // console.log('filtre true');
+    this.detayAra = {};
+    this.detayAra.olusturan = "agor@agor.com";
+    this.sirala = '{}';
+  }
+  console.log('ilanlistele filtre çağrıldı');
+  this.ilanListele();
+
+});
   }
 
   ilanListele() {
@@ -72,6 +87,13 @@ export class IlanlarimPage {
       ilan: ilan
       // basvurulist: this.basvuruSer.basvuruList,
       // kaydedilenlist: this.basvuruSer.kaydedilenList
+    });
+  }
+
+  presentFilter(myEvent) {
+    this.navCtrl.push(IlanFiltrelePage, {
+      detayAra: this.detayAra,
+      sirala: this.sirala
     });
   }
 

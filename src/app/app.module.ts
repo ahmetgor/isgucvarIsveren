@@ -9,6 +9,8 @@ import { IlanlarimPage } from '../pages/ilanlarim/ilanlarim';
 import { TumIlanlarPage } from '../pages/tum-ilanlar/tum-ilanlar';
 import { OzgecmisDetayPage} from '../pages/ozgecmis-detay/ozgecmis-detay';
 import { IlanDetayPage } from '../pages/ilan-detay/ilan-detay';
+import { IlanFiltrelePage } from '../pages/ilan-filtrele/ilan-filtrele';
+import { OzgecmisFiltrelePage } from '../pages/ozgecmis-filtrele/ozgecmis-filtrele';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +33,9 @@ import { DatePipe } from '../pipes/date-pipe';
     IlanlarimPage,
     IlanDetayPage,
     TumIlanlarPage,
-    DatePipe
+    DatePipe,
+    IlanFiltrelePage,
+    OzgecmisFiltrelePage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,9 @@ import { DatePipe } from '../pipes/date-pipe';
     TumOzgecmislerPage,
     IlanlarimPage,
     IlanDetayPage,
-    TumIlanlarPage
+    TumIlanlarPage,
+    IlanFiltrelePage,
+    OzgecmisFiltrelePage
   ],
   providers: [
     StatusBar,

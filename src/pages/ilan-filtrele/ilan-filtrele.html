@@ -1,0 +1,86 @@
+<!--
+  Generated template for the IlanFiltrelePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>İlan Filtrele</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="detayAra">
+
+  <!-- <ion-item-group>
+    <ion-item-divider color="light"></ion-item-divider>
+  <ion-item>
+  <ion-label color="secondary">Sırala:</ion-label>
+  <ion-select [(ngModel)]="sirala" cancelText="İptal" okText="Tamam">
+    <ion-option value='{}'>En Uygun</ion-option>
+    <ion-option value='{"olusturmaTarih" :-1}'>En Erken</ion-option>
+  </ion-select>
+</ion-item>
+</ion-item-group> -->
+
+<!-- <ion-item-group>
+  <ion-item-divider color="light"></ion-item-divider> -->
+  <ion-item>
+  <ion-label floating color="primary">İl</ion-label>
+  <ion-select [(ngModel)]="detayAra.il" interface="popover" cancelText="İptal" okText="Tamam">
+    <!-- <ion-option value='Konumum'>Konumum</ion-option> -->
+    <ion-option *ngFor="let item of sehirler" value='{{item.sehir}}'>{{item.sehir}}</ion-option>
+
+    <!-- <ion-option value='İstanbul'>İstanbul</ion-option>
+    <ion-option value='Ankara'>Ankara</ion-option>
+    <ion-option value='Kahramanmaraş'>Kahramanmaraş</ion-option> -->
+  </ion-select>
+  </ion-item>
+<ion-item>
+    <ion-label floating color="primary">Firma</ion-label>
+    <ion-input type="text" [(ngModel)]="detayAra.firma"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label floating color="primary">Tecrübe</ion-label>
+  <ion-select [(ngModel)]="detayAra.tecrube" multiple="true" cancelText="İptal" okText="Tamam">
+    <!-- <ion-option value='' selected="true">Farketmez</ion-option> -->
+    <ion-option value='Az Tecrübeli (Junior)'>Az Tecrübeli (Junior)</ion-option>
+    <ion-option value='Orta Tecrübeli (Midlevel)'>Orta Tecrübeli (Midlevel)</ion-option>
+    <ion-option value='Çok Tecrübeli (Senior)'>Çok Tecrübeli (Senior)</ion-option>
+    <ion-option value='Yönetici (Manager)'>Yönetici (Manager)</ion-option>
+    <ion-option value='Stajyer'>Stajyer</ion-option>
+    <ion-option value='Hizmet Personeli - İşçi'>Hizmet Personeli - İşçi</ion-option>
+  </ion-select>
+</ion-item>
+<ion-item>
+<ion-label floating color="primary">Eğitim</ion-label>
+<ion-select [(ngModel)]="detayAra.egitim" multiple="true" cancelText="İptal" okText="Tamam">
+  <ion-option value='Lise'>Lise</ion-option>
+  <ion-option value='Lisans'>Lisans</ion-option>
+  <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans - Doktora</ion-option>
+</ion-select>
+</ion-item>
+
+ <!-- </ion-item-group> -->
+
+ <ion-row>
+ <ion-col>
+ <button ion-button block icon-left color="secondary"  (click)="clear()">
+   <ion-icon name="backspace"></ion-icon>
+   Temizle</button>
+ </ion-col>
+ <ion-col>
+ <button ion-button block icon-left color="primary" (click)="filtrele()">
+   <ion-icon name="search"></ion-icon>
+   Filtrele</button>
+ </ion-col>
+</ion-row>
+</div>
+</ion-content>

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Content, Events } from 'ionic-angu
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { FormControl } from '@angular/forms';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
+import { OzgecmisFiltrelePage } from '../ozgecmis-filtrele/ozgecmis-filtrele';
 import { Storage } from '@ionic/storage';
 
 /**
@@ -70,6 +71,20 @@ this.events.subscribe('ozgecmis:begen', (a) => {
   console.log('ozgecmis begen event çağrıldı');
   this.ozgecmisListele();
 });
+
+this.events.subscribe('ozgecmis:filtered', (a) => {
+  this.scrollEnable = true;
+  // this.infiniteScroll.enable(true);
+  this.skip = 0;
+  if(a) {
+    // console.log('filtre true');
+    this.detayAra = {};
+    this.sirala = '{}';
+  }
+  console.log('ozgecmislistele filtre çağrıldı');
+  this.ozgecmisListele();
+
+});
   }
 
   ozgecmisListele(){
@@ -94,6 +109,13 @@ this.events.subscribe('ozgecmis:begen', (a) => {
     this.navCtrl.push(OzgecmisDetayPage, {
       ozgecmisTapped: ozgecmis,
       aktivite: this.aktivite
+    });
+  }
+
+  presentFilter(myEvent) {
+    this.navCtrl.push(OzgecmisFiltrelePage, {
+      detayAra: this.detayAra,
+      sirala: this.sirala
     });
   }
 
