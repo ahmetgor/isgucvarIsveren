@@ -17,5 +17,66 @@
 
 
 <ion-content padding>
+  <div *ngIf="detayAra">
+    <ion-item>
+      <ion-label floating color="primary">Özgeçmiş Sahibi</ion-label>
+      <ion-input type="text" [(ngModel)]="detayAra.isim"></ion-input>
+    </ion-item>
 
+    <ion-item>
+        <ion-label floating color="primary">Ünvan / Son Pozisyon</ion-label>
+        <ion-input  type="text" [(ngModel)]="detayAra.unvan"></ion-input>
+    </ion-item>
+
+  <ion-item>
+  <ion-label floating color="primary">İl</ion-label>
+  <ion-select [(ngModel)]="detayAra.sehir" interface="popover" cancelText="İptal" okText="Tamam">
+    <!-- <ion-option value='Konumum'>Konumum</ion-option> -->
+    <ion-option *ngFor="let item of sehirler" value='{{item.sehir}}'>{{item.sehir}}</ion-option>
+  </ion-select>
+  </ion-item>
+
+  <ion-item>
+  <ion-label floating color="primary">Eğitim</ion-label>
+  <ion-select [(ngModel)]="detayAra.egitimdurum" multiple="true" cancelText="İptal" okText="Tamam">
+  <ion-option value='Lise'>Lise</ion-option>
+  <ion-option value='Lisans'>Lisans</ion-option>
+  <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans - Doktora</ion-option>
+  </ion-select>
+  </ion-item>
+
+  <ion-item>
+      <ion-label floating color="primary">Minimum Tecrübe (yıl)</ion-label>
+      <ion-input  type="number" [(ngModel)]="detayAra.yilTecrube"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Minimum Doğum Tarihi</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="detayAra.dogumTarihi" cancelText="İptal" doneText="Tamam">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-item>
+      <ion-label floating color="primary">Bilgisayar Teknolojileri</ion-label>
+      <ion-input  type="text" [(ngModel)]="detayAra.bilgisayar"></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label floating color="primary">Yabancı Dil:</ion-label>
+      <ion-input  type="text" [(ngModel)]="detayAra.dil"></ion-input>
+  </ion-item>
+
+  <ion-row>
+  <ion-col>
+  <button ion-button block icon-left color="secondary"  (click)="clear()">
+   <ion-icon name="backspace"></ion-icon>
+   Temizle</button>
+  </ion-col>
+  <ion-col>
+  <button ion-button block icon-left color="primary" (click)="filtrele()">
+   <ion-icon name="search"></ion-icon>
+   Filtrele</button>
+  </ion-col>
+  </ion-row>
+  </div>
 </ion-content>

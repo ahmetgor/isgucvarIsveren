@@ -4,6 +4,7 @@ import { IlanSerProvider } from '../../providers/ilan-ser';
 import { IlanDetayPage } from '../ilan-detay/ilan-detay';
 import { FormControl } from '@angular/forms';
 import { UserSerProvider} from '../../providers/user-ser';
+import { IlanFiltrelePage } from '../ilan-filtrele/ilan-filtrele';
 
 /**
  * Generated class for the TumIlanlarPage page.
@@ -51,6 +52,20 @@ export class TumIlanlarPage {
     console.log('searchkontrol çağrıldı');
   // }
 });
+
+this.events.subscribe('ilan:filtered', (a) => {
+  this.scrollEnable = true;
+  // this.infiniteScroll.enable(true);
+  this.skip = 0;
+  if(a) {
+    // console.log('filtre true');
+    this.detayAra = {};
+    this.detayAra.firma = "I2I-Systems";
+    this.sirala = '{}';
+  }
+  console.log('ilanlistele filtre çağrıldı');
+  this.ilanListele();
+});
   }
 
   ilanListele() {
@@ -70,6 +85,13 @@ export class TumIlanlarPage {
       ilan: ilan
       // basvurulist: this.basvuruSer.basvuruList,
       // kaydedilenlist: this.basvuruSer.kaydedilenList
+    });
+  }
+
+  presentFilter(myEvent) {
+    this.navCtrl.push(IlanFiltrelePage, {
+      detayAra: this.detayAra,
+      sirala: this.sirala
     });
   }
 
