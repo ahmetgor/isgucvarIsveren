@@ -45,16 +45,22 @@
 
     <ion-row>
       <ion-col col-auto>
-        <p><ion-icon name="pin"></ion-icon>
+        <ion-icon name="pin"></ion-icon>
           {{ilan.il}}
-        </p>
+
     </ion-col>
+    <ion-col>
+      <p align="right">
+    <ion-icon name="briefcase"></ion-icon>
+    {{ilan.tip}}
+  </p>
+</ion-col>
   </ion-row>
 </ion-item>
 <!-- <ion-toolbar> -->
 <button ion-button block icon-left color="primary" (click)="toOzgecmis()">
   <ion-icon name="person"></ion-icon>
-  Özgeçmişler</button>
+  Başvuranlar</button>
 <!-- </ion-toolbar> -->
 
   <!-- <div *ngIf="ilan"> -->
@@ -87,6 +93,10 @@
   <p><b>İlan No: </b> {{ilan.id}}</p>
 </ion-card-content>
 </ion-card>
+
+<button ion-button block icon-left color="secondary" (click)="guncelleIlan()">
+  <ion-icon name="create"></ion-icon>
+  Güncelle</button>
 
 </div>
 </ion-content>

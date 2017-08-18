@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import {ToastController, LoadingController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { UserSerProvider } from './user-ser';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the IlanSerProvider provider.
@@ -17,8 +18,11 @@ export class IlanSerProvider {
   // url : string = 'https://serverisgucvar.herokuapp.com/api/ilanlar/';
   url : string = 'http://127.0.0.1:8080/api/ilanlar/';
   // ilanlar: Array<any>;
-  basvurKaydetList: any;
+  // basvurKaydetList: any;
   loading: any;
+  // ozgecmisId: string;
+  user: any;
+  // ozgecmis: any;
   sehirler = [
     {"sehir":"İstanbul"},{"sehir":"Ankara"},{"sehir":"İzmir"},{"sehir":"Adana"},{"sehir":"Adıyaman"},{"sehir":"Afyonkarahisar"}
    ,{"sehir":"Ağrı"},{"sehir":"Aksaray"},{"sehir":"Amasya"},{"sehir":"Antalya"},{"sehir":"Ardahan"},{"sehir":"Artvin"}
@@ -37,7 +41,8 @@ export class IlanSerProvider {
   ];
 
   constructor(public http: Http, public authService: UserSerProvider,
-              public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+              public toastCtrl: ToastController, public loadingCtrl: LoadingController,
+              public storage: Storage) {
     console.log('Hello IlanSerProvider Provider');
   }
 
@@ -57,14 +62,57 @@ export class IlanSerProvider {
           resolve(data);
         }, (err) => {
           // reject(err);
-          this.presentToast();
+          this.presentToast('İlanlar alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
         });
     });
   }
 
-  presentToast() {
+  updateIlan(kayit: any){
+    this.showLoader();
+    return new Promise((resolve, reject) => {
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', this.authService.token);
+
+      this.http.put(this.url + kayit._id, JSON.stringify(kayit), {headers: headers})
+        .map(res => res.json())
+        .subscribe(res => {
+          // this.ozgecmis = kayit;
+          // this.storage.set('ozgecmis', kayit);
+          console.log(JSON.stringify(res)+"updateall");
+          this.loading.dismiss();
+          this.presentToast('İlan eklendi & güncellendi!');
+          resolve(res);
+        }, (err) => {
+          // reject(err);
+          this.loading.dismiss();
+          this.presentToast('İlan eklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+        });
+    });
+  }
+
+  getIlan(ilanId: string){
+      let headers = new Headers();
+      headers.append('Authorization', this.authService.token);
+      return new Promise((resolve, reject) => {
+      this.http.get(this.url + ilanId, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          // this.ozgecmis = data;
+          // this.storage.set('ozgecmis', data);
+          // console.log(JSON.stringify(data)+"data123");
+          resolve(data);
+        }, (err) => {
+          // reject(err);
+          this.presentToast('İlan alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+        });
+    });
+}
+
+  presentToast(message) {
   let toast = this.toastCtrl.create({
-    message: 'İlan listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!',
+    message: message,
     duration: 4000,
     position: 'top',
     showCloseButton: true,
@@ -74,6 +122,13 @@ export class IlanSerProvider {
     // console.log('Dismissed toast');
   });
   toast.present();
+}
+
+showLoader(){
+    this.loading = this.loadingCtrl.create({
+        content: 'İşlem yapılıyor...'
+    });
+    this.loading.present();
 }
 
 }

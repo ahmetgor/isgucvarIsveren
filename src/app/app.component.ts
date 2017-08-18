@@ -7,6 +7,8 @@ import { OzgecmislerimPage } from '../pages/ozgecmislerim/ozgecmislerim';
 import { TumOzgecmislerPage } from '../pages/tum-ozgecmisler/tum-ozgecmisler';
 import { IlanlarimPage } from '../pages/ilanlarim/ilanlarim';
 import { TumIlanlarPage } from '../pages/tum-ilanlar/tum-ilanlar';
+import { IlanEklePage } from '../pages/ilan-ekle/ilan-ekle';
+import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,6 +26,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
 
+      { title: 'İlan Ekle', component: IlanEklePage, icon: "add-circle"  },
       { title: 'Özgeçmişlerim', component: OzgecmislerimPage, icon: "person"  },
       { title: 'İlanlarım', component: IlanlarimPage, icon: "clipboard" },
       { title: 'Tüm Özgeçmişler', component: TumOzgecmislerPage, icon: "people" },

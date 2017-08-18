@@ -35,6 +35,7 @@ export class IlanlarimPage {
     public events: Events, public userAuth: UserSerProvider) {
 
       // this.detayAra.olusturan = this.userAuth.user.email;
+      // TODO: storage
       this.detayAra.olusturan = "agor@agor.com";
       this.searchControl = new FormControl();
 
@@ -47,7 +48,6 @@ export class IlanlarimPage {
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
     this.skip = 0;
-    // this.infiniteScroll.enable(true);
     console.log('ilanlistele searchkontrol çağrıldı');
     this.ilanListele();
 
@@ -66,7 +66,13 @@ this.events.subscribe('ilan:filtered', (a) => {
   }
   console.log('ilanlistele filtre çağrıldı');
   this.ilanListele();
+});
 
+this.events.subscribe('ilan:ekle', () => {
+  console.log('ilan ekle event çağrıldı');
+  this.scrollEnable = true;
+  this.skip = 0;
+  this.ilanListele();
 });
   }
 
@@ -84,7 +90,8 @@ this.events.subscribe('ilan:filtered', (a) => {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push(IlanDetayPage, {
-      ilan: ilan
+      ilan: ilan,
+      guncelleyen: this.detayAra.olusturan
       // basvurulist: this.basvuruSer.basvuruList,
       // kaydedilenlist: this.basvuruSer.kaydedilenList
     });

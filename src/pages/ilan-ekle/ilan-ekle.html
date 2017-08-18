@@ -1,0 +1,121 @@
+<!--
+  Generated template for the IlanEklePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>İlan Ekle & Güncelle</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="detay && firmaInfo">
+    <form [formGroup]="ilanFormGroup">
+<!-- <form [formGroup]="ozgecmisFormGroup"> -->
+    <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
+
+    <ion-item>
+        <ion-label floating>Başlık</ion-label>
+        <ion-input formControlName="baslik" type="text" [(ngModel)]="detay.baslik"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Firma</ion-label>
+        <ion-input formControlName="firma" disabled type="text" [(ngModel)]="firmaInfo.firma"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Tip</ion-label>
+      <ion-select formControlName="tip" type="text" [(ngModel)]="detay.tip" cancelText="İptal" okText="Tamam">
+        <ion-option value='Tam Z.'>Tam Z.</ion-option>
+        <ion-option value='Yarı Z.'>Yarı Z.</ion-option>
+        <ion-option value='Proje Bazlı'>Proje Bazlı</ion-option>
+        <ion-option value='Staj'>Staj</ion-option>
+        <ion-option value='Günlük'>Günlük</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>İl</ion-label>
+        <ion-input formControlName="il" type="text" [(ngModel)]="detay.il"></ion-input>
+    </ion-item>
+
+    <ion-item>
+    <ion-label floating>Askerlik</ion-label>
+    <ion-select formControlName="askerlik" [(ngModel)]="detay.askerlik" cancelText="İptal" okText="Tamam">
+      <ion-option value="Yapıldı/Muaf" >Yapıldı/Muaf</ion-option>
+      <ion-option value="Tecilli/Yapılmadı">Tecilli/Yapılmadı</ion-option>
+    </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Ehliyet</ion-label>
+        <ion-input formControlName="ehliyet" type="text" [(ngModel)]="detay.ehliyet"></ion-input>
+    </ion-item>
+
+    <ion-item>
+    <ion-label floating>Eğitim</ion-label>
+    <ion-select formControlName="egitimdurum" [(ngModel)]="detay.egitim" multiple="true"  cancelText="İptal" okText="Tamam">
+      <ion-option value='Lise'>Lise</ion-option>
+      <ion-option value='Lisans'>Lisans</ion-option>
+      <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans</ion-option>
+      <ion-option value='Doktora'>Doktora</ion-option>
+    </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Tecrübe</ion-label>
+      <ion-select formControlName="tecrubedurum" [(ngModel)]="detay.tecrube" multiple="true" cancelText="İptal" okText="Tamam">
+        <!-- <ion-option value='' selected="true">Farketmez</ion-option> -->
+        <ion-option value='Az Tecrübeli (Junior)'>Az Tecrübeli (Junior)</ion-option>
+        <ion-option value='Orta Tecrübeli (Midlevel)'>Orta Tecrübeli (Midlevel)</ion-option>
+        <ion-option value='Çok Tecrübeli (Senior)'>Çok Tecrübeli (Senior)</ion-option>
+        <ion-option value='Yönetici (Manager)'>Yönetici (Manager)</ion-option>
+        <ion-option value='Stajyer'>Stajyer</ion-option>
+        <ion-option value='Hizmet Personeli - İşçi'>Hizmet Personeli - İşçi</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Açıklama</ion-label>
+        <ion-textarea rows="5" formControlName="aciklama" type="text" [(ngModel)]="detay.aciklama"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Aktif</ion-label>
+      <ion-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="detay.enabled" disabled="false"></ion-toggle>
+    </ion-item>
+
+    <ion-item no-lines *ngIf="!ilanFormGroup.valid">
+        <p style="color:red;">Tüm alanlar zorunlu</p>
+    </ion-item>
+    <!-- <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">
+      <p></p> -->
+  <button ion-button block icon-left color="secondary" [disabled]="!ilanFormGroup.valid" (click)="add()">
+    <ion-icon name="add-circle"></ion-icon>
+    Ekle&Güncelle</button>
+  <!-- </div> -->
+
+  <!-- <div *ngIf="(des!='tecrubeEkle'&&des!='egitimEkle'&&des!='yabanciDilEkle'&&des!='sertifikaEkle')">
+    <p></p>
+    <ion-row>
+      <ion-col *ngIf="(des!='kisisel'&&des!='iletisim'&&des!='bilgisayar')">
+    <button ion-button block icon-left color="danger" (click)="delete()">
+      <ion-icon name="trash"></ion-icon>
+      Sil</button>
+    </ion-col>
+    <ion-col>
+    <button ion-button block icon-left [disabled]="!kisiselFormGroup.valid" (click)="save()">
+      <ion-icon name="checkmark"></ion-icon>
+      Güncelle</button>
+    </ion-col>
+    </ion-row>
+  </div> -->
+</form>
+  </div>
+
+</ion-content>
