@@ -15,6 +15,7 @@ export class UserSerProvider {
   // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
 
   url : string = 'http://127.0.0.1:8080/api/firmaauth/';
+  urlauth : string = 'http://127.0.0.1:8080/api/auth/';
   url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
   loading: any;
@@ -46,6 +47,31 @@ export class UserSerProvider {
     });
   }
 
+  createFirmaAccount(details){
+
+    return new Promise((resolve, reject) => {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        this.http.post(this.url+'register/firma', JSON.stringify(details), {headers: headers})
+          .subscribe(res => {
+            // this.currentUser = details;
+            let data = res.json();
+            // this.token = data.token;
+            // this.storage.set('token', data.token);
+            // this.storage.set('user', details);
+            this.presentToast("Firma hesabı oluşturuldu!");
+            resolve(data);
+
+          }, (err) => {
+            let erm = JSON.parse(err._body);
+            this.presentToast("Firma hesabı oluşturulamadı! "+erm.error);
+            reject(err);
+          });
+    });
+  }
+
   createAccount(details){
 
     return new Promise((resolve, reject) => {
@@ -53,18 +79,25 @@ export class UserSerProvider {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        this.http.post(this.url+'register', JSON.stringify(details), {headers: headers})
+        console.log("createaccount");
+        this.http.post(this.url+'register/user', JSON.stringify(details), {headers: headers})
           .subscribe(res => {
-            // this.currentUser = details;
             let data = res.json();
-            // this.token = data.token;
-            // this.storage.set('token', data.token);
-            // this.storage.set('user', details);
+
+            this.presentToast("Çalışan hesabı oluşturuldu!");
             resolve(data);
 
           }, (err) => {
-            // console.log(JSON.stringify(err)+'registererr')
+            // console.log(err+"hebe");
+            // console.log(JSON.parse(err)+"adsasdad");
+            if(err._body) {
+            this.presentToast("Çalışan hesabı oluşturulamadı! Firma bilgileri hatalı!");
+            }
+            else {
+            let erm = JSON.parse(err._body);
+            this.presentToast("Çalışan hesabı oluşturulamadı! "+erm.error);
             reject(err);
+          }
           });
     });
   }

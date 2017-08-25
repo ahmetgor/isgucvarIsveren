@@ -34,6 +34,7 @@ export class IlanDetayPage {
 
     this.events.subscribe('ilan:ekle', () => {
       console.log('ilan ekle event çağrıldı');
+      console.log(this.ilan._id+'  id  '+this.ilan.id);
       this.ilanSer.getIlan(this.ilan._id)
       .then(ilan => {
         this.ilan = ilan;

@@ -7,12 +7,56 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>signup</ion-title>
+    <ion-title>Firma Çalışanı Kayıt</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+  <form #heroForm="ngForm">
+    <ion-list>
+      <ion-item-divider no-lines color="light">Bilgileriniz:</ion-item-divider>
+      <ion-item>
+          <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+          <ion-input [(ngModel)]="email" placeholder="Email" type="email" #name="ngModel" name="name" required
+          pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+        </ion-input>
+      </ion-item>
+      <ion-item no-lines *ngIf="name.errors">
+          <p style="color:red;">Lütfen geçerli email giriniz</p>
+      </ion-item>
+      <ion-item>
+          <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+          <ion-input [(ngModel)]="password" placeholder="Şifreniz" type="password" #pass="ngModel" name="pass" minlength="6" required>
+          </ion-input>
+      </ion-item>
+      <ion-item no-lines *ngIf="pass.errors">
+          <p style="color:red;">Şifre minimum 6 karakter olmalı</p>
+      </ion-item>
+      <ion-item>
+          <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+          <ion-input [(ngModel)]="password1" placeholder="Şifre tekrar" type="password" #pass1="ngModel" name="pass1" minlength="6" required>
+          </ion-input>
+      </ion-item>
+      <ion-item no-lines *ngIf="pass1.value != pass.value">
+          <p style="color:red;">Girilen şifreler aynı değil</p>
+      </ion-item>
+      <p>
 
+      </p>
+      <ion-item-divider no-lines color="light">Yöneticinizin paylaştığı firma bilgileri:</ion-item-divider>
+
+        <ion-item>
+            <ion-label><ion-icon name="power"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="firma" placeholder="Firma ismi" type="text" #firmaa="ngModel" name="firma" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="firmaPass" placeholder="Firma Şifresi" type="password" #firmaPasss="ngModel" name="firmaPasss" minlength="6" required>
+            </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <button ion-button block (click)="register()" [disabled]="!heroForm.form.valid">Kaydol</button>
+    </form>
 </ion-content>

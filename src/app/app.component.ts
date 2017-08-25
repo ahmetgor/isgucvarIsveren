@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,6 +9,7 @@ import { IlanlarimPage } from '../pages/ilanlarim/ilanlarim';
 import { TumIlanlarPage } from '../pages/tum-ilanlar/tum-ilanlar';
 import { IlanEklePage } from '../pages/ilan-ekle/ilan-ekle';
 import { LoginPage } from '../pages/login/login';
+import { UserSerProvider } from '../providers/user-ser';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,11 +17,13 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = IlanlarimPage;
+  rootPage: any = LoginPage;
+  alert: any;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public alertCtrl: AlertController, public authService: UserSerProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -41,7 +44,51 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.platform.registerBackButtonAction(() => {
+
+  if(this.nav.canGoBack()){
+    this.nav.pop();
+  }else{
+    if(this.alert){
+      this.alert.dismiss();
+      this.alert =null;
+    }else{
+      this.presentLogout('Uygulama kapansın mı?');
+     }
+  }
+});
     });
+  }
+
+  presentLogout(message) {
+   this.alert = this.alertCtrl.create({
+    title: message,
+    // message: 'Çıkmak istediğinizden emin misiniz?',
+    buttons: [
+      {
+        text: 'Hayır',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Evet',
+        handler: () => {
+          console.log('Logged out');
+          if (message=='Uygulama kapansın mı?') {
+            this.platform.exitApp();
+          }
+          else {
+          this.authService.logout();
+          this.nav.setRoot(LoginPage);
+        }
+        }
+      }
+    ]
+  });
+  this.alert.present();
   }
 
   openPage(page) {

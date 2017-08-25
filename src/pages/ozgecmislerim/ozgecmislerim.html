@@ -50,7 +50,7 @@
   <ion-list text-wrap>
     <button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis.ozgecmis)">
       <ion-thumbnail item-left>
-        <img [src]="ozgecmis.ozgecmis.resim.link">
+        <img class="img-circle" [src]="ozgecmis.ozgecmis.resim.link">
       </ion-thumbnail>
 
       <h2>{{ozgecmis.ozgecmis.isim}} {{ozgecmis.ozgecmis.soyisim}}</h2>

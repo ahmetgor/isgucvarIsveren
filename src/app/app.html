@@ -7,6 +7,19 @@
 
   <ion-content>
     <ion-list>
+      <ion-item no-lines>
+        <ion-thumbnail item-start>
+          <!--TODO: resim link  -->
+        <img class="img-circle" src="https://avatars.io/facebook/ahmetgoer">
+        </ion-thumbnail>
+        <h2>Ahmet Gör</h2>
+      </ion-item>
+      <button menuClose ion-item no-lines (click)="presentLogout('Oturumunuz kapansın mı?')">
+        <ion-icon name="log-out"></ion-icon>
+        Çıkış
+      </button>
+      <ion-item-divider color="light"></ion-item-divider>
+
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         <ion-icon name="{{p.icon}}"></ion-icon>
         {{p.title}}

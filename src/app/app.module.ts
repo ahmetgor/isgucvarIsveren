@@ -14,7 +14,8 @@ import { OzgecmisFiltrelePage } from '../pages/ozgecmis-filtrele/ozgecmis-filtre
 import { IlanEklePage } from '../pages/ilan-ekle/ilan-ekle';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
-
+import { ResetPage } from '../pages/reset/reset';
+import { SignupFirmaPage } from '../pages/signup-firma/signup-firma';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,7 +27,8 @@ import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { DatePipe } from '../pipes/date-pipe';
-
+import { CloudinaryModule } from '@cloudinary/angular-4.x';
+import * as  Cloudinary from 'cloudinary-core';
 
 @NgModule({
   declarations: [
@@ -42,13 +44,18 @@ import { DatePipe } from '../pipes/date-pipe';
     OzgecmisFiltrelePage,
     IlanEklePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    SignupFirmaPage,
+    ResetPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    HttpModule
+    HttpModule,
+    CloudinaryModule.forRoot(Cloudinary,
+    {cloud_name: 'isgucvar', upload_preset: 'cod9ui0a'}),
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,7 +70,9 @@ import { DatePipe } from '../pipes/date-pipe';
     OzgecmisFiltrelePage,
     IlanEklePage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    SignupFirmaPage,
+    ResetPage
   ],
   providers: [
     StatusBar,

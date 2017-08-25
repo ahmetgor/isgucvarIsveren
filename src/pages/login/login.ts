@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { UserSerProvider } from '../../providers/user-ser';
 import { IlanlarimPage } from '../ilanlarim/ilanlarim';
 import { SignupPage } from '../signup/signup';
+import { SignupFirmaPage} from '../signup-firma/signup-firma';
+import { ResetPage} from '../reset/reset';
 import { Storage } from '@ionic/storage';
 // import { PassResetPage } from '../pass-reset/pass-reset';
 
@@ -49,7 +51,7 @@ export class LoginPage {
           email: this.email,
           password: this.password
       };
-        // console.log(JSON.stringify(credentials)+'credentials');
+        console.log(JSON.stringify(credentials)+'credentials');
       this.authService.login(credentials).then((result: any) => {
 
         console.log(JSON.stringify(result)+"result");
@@ -67,9 +69,13 @@ launchSignup(){
   this.navCtrl.push(SignupPage);
 }
 
-// resetPass(){
-//   this.navCtrl.push(PassResetPage);
-// }
+launchFirmaSignup(){
+  this.navCtrl.push(SignupFirmaPage);
+}
+
+resetPass(){
+  this.navCtrl.push(ResetPage);
+}
 
 showLoader(message){
   this.loading = this.loadingCtrl.create({
