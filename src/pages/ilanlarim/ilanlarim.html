@@ -30,7 +30,7 @@
     <button ion-item *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-avatar item-left>
-        <img [src]="ilan.resim">
+        <img [src]="ilan.firma.resim">
       </ion-avatar>
 
       <ion-row>
@@ -41,7 +41,7 @@
 
       <ion-row>
         <ion-col>
-      <div class="firma"><h4>{{ilan.firma}}</h4></div>
+      <div class="firma"><h4>{{ilan.firma.firma}}</h4></div>
       </ion-col>
       <ion-col>
         <h4 align="right" [class.my-class]="getDays(ilan.olusurmaTarih) < 10">

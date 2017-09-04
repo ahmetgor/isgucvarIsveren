@@ -42,10 +42,12 @@
     <ion-option value='Kahramanmaraş'>Kahramanmaraş</ion-option> -->
   </ion-select>
   </ion-item>
+  <div [hidden]="ilanlarim">
 <ion-item>
     <ion-label floating color="primary">İlan Sahibi</ion-label>
     <ion-input type="text" [(ngModel)]="detayAra.olusturan"></ion-input>
 </ion-item>
+</div>
 <ion-item>
   <ion-label floating color="primary">Tecrübe</ion-label>
   <ion-select [(ngModel)]="detayAra.tecrube" multiple="true" cancelText="İptal" okText="Tamam">

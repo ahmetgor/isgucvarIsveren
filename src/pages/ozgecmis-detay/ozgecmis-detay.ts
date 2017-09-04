@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the OzgecmisDetayPage page.
@@ -19,14 +20,15 @@ export class OzgecmisDetayPage {
   begenBody: any = {};
   aktivite: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ozgecmisSer: OzgecmisSerProvider, public events: Events) {
+              public ozgecmisSer: OzgecmisSerProvider, public events: Events,
+              public storage: Storage) {
     this.ozgecmis = this.navParams.get('ozgecmisTapped');
     this.aktivite = this.navParams.get('aktivite');
-    // this.storage.get('user')
-    //     .then((user) => {
-    //       this.userId = user._id;
-    //     });
-    this.userId = "59163aa74be8d6e2c51b8647";
+    this.storage.get('user')
+        .then((user) => {
+          this.userId = user._id;
+        });
+    // this.userId = "59163aa74be8d6e2c51b8647";
   }
 
   ionViewDidLoad() {

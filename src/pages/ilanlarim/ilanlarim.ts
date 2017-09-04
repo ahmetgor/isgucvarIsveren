@@ -6,6 +6,8 @@ import { IlanFiltrelePage } from '../ilan-filtrele/ilan-filtrele';
 import { FormControl } from '@angular/forms';
 import { UserSerProvider} from '../../providers/user-ser';
 import 'rxjs/add/operator/debounceTime';
+import { Storage } from '@ionic/storage';
+
 /**
  * Generated class for the IlanlarimPage page.
  *
@@ -29,21 +31,26 @@ export class IlanlarimPage {
   skip: number = 0;
   limit: number = 20;
   scrollEnable: boolean = true;
+  user: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ilanSer: IlanSerProvider, public modalCtrl: ModalController,
-    public events: Events, public userAuth: UserSerProvider) {
+    public events: Events, public userAuth: UserSerProvider, public storage: Storage) {
 
       // this.detayAra.olusturan = this.userAuth.user.email;
       // TODO: storage
-      this.detayAra.olusturan = "agor@agor.com";
+      this.storage.get('user')
+          .then((user) => { this.user = user;
+            console.log(JSON.stringify(user));
+            this.detayAra.olusturan = this.user.email;
+            this.ilanListele();
+          });
       this.searchControl = new FormControl();
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad IlanlarimPage');
-    this.ilanListele();
     console.log('ionViewDidLoad SonucPage çağrıldı');
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
@@ -61,7 +68,7 @@ this.events.subscribe('ilan:filtered', (a) => {
   if(a) {
     // console.log('filtre true');
     this.detayAra = {};
-    this.detayAra.olusturan = "agor@agor.com";
+    this.detayAra.olusturan = this.user.email;
     this.sirala = '{}';
   }
   console.log('ilanlistele filtre çağrıldı');
@@ -100,7 +107,8 @@ this.events.subscribe('ilan:ekle', () => {
   presentFilter(myEvent) {
     this.navCtrl.push(IlanFiltrelePage, {
       detayAra: this.detayAra,
-      sirala: this.sirala
+      sirala: this.sirala,
+      ilanlarim: true
     });
   }
 

@@ -5,6 +5,7 @@ import { IlanDetayPage } from '../ilan-detay/ilan-detay';
 import { FormControl } from '@angular/forms';
 import { UserSerProvider} from '../../providers/user-ser';
 import { IlanFiltrelePage } from '../ilan-filtrele/ilan-filtrele';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the TumIlanlarPage page.
@@ -28,19 +29,25 @@ export class TumIlanlarPage {
   skip: number = 0;
   limit: number = 20;
   scrollEnable: boolean = true;
+  user: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ilanSer: IlanSerProvider, public modalCtrl: ModalController,
-    public events: Events, public userAuth: UserSerProvider) {
+    public events: Events, public userAuth: UserSerProvider, public storage: Storage) {
 
+      this.storage.get('user')
+          .then((user) => { this.user = user;
+            console.log(JSON.stringify(user));
+            this.detayAra.firma = this.user.firma;
+            this.ilanListele();
+          });
       // this.detayAra.firma = this.userAuth.user.firma;
-      this.detayAra.firma = "I2I-Systems";
+      // this.detayAra.firma = "I2I-Systems";
       this.searchControl = new FormControl();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TumIlanlarPage');
-    this.ilanListele();
     console.log('ionViewDidLoad SonucPage çağrıldı');
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
@@ -60,7 +67,7 @@ this.events.subscribe('ilan:filtered', (a) => {
   if(a) {
     // console.log('filtre true');
     this.detayAra = {};
-    this.detayAra.firma = "I2I-Systems";
+    this.detayAra.firma = this.user.firma;
     this.sirala = '{}';
   }
   console.log('ilanlistele filtre çağrıldı');

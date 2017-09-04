@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { OzgecmislerimPage } from '../ozgecmislerim/ozgecmislerim';
 import { IlanEklePage } from '../ilan-ekle/ilan-ekle';
 import { IlanSerProvider} from '../../providers/ilan-ser';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the IlanDetayPage page.
@@ -21,9 +22,13 @@ export class IlanDetayPage {
   guncelleyen: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
-              public ilanSer: IlanSerProvider) {
+              public ilanSer: IlanSerProvider, public storage: Storage) {
     this.ilan = this.navParams.get('ilan');
     this.guncelleyen = this.navParams.get('guncelleyen');
+    this.storage.get('user')
+        .then((user) => {
+          this.guncelleyen = user.email;
+        });
     // this.basvuruList = this.navParams.get('basvurulist');
     // this.kaydedilenList = this.navParams.get('kaydedilenlist');
     // this.ilanId = this.navParams.get('ilanId');

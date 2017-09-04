@@ -39,13 +39,13 @@ export class OzgecmislerimPage {
               public events: Events) {
     this.searchControl = new FormControl();
     // this.ilanId = this.navParams.get('ilanId');
-    // this.storage.get('user')
-    //     .then((user) => {
-    //       this.userId = user._id;
-    //       this.olusturan = user.isim;
-    //     });
-    this.userId = "59163aa74be8d6e2c51b8647";
-    this.olusturan = "agor1@agor.com";
+    this.storage.get('user')
+        .then((user) => {
+          this.userId = user._id;
+          this.olusturan = user.email;
+        });
+    // this.userId = "59163aa74be8d6e2c51b8647";
+    // this.olusturan = "agor1@agor.com";
   }
 
   ionViewDidLoad() {

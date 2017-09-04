@@ -17,7 +17,7 @@
 
 
 <ion-content padding>
-  <div *ngIf="detay && firmaInfo">
+  <div *ngIf="detay && user">
     <form [formGroup]="ilanFormGroup">
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
@@ -28,7 +28,7 @@
     </ion-item>
     <ion-item>
         <ion-label floating>Firma</ion-label>
-        <ion-input formControlName="firma" disabled type="text" [(ngModel)]="firmaInfo.firma"></ion-input>
+        <ion-input formControlName="firma" disabled type="text" [(ngModel)]="user.firma"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -43,15 +43,19 @@
     </ion-item>
 
     <ion-item>
-        <ion-label floating>İl</ion-label>
-        <ion-input formControlName="il" type="text" [(ngModel)]="detay.il"></ion-input>
+      <ion-label floating>İl</ion-label>
+      <ion-select formControlName="il" [(ngModel)]="detay.il" interface="popover" cancelText="İptal" okText="Tamam">
+        <!-- <ion-option value='Konumum'>Konumum</ion-option> -->
+        <ion-option *ngFor="let item of sehirler" value='{{item.sehir}}'>{{item.sehir}}</ion-option>
+        <!-- <ion-option value='İstanbul'>İstanbul</ion-option> -->
+      </ion-select>
     </ion-item>
 
     <ion-item>
     <ion-label floating>Askerlik</ion-label>
     <ion-select formControlName="askerlik" [(ngModel)]="detay.askerlik" cancelText="İptal" okText="Tamam">
       <ion-option value="Yapıldı/Muaf" >Yapıldı/Muaf</ion-option>
-      <ion-option value="Tecilli/Yapılmadı">Tecilli/Yapılmadı</ion-option>
+      <ion-option value="Yapılmadı/Tecilli">Yapılmadı/Tecilli</ion-option>
     </ion-select>
     </ion-item>
 
@@ -90,7 +94,7 @@
 
     <ion-item>
       <ion-label>Aktif</ion-label>
-      <ion-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="detay.enabled" disabled="false"></ion-toggle>
+      <ion-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="detay.enabled"></ion-toggle>
     </ion-item>
 
     <ion-item no-lines *ngIf="!ilanFormGroup.valid">

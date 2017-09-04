@@ -74,6 +74,7 @@ export class IlanSerProvider {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authService.token);
+      console.log(JSON.stringify(kayit)+'order service add ilan');
 
       this.http.put(this.url + kayit._id, JSON.stringify(kayit), {headers: headers})
         .map(res => res.json())
@@ -82,12 +83,12 @@ export class IlanSerProvider {
           // this.storage.set('ozgecmis', kayit);
           console.log(JSON.stringify(res)+"updateall");
           this.loading.dismiss();
-          this.presentToast('İlan eklendi & güncellendi!');
+          this.presentToast('İlan güncellendi!');
           resolve(res);
         }, (err) => {
           // reject(err);
           this.loading.dismiss();
-          this.presentToast('İlan eklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+          this.presentToast('İlan güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
         });
     });
   }
@@ -110,6 +111,29 @@ export class IlanSerProvider {
     });
 }
 
+createIlan(ilan: any){
+  this.showLoader();
+
+  return new Promise((resolve, reject) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', this.authService.token);
+
+      this.http.post(this.url, JSON.stringify(ilan), {headers: headers})
+      .map(res => res.json())
+        .subscribe(data => {
+          // this.currentUser = details;
+          this.loading.dismiss();
+          this.presentToast('İlan eklendi!');
+          resolve(data);
+
+        }, (err) => {
+          this.loading.dismiss();
+          this.presentToast('İlan eklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+          reject(err);
+        });
+  });
+}
   presentToast(message) {
   let toast = this.toastCtrl.create({
     message: message,
