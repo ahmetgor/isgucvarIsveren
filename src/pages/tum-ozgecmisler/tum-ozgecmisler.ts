@@ -37,26 +37,25 @@ export class TumOzgecmislerPage {
               public ozgecmisSer: OzgecmisSerProvider, public storage: Storage,
               public events: Events) {
                 this.searchControl = new FormControl();
-                this.ilanId = this.navParams.get('ilanId');
-                // this.storage.get('user')
-                //     .then((user) => {
-                //       this.firmaId = user.firma;
-                //       this.userId = user._id;
-                //     });
-              this.firma = 'I2I-Systems';
-              this.userId = "59163aa74be8d6e2c51b8647";
+                // this.ilanId = this.navParams.get('ilanId');
+
+              // this.firma = 'I2I-Systems';
+              // this.userId = "59163aa74be8d6e2c51b8647";
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TumOzgecmislerPage');
-    this.ozgecmisListele();
-
+    this.storage.get('user')
+        .then((user) => {
+          this.firma = user.firmaId;
+          this.userId = user._id;
+          this.ozgecmisListele();
+        });
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
     this.skip = 0;
     // this.infiniteScroll.enable(true);
     console.log('ilanlistele searchkontrol çağrıldı');
-    this.ozgecmisListele();
 });
 
   this.events.subscribe('ozgecmis:begen', (a) => {
@@ -74,7 +73,7 @@ this.events.subscribe('ozgecmis:filtered', (a) => {
   if(a) {
     // console.log('filtre true');
     this.detayAra = {};
-    this.firma = 'I2I-Systems';
+    // this.firma = 'I2I-Systems';
     this.sirala = '{}';
   }
   console.log('ozgecmislistele filtre çağrıldı');
@@ -87,7 +86,7 @@ this.events.subscribe('ozgecmis:filtered', (a) => {
     // let basvurular = [];
     // basvurular.push(this.ilanId);
     this.detayAra.userId = this.userId;
-    this.detayAra.basvuruId = this.ilanId;
+    // this.detayAra.basvuruId = this.ilanId;
     this.detayAra.segment = this.aktivite;
     this.detayAra.firma = this.firma;
     this.searching = true;

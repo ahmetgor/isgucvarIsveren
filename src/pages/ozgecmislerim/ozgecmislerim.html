@@ -48,14 +48,14 @@
   <!-- <div [ngSwitch]="aktivite">
     <div  *ngSwitchCase="'okunmadı'"> -->
   <ion-list text-wrap>
-    <button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis.ozgecmis)">
+    <button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis)">
       <ion-thumbnail item-left>
-        <img class="img-circle" [src]="ozgecmis.ozgecmis.resim.link">
+        <img class="img-circle" [src]="ozgecmis.resim.link">
       </ion-thumbnail>
 
-      <h2>{{ozgecmis.ozgecmis.isim}} {{ozgecmis.ozgecmis.soyisim}}</h2>
-      <p>{{ozgecmis.ozgecmis.unvan}}</p>
-      <p>{{getAge(ozgecmis.ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.ozgecmis.yilTecrube}} yıl tecrübe</p>
+      <h2>{{ozgecmis.isim}} {{ozgecmis.soyisim}}</h2>
+      <p>{{ozgecmis.unvan}}</p>
+      <p>{{getAge(ozgecmis.dogumTarihi)}} yaşında, {{ozgecmis.yilTecrube}} yıl tecrübe</p>
 
     </button>
   </ion-list>

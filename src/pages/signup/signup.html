@@ -16,6 +16,14 @@
   <form #heroForm="ngForm">
     <ion-list>
       <ion-item-divider no-lines color="light">Bilgileriniz:</ion-item-divider>
+      <input type="file" #userFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event, 'user')" required/>
+      <div class="profile-image-wrapper" (click)="getPicture('user')">
+        <div class="profile-image-placeholder" *ngIf="!userUrl">
+          <ion-icon name="add"></ion-icon>
+          <div>Profil Resmi</div>
+        </div>
+        <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(userUrl)" *ngIf="userUrl"></div>
+      </div>
       <ion-item>
           <ion-label><ion-icon name="mail"></ion-icon></ion-label>
           <ion-input [(ngModel)]="email" placeholder="Email" type="email" #name="ngModel" name="name" required

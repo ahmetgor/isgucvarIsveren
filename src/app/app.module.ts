@@ -29,6 +29,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { DatePipe } from '../pipes/date-pipe';
 import { CloudinaryModule } from '@cloudinary/angular-4.x';
 import * as  Cloudinary from 'cloudinary-core';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import * as  Cloudinary from 'cloudinary-core';
     IlanSerProvider,
     OzgecmisSerProvider,
     UserSerProvider,
-    AktiviteSerProvider
+    AktiviteSerProvider,
+    Camera
   ]
 })
 export class AppModule {}

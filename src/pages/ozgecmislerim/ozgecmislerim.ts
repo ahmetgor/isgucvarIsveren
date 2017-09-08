@@ -41,16 +41,19 @@ export class OzgecmislerimPage {
     // this.ilanId = this.navParams.get('ilanId');
     this.storage.get('user')
         .then((user) => {
+          console.log(user._id+'userid');
           this.userId = user._id;
           this.olusturan = user.email;
+          console.log("constructor çağrıldı");
+          this.ozgecmisListele();
         });
     // this.userId = "59163aa74be8d6e2c51b8647";
     // this.olusturan = "agor1@agor.com";
   }
 
   ionViewDidLoad() {
+
     console.log('ionViewDidLoad OzgecmislerimPage');
-    this.ozgecmisListele();
 
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;

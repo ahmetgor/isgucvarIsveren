@@ -89,6 +89,27 @@ export class OzgecmisSerProvider {
     });
   }
 
+  updateAvatar(resim: String){
+    this.showLoader();
+    return new Promise((resolve, reject) => {
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Authorization', this.authService.token);
+
+      this.http.post(this.url1, { "resim" : resim }, {headers: headers})
+        .map(res => res.json())
+        .subscribe(res => {
+          this.loading.dismiss();
+          resolve(res);
+        }, (err) => {
+          // reject(err);
+          this.loading.dismiss();
+          this.presentToast('Resim yüklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+        });
+    });
+  }
+
 presentToast(message) {
 let toast = this.toastCtrl.create({
   message: message,
