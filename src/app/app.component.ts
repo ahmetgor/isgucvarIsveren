@@ -10,6 +10,7 @@ import { TumIlanlarPage } from '../pages/tum-ilanlar/tum-ilanlar';
 import { IlanEklePage } from '../pages/ilan-ekle/ilan-ekle';
 import { LoginPage } from '../pages/login/login';
 import { UserSerProvider } from '../providers/user-ser';
+import { Storage } from '@ionic/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,12 +20,19 @@ export class MyApp {
 
   rootPage: any = LoginPage;
   alert: any;
+  user: any;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public alertCtrl: AlertController, public authService: UserSerProvider) {
+              public alertCtrl: AlertController, public authService: UserSerProvider,
+              public storage: Storage) {
     this.initializeApp();
+    this.storage.get('user')
+        .then((user) => { this.user = user;
+          console.log(JSON.stringify(user));
+          // str.substring(0, str.indexOf(":"));
+        });
 
     // used for an example of ngFor and navigation
     this.pages = [

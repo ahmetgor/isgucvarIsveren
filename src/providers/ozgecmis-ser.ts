@@ -55,7 +55,8 @@ export class OzgecmisSerProvider {
     console.log(order+'order service string');
 
     return new Promise((resolve, reject) => {
-    this.http.get(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}&skip=${skip}&limit=${limit}`
+      let uri = encodeURI(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}&skip=${skip}&limit=${limit}`);
+    this.http.get(uri
     , {headers: headers})
       .map(res => res.json())
       .subscribe(data => {

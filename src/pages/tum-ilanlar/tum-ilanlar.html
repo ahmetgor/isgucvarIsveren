@@ -28,9 +28,9 @@
   <ion-list text-wrap>
     <button ion-item *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
-      <ion-avatar item-left>
-        <img [src]="ilan.firma.resim">
-      </ion-avatar>
+      <ion-thumbnail item-left>
+        <img class="img-circle" [src]="ilan.firma.resim">
+      </ion-thumbnail>
 
       <ion-row>
       <ion-col>
@@ -54,9 +54,14 @@
       <ion-col col-auto>
           <p><ion-icon name="pin"></ion-icon>
             {{ilan.il}}
-
           </p>
       </ion-col>
+      <ion-col>
+        <p align="right">
+      <ion-icon name="briefcase"></ion-icon>
+      {{ilan.tip}}
+    </p>
+  </ion-col>
       </ion-row>
 
     </button>
