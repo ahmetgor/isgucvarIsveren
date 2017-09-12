@@ -80,7 +80,7 @@ this.events.subscribe('ozgecmis:filtered', (a) => {
   // this.infiniteScroll.enable(true);
   this.skip = 0;
   if(a) {
-    // console.log('filtre true');
+    console.log('filtre true');
     this.detayAra = {};
     this.sirala = '{}';
   }

@@ -38,10 +38,12 @@
 
   <ion-item>
   <ion-label floating color="primary">Eğitim</ion-label>
-  <ion-select [(ngModel)]="detayAra.egitimdurum" multiple="true" cancelText="İptal" okText="Tamam">
-  <ion-option value='Lise'>Lise</ion-option>
-  <ion-option value='Lisans'>Lisans</ion-option>
-  <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans - Doktora</ion-option>
+  <ion-select [(ngModel)]="detayAra.egitimdurum" cancelText="İptal" okText="Tamam">
+    <ion-option value="1">İlköğretim</ion-option>
+    <ion-option value="2">Lise</ion-option>
+    <ion-option value="3">Lisans</ion-option>
+    <ion-option value="4">Yüksek Lisans</ion-option>
+    <ion-option value="5">Doktora</ion-option>
   </ion-select>
   </ion-item>
 
@@ -51,7 +53,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Minimum Doğum Tarihi</ion-label>
+    <ion-label floating color="primary">Minimum Doğum Tarihi</ion-label>
     <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="detayAra.dogumTarihi" cancelText="İptal" doneText="Tamam">
     </ion-datetime>
   </ion-item>
@@ -64,6 +66,17 @@
   <ion-item>
       <ion-label floating color="primary">Yabancı Dil:</ion-label>
       <ion-input  type="text" [(ngModel)]="detayAra.dil"></ion-input>
+  </ion-item>
+
+  <ion-item>
+  <ion-label floating color="primary">Dil Seviye</ion-label>
+  <ion-select [(ngModel)]="detayAra.seviye" cancelText="İptal" okText="Tamam">
+    <ion-option value="1">Başlangıç</ion-option>
+    <ion-option value="2">Orta</ion-option>
+    <ion-option value="3">İyi</ion-option>
+    <ion-option value="4">Çok İyi</ion-option>
+    <ion-option value="5">Mükemmel</ion-option>
+  </ion-select>
   </ion-item>
 
   <ion-row>
