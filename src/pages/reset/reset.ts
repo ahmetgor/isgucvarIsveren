@@ -21,6 +21,7 @@ export class ResetPage {
   password: string;
   resetPasswordToken: string;
   loading: any;
+  password1: string;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
       public authService: UserSerProvider, public loadingCtrl: LoadingController,
