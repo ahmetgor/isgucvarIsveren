@@ -11,6 +11,7 @@ import { IlanEklePage } from '../pages/ilan-ekle/ilan-ekle';
 import { LoginPage } from '../pages/login/login';
 import { UserSerProvider } from '../providers/user-ser';
 import { Storage } from '@ionic/storage';
+import { HesapPage } from '../pages/hesap/hesap';
 
 @Component({
   templateUrl: 'app.html'
@@ -100,8 +101,9 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+  goHesap() {
+    this.nav.push(HesapPage);
   }
 }

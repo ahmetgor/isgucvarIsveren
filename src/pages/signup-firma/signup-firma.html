@@ -97,7 +97,8 @@
             </ion-list>
             <div class="g-recaptcha" data-sitekey="6LeWBS4UAAAAAAvIlSnwKqhUq2u4gPuTdLAU6UOZ"></div>
 
-            <button ion-button block (click)="registerFirma()" [disabled]="!heroForm.form.valid">Kaydol</button>
+            <button ion-button block (click)="registerFirma()"
+                    [disabled]="!heroForm.form.valid||firmaPasss1.value != firmaPasss.value||pass1.value != pass.value">Kaydol</button>
           </form>
 
 </ion-content>

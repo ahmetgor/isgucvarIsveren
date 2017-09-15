@@ -1,0 +1,54 @@
+<!--
+  Generated template for the FirmaHesapPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Firma Hesap</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #heroForm="ngForm">
+    <ion-list>
+  <ion-item-divider no-lines color="light">Firma Bilgileri:</ion-item-divider>
+  <input type="file" #firmaFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event, 'firma')" required/>
+  <div class="profile-image-wrapper" (click)="getPicture('firma')">
+    <div class="profile-image-placeholder" *ngIf="!firmaUrl">
+      <ion-icon name="add"></ion-icon>
+      <div>Firma Logosu</div>
+    </div>
+    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(firmaUrl)" *ngIf="firmaUrl"></div>
+  </div>
+  <ion-item>
+      <ion-label><ion-icon name="power"></ion-icon></ion-label>
+      <ion-input [(ngModel)]="user.firma" placeholder="Firma ismi" type="text" #firmaa="ngModel" name="firma" disabled></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+      <ion-input [(ngModel)]="firmaPass" placeholder="Firma Şifresi" type="password" #firmaPasss="ngModel" name="firmaPass" minlength="6" required>
+      </ion-input>
+  </ion-item>
+  <ion-item no-lines *ngIf="firmaPasss.errors">
+      <p style="color:red;">Firma Şifresİ minimum 6 karakter olmalı</p>
+  </ion-item>
+  <ion-item>
+      <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+      <ion-input [(ngModel)]="firmaPass1" placeholder="Şifre tekrar" type="password" #firmaPasss1="ngModel" name="firmaPass1" minlength="6" required>
+      </ion-input>
+  </ion-item>
+  <ion-item no-lines *ngIf="firmaPasss1.value != firmaPasss.value">
+      <p style="color:red;">Girilen firma şifreleri aynı değil</p>
+  </ion-item>
+
+      </ion-list>
+
+      <button ion-button block (click)="registerFirma()" [disabled]="!heroForm.form.valid">Güncelle</button>
+    </form>
+
+</ion-content>

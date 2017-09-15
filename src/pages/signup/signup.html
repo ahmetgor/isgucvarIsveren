@@ -65,6 +65,6 @@
         </ion-item>
       </ion-list>
 
-      <button ion-button block (click)="register()" [disabled]="!heroForm.form.valid">Kaydol</button>
+      <button ion-button block (click)="register()" [disabled]="!heroForm.form.valid||pass1.value != pass.value">Kaydol</button>
     </form>
 </ion-content>
