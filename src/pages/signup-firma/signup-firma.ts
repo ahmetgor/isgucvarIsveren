@@ -25,7 +25,8 @@ export class SignupFirmaPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
       public authService: UserSerProvider, public loadingCtrl: LoadingController,
-      public toastCtrl: ToastController, public camera: Camera, public ozgecmisSer: OzgecmisSerProvider) {}
+      public toastCtrl: ToastController, public camera: Camera,
+      public ozgecmisSer: OzgecmisSerProvider) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupFirmaPage');

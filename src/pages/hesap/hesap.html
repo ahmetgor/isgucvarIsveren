@@ -33,7 +33,15 @@
         </ion-item>
         <ion-item>
             <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-            <ion-input [(ngModel)]="newpassword" placeholder="Şifre" type="password" #pass="ngModel" name="pass" minlength="6">
+            <ion-input [(ngModel)]="password" placeholder="Mevcut Şifre" type="password" #oldpass="ngModel" name="passwrd" required>
+            </ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="oldpass.errors">
+            <p style="color:red;">Lütfen şifrenizi giriniz</p>
+        </ion-item>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="newpassword" placeholder="Yeni Şifre" type="password" #pass="ngModel" name="pass" minlength="6">
             </ion-input>
         </ion-item>
         <ion-item no-lines *ngIf="pass.errors">
@@ -41,7 +49,7 @@
         </ion-item>
         <ion-item>
             <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-            <ion-input [(ngModel)]="newpassword1" placeholder="Tekrar Şifre" type="password" #pass1="ngModel" name="pass1" minlength="6">
+            <ion-input [(ngModel)]="newpassword1" placeholder="Yeni Şifre tekrar" type="password" #pass1="ngModel" name="pass1" minlength="6">
             </ion-input>
         </ion-item>
         <ion-item no-lines *ngIf="pass1.value != pass.value">

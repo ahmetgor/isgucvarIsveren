@@ -15,7 +15,6 @@ export class UserSerProvider {
   // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
 
   url : string = 'http://127.0.0.1:8080/api/firmaauth/';
-  urlauth : string = 'http://127.0.0.1:8080/api/auth/';
   url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
   loading: any;
@@ -126,6 +125,33 @@ export class UserSerProvider {
             console.log(JSON.stringify(err)+'servis err');
             reject(err);
           });
+    });
+  }
+
+  updateUser(user: any){
+    this.showLoader();
+    return new Promise((resolve, reject) => {
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      // headers.append('Authorization', this.authService.token);
+      console.log(JSON.stringify(user)+'order service update user');
+
+      this.http.put(this.url + 'updateuser', JSON.stringify(user), {headers: headers})
+        .map(res => res.json())
+        .subscribe(res => {
+          // this.ozgecmis = kayit;
+          // this.storage.set('ozgecmis', kayit);
+          console.log(JSON.stringify(res)+"updateuser");
+          this.loading.dismiss();
+          this.presentToast('Kullanıcı güncellendi!');
+          resolve(res);
+        }, (err) => {
+          // reject(err);
+          console.log(JSON.stringify(err));
+          this.loading.dismiss();
+          this.presentToast('Kullanıcı güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+        });
     });
   }
 
