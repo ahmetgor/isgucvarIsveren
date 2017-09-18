@@ -4,6 +4,8 @@ import { Camera } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { UserSerProvider } from '../../providers/user-ser';
+import { LoginPage} from '../login/login';
+
 
 @IonicPage()
 @Component({
@@ -25,7 +27,7 @@ export class HesapPage {
 
     this.storage.get('user')
         .then((user) => { this.user = user;
-          this.userUrl = 'url(' + user.resim + ')'
+          this.userUrl = 'url(' + user.resim + ')';
           this.cloudUrl = user.resim;
           console.log(JSON.stringify(user));
         });
@@ -36,14 +38,14 @@ export class HesapPage {
   }
 
   updateUser(){
-    // this.ozgecmisSer.updateAvatar(this.cloudUrl)
-    // .then( (resUrl: any) => {
-    //   this.cloudUrl = resUrl.secure_url;
-    //   console.log(resUrl.secure_url+"user cloud url");
+    this.ozgecmisSer.updateAvatar(this.cloudUrl)
+    .then( (resUrl: any) => {
+      this.cloudUrl = resUrl.secure_url;
+      console.log(resUrl.secure_url+"user cloud url");
 
       let details : any = {
           email: this.user.email,
-          userUrl: this.userUrl,
+          userUrl: this.cloudUrl,
           password: this.password
       };
 
@@ -53,13 +55,15 @@ export class HesapPage {
 
       this.authService.updateUser(details).then((result) => {
         // this.presentToast('Kaydınız yapıldı, giriş yapabilirsiniz');
-        this.navCtrl.pop();
+          this.authService.logout();
+          this.navCtrl.setRoot(LoginPage);
+
       }, (err) => {
         // let msg = JSON.parse(err._body);
         // console.log(msg.error+'asdasd');
 
       });
-    // });
+    });
   }
 
   getPicture(url) {

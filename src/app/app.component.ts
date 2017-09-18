@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController } from 'ionic-angular';
+import { Nav, Platform, AlertController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -22,19 +22,20 @@ export class MyApp {
   rootPage: any = LoginPage;
   alert: any;
   user: any;
-
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public alertCtrl: AlertController, public authService: UserSerProvider,
-              public storage: Storage) {
+              public storage: Storage,  public events: Events) {
     this.initializeApp();
-    this.storage.get('user')
-        .then((user) => { this.user = user;
-          console.log(JSON.stringify(user));
-          // str.substring(0, str.indexOf(":"));
-        });
 
+    this.events.subscribe('login:event', (a) => {
+      this.storage.get('user')
+          .then((user) => { this.user = user;
+            console.log(JSON.stringify('login fired'));
+            // str.substring(0, str.indexOf(":"));
+          });
+});
     // used for an example of ngFor and navigation
     this.pages = [
 
@@ -48,6 +49,11 @@ export class MyApp {
   }
 
   initializeApp() {
+    this.storage.get('user')
+        .then((user) => { this.user = user;
+          console.log(JSON.stringify(user));
+          // str.substring(0, str.indexOf(":"));
+        });
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

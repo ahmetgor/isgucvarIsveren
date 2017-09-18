@@ -17,7 +17,7 @@
   <form #heroForm="ngForm">
     <div *ngIf="user">
     <ion-list>
-
+      <ion-item-divider no-lines color="light">Profil resmi değiştirin:</ion-item-divider>
       <input type="file" #userFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" required />
       <div class="profile-image-wrapper" (click)="getPicture()">
         <div class="profile-image-placeholder" *ngIf="!userUrl">
@@ -26,19 +26,8 @@
         </div>
         <div class="profile-image" [style.backgroundImage]= "userUrl" *ngIf="userUrl"></div>
       </div>
-        <ion-item>
-            <ion-label><ion-icon name="mail"></ion-icon></ion-label>
-            <ion-input [(ngModel)]="user.email" placeholder="Email" type="email" #name="ngModel" name="name" disabled>
-          </ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-            <ion-input [(ngModel)]="password" placeholder="Mevcut Şifre" type="password" #oldpass="ngModel" name="passwrd" required>
-            </ion-input>
-        </ion-item>
-        <ion-item no-lines *ngIf="oldpass.errors">
-            <p style="color:red;">Lütfen şifrenizi giriniz</p>
-        </ion-item>
+
+        <ion-item-divider no-lines color="light">Yeni şifre belirleyin:</ion-item-divider>
         <ion-item>
             <ion-label><ion-icon name="lock"></ion-icon></ion-label>
             <ion-input [(ngModel)]="newpassword" placeholder="Yeni Şifre" type="password" #pass="ngModel" name="pass" minlength="6">
@@ -54,6 +43,20 @@
         </ion-item>
         <ion-item no-lines *ngIf="pass1.value != pass.value">
             <p style="color:red;">Girilen şifreler aynı değil</p>
+        </ion-item>
+        <ion-item-divider no-lines color="light"></ion-item-divider>
+        <ion-item>
+            <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="user.email" placeholder="Email" type="email" #name="ngModel" name="name" disabled>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="password" placeholder="Mevcut Şifre" type="password" #oldpass="ngModel" name="passwrd" required>
+            </ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="oldpass.errors">
+            <p style="color:red;">Lütfen şifrenizi giriniz</p>
         </ion-item>
 
     </ion-list>

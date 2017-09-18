@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Events } from 'ionic-angular';
 import { UserSerProvider } from '../../providers/user-ser';
 import { IlanlarimPage } from '../ilanlarim/ilanlarim';
 import { SignupPage } from '../signup/signup';
@@ -22,7 +22,7 @@ export class LoginPage {
   loading: any;
 
   constructor(public navCtrl: NavController, public authService: UserSerProvider,
-    public loadingCtrl: LoadingController, public storage: Storage) {
+    public loadingCtrl: LoadingController, public storage: Storage, public events: Events) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -53,6 +53,7 @@ export class LoginPage {
       };
         console.log(JSON.stringify(credentials)+'credentials');
       this.authService.login(credentials).then((result: any) => {
+        this.events.publish('login:event');
 
         console.log(JSON.stringify(result)+"result");
         this.loading.dismiss();

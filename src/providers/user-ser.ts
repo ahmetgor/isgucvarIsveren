@@ -150,7 +150,7 @@ export class UserSerProvider {
           // reject(err);
           console.log(JSON.stringify(err));
           this.loading.dismiss();
-          this.presentToast('Kullanıcı güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+          this.presentToast('Kullanıcı güncellenemedi. Bağlantı problemi veya şifre hatalı olabilir!');
         });
     });
   }
