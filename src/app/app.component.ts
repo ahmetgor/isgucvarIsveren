@@ -12,6 +12,8 @@ import { LoginPage } from '../pages/login/login';
 import { UserSerProvider } from '../providers/user-ser';
 import { Storage } from '@ionic/storage';
 import { HesapPage } from '../pages/hesap/hesap';
+import { FirmaHesapPage } from '../pages/firma-hesap/firma-hesap';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -111,5 +113,8 @@ export class MyApp {
   }
   goHesap() {
     this.nav.push(HesapPage);
+  }
+  goFirmaHesap() {
+    this.nav.push(FirmaHesapPage);
   }
 }

@@ -14,41 +14,84 @@
 
 
 <ion-content padding>
+  <div *ngIf="user">
   <form #heroForm="ngForm">
     <ion-list>
-  <ion-item-divider no-lines color="light">Firma Bilgileri:</ion-item-divider>
-  <input type="file" #firmaFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event, 'firma')" required/>
-  <div class="profile-image-wrapper" (click)="getPicture('firma')">
-    <div class="profile-image-placeholder" *ngIf="!firmaUrl">
-      <ion-icon name="add"></ion-icon>
-      <div>Firma Logosu</div>
-    </div>
-    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(firmaUrl)" *ngIf="firmaUrl"></div>
-  </div>
-  <ion-item>
-      <ion-label><ion-icon name="power"></ion-icon></ion-label>
-      <ion-input [(ngModel)]="user.firma" placeholder="Firma ismi" type="text" #firmaa="ngModel" name="firma" disabled></ion-input>
-  </ion-item>
-  <ion-item>
-      <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-      <ion-input [(ngModel)]="firmaPass" placeholder="Firma Şifresi" type="password" #firmaPasss="ngModel" name="firmaPass" minlength="6" required>
-      </ion-input>
-  </ion-item>
-  <ion-item no-lines *ngIf="firmaPasss.errors">
-      <p style="color:red;">Firma Şifresİ minimum 6 karakter olmalı</p>
-  </ion-item>
-  <ion-item>
-      <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-      <ion-input [(ngModel)]="firmaPass1" placeholder="Şifre tekrar" type="password" #firmaPasss1="ngModel" name="firmaPass1" minlength="6" required>
-      </ion-input>
-  </ion-item>
-  <ion-item no-lines *ngIf="firmaPasss1.value != firmaPasss.value">
-      <p style="color:red;">Girilen firma şifreleri aynı değil</p>
-  </ion-item>
+      <ion-item-divider no-lines color="light">Firma profil resmi değiştirin</ion-item-divider>
+      <input type="file" #userFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" required />
+      <div class="profile-image-wrapper" (click)="getPicture()">
+        <div class="profile-image-placeholder" *ngIf="!userUrl">
+          <ion-icon name="add"></ion-icon>
+          <div>Profil Resmi</div>
+        </div>
+        <div class="profile-image" [style.backgroundImage]= "userUrl" *ngIf="userUrl"></div>
+      </div>
 
-      </ion-list>
+        <ion-item-divider no-lines color="light">Yeni firma ismi veya şifresi belirleyin</ion-item-divider>
+        <ion-item>
+            <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="user.firma" placeholder="Firma İsmi" type="text" #name="ngModel" name="name">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="newpassword" placeholder="Yeni firma şifresi" type="password" #pass="ngModel" name="pass" minlength="6">
+            </ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="pass.errors">
+            <p style="color:red;">Şifre minimum 6 karakter olmalı</p>
+        </ion-item>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="newpassword1" placeholder="Yeni firma şifresi tekrar" type="password" #pass1="ngModel" name="pass1" minlength="6">
+            </ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="pass1.value != pass.value">
+            <p style="color:red;">Girilen şifreler aynı değil</p>
+        </ion-item>
+        <!-- <ion-item-divider no-lines color="light"></ion-item-divider> -->
+        <div style="padding-top: 20px">
+      </div>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="password" placeholder="Mevcut kullanıcı şifreniz" type="password" #oldpass="ngModel" name="passwrd" required>
+            </ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="oldpass.errors">
+            <p style="color:red;">Lütfen mevcut kullanıcı şifresini girin</p>
+        </ion-item>
 
-      <button ion-button block (click)="registerFirma()" [disabled]="!heroForm.form.valid">Güncelle</button>
+    </ion-list>
+
+    <button ion-button block (click)="updateUser()"
+            [disabled]="!heroForm.form.valid||pass1.value != pass.value||heroForm.form.untouched">Güncelle</button>
     </form>
+
+    <div style="padding-top: 40px">
+  </div>
+
+    <ion-list text-wrap>
+
+      <ion-item-divider no-lines color="light">Firma kullanıcıları aktiflik ayarı</ion-item-divider>
+      <button ion-item *ngFor="let usr of userList">
+        <ion-avatar item-start *ngIf="usr && usr.resim">
+          <img class="img-circle" [src]="usr.resim">
+        </ion-avatar>
+        <!-- <ion-row>
+        <ion-col> -->
+
+        <ion-label>
+          <div [class.my-class]="!usr.enabled">{{usr.email}}
+      </div>
+    </ion-label>
+        <ion-toggle [(ngModel)]="usr.enabled" (ionChange)="updateUserEnabled(usr)"></ion-toggle>
+        <!-- </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row> -->
+    </button>
+    </ion-list>
+
+  </div>
 
 </ion-content>

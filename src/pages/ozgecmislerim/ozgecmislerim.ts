@@ -75,7 +75,7 @@ this.events.subscribe('ozgecmis:begen', (a) => {
   this.ozgecmisListele();
 });
 
-this.events.subscribe('ozgecmis:filtered', (a) => {
+this.events.subscribe('ozgecmis:filtered_tek', (a) => {
   this.scrollEnable = true;
   // this.infiniteScroll.enable(true);
   this.skip = 0;
@@ -118,7 +118,8 @@ this.events.subscribe('ozgecmis:filtered', (a) => {
   presentFilter(myEvent) {
     this.navCtrl.push(OzgecmisFiltrelePage, {
       detayAra: this.detayAra,
-      sirala: this.sirala
+      sirala: this.sirala,
+      page: 'tek'
     });
   }
 

@@ -61,7 +61,6 @@ export class HesapPage {
       }, (err) => {
         // let msg = JSON.parse(err._body);
         // console.log(msg.error+'asdasd');
-
       });
     });
   }
@@ -70,8 +69,9 @@ export class HesapPage {
     if (Camera['installed']()) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
+        targetWidth: 150,
+        targetHeight: 150,
+        allowEdit: true
       }).then((data) => {
         console.log("camera");
         this.userUrl = 'data:image/jpg;base64,' + data;
@@ -89,17 +89,25 @@ export class HesapPage {
 
   processWebImage(event) {
     let reader = new FileReader();
+    let imageData = new Image();
+    const canvas = document.createElement('canvas');
+
     reader.onload = (readerEvent) => {
       console.log("event");
       let imageData = (readerEvent.target as any).result;
+
+      // canvas.getContext("2d").drawImage(imageData, 0, 0, 150, 150);
+      // let dataUrl = canvas.toDataURL('image/jpeg');
+
       this.userUrl = 'url(' + imageData + ')';
       this.cloudUrl = imageData;
       // console.log(imageData);
       // console.log(JSON.stringify(readerEvent.target));
       // this.form.patchValue({ 'profilePic': imageData });
     };
-
     reader.readAsDataURL(event.target.files[0]);
+    console.log(event.target.files[0]);
+
   }
 
   // getProfileImageStyle(url) {

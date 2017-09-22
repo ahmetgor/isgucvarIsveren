@@ -34,7 +34,8 @@ export class ResetPage {
     resetle(){
         // this.showLoader();
         let user = {
-            email: this.email
+            email: this.email,
+            prm: 'firmauser'
         };
           // console.log(JSON.stringify(credentials)+'credentials');
         this.authService.forgot(user).then((result) => {
@@ -53,7 +54,8 @@ export class ResetPage {
       let user = {
           email: this.email,
           password: this.password,
-          resetPasswordToken: this.resetPasswordToken
+          resetPasswordToken: this.resetPasswordToken,
+          prm: 'firmauser'
       };
         // console.log(JSON.stringify(credentials)+'credentials');
       this.authService.reset(user).then((result) => {

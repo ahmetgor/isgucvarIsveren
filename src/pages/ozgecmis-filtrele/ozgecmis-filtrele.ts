@@ -49,13 +49,13 @@ export class OzgecmisFiltrelePage {
     console.log(this.sirala+'kapatfiltre');
     console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
       // console.log(JSON.stringify(this.sirala)+'parsefiltre');
-    this.events.publish('ozgecmis:filtered');
+    this.events.publish('ozgecmis:filtered_'+this.navParams.get('page'));
     this.navCtrl.pop();
    }
 
    clear() {
    console.log(JSON.stringify(this.detayAra)+'clearfiltre');
-   this.events.publish('ozgecmis:filtered', 'clear');
+   this.events.publish('ozgecmis:filtered_'+this.navParams.get('page'), 'clear');
    this.navCtrl.pop();
   }
 

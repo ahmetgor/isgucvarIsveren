@@ -17,6 +17,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { ResetPage } from '../pages/reset/reset';
 import { SignupFirmaPage } from '../pages/signup-firma/signup-firma';
 import { HesapPage } from '../pages/hesap/hesap';
+import { FirmaHesapPage } from '../pages/firma-hesap/firma-hesap';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -49,7 +50,8 @@ import { Camera } from '@ionic-native/camera';
     SignupPage,
     SignupFirmaPage,
     ResetPage,
-    HesapPage
+    HesapPage,
+    FirmaHesapPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import { Camera } from '@ionic-native/camera';
     SignupPage,
     SignupFirmaPage,
     ResetPage,
-    HesapPage
+    HesapPage,
+    FirmaHesapPage
   ],
   providers: [
     StatusBar,

@@ -7,23 +7,27 @@
 
   <ion-content>
     <ion-list>
+      <div *ngIf="user">
       <ion-item no-lines>
-        <div *ngIf="user">
         <ion-thumbnail item-start>
         <img class="img-circle" [src]="user.resim">
         </ion-thumbnail>
         <h2>{{user.email}}</h2>
-      </div>
       </ion-item>
       <button menuClose ion-item no-lines (click)="goHesap()">
         <ion-icon name="build"></ion-icon>
-        Hesap
+        Hesabım
+      </button>
+      <button *ngIf="user.role == 'Manager'" menuClose ion-item no-lines (click)="goFirmaHesap()">
+        <ion-icon name="key"></ion-icon>
+        Firma Hesabı
       </button>
       <button menuClose ion-item no-lines (click)="presentLogout('Oturumunuz kapansın mı?')">
         <ion-icon name="log-out"></ion-icon>
         Çıkış
       </button>
       <ion-item-divider color="light"></ion-item-divider>
+    </div>
 
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         <ion-icon name="{{p.icon}}"></ion-icon>

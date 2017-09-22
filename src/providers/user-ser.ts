@@ -131,13 +131,13 @@ export class UserSerProvider {
   updateUser(user: any){
     this.showLoader();
     return new Promise((resolve, reject) => {
-
+      let en = user.en ? user.en : "";
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       // headers.append('Authorization', this.authService.token);
       console.log(JSON.stringify(user)+'order service update user');
 
-      this.http.put(this.url + 'updateuser', JSON.stringify(user), {headers: headers})
+      this.http.put(this.url + 'updateuser'+en, JSON.stringify(user), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
           // this.ozgecmis = kayit;
@@ -148,9 +148,38 @@ export class UserSerProvider {
           resolve(res);
         }, (err) => {
           // reject(err);
+          this.loading.dismiss();
+          console.log(JSON.stringify(err));
+          this.presentToast('Kullanıcı güncellenemedi. Bağlantı problemi veya şifre hatalı olabilir!');
+        });
+    });
+  }
+
+  updateFirma(user: any){
+    this.showLoader();
+    return new Promise((resolve, reject) => {
+
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      // headers.append('Authorization', this.authService.token);
+      console.log(JSON.stringify(user)+'order service update firma');
+
+      this.http.put(this.url + 'updatefirma', JSON.stringify(user), {headers: headers})
+        .map(res => res.json())
+        .subscribe(res => {
+
+          console.log(JSON.stringify(res)+"updatefirma");
+          this.loading.dismiss();
+          this.presentToast('Firma güncellendi. Tekrar giriş yaptığınızda geçerli olacak.');
+          resolve(res);
+        }, (err) => {
+          // reject(err);
           console.log(JSON.stringify(err));
           this.loading.dismiss();
-          this.presentToast('Kullanıcı güncellenemedi. Bağlantı problemi veya şifre hatalı olabilir!');
+          if(JSON.stringify(err).includes('duplicate'))
+          this.presentToast('Firma ismi kullanılıyor. Firma güncellenemedi.');
+          else
+          this.presentToast('Firma güncellenemedi. Bağlantı problemi veya şifre hatalı olabilir!');
         });
     });
   }
@@ -200,6 +229,7 @@ export class UserSerProvider {
           });
     });
   }
+
 
   logout(){
       this.storage.remove('token');
