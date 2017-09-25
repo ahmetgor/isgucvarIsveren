@@ -20,14 +20,15 @@
       <ion-item-divider no-lines color="light">Profil resmi değiştirin:</ion-item-divider>
       <input type="file" #userFileInput [hidden]="true" (change)="processWebImage($event)" required />
       <!-- style="visibility: hidden; height: 0px"  -->
-      <div class="profile-image-wrapper" (click)="getPicture()">
+      <div class="profile-image-wrapper" >
         <div class="profile-image-placeholder" *ngIf="!userUrl">
           <ion-icon name="add"></ion-icon>
           <div>Profil Resmi</div>
         </div>
-        <div *ngIf="userUrl">
-            <img class="profile-image" [src]="cloudUrl">
-        </div>
+        <!-- [style.backgroundImage]="userUrl" -->
+          <div *ngIf="userUrl" >
+              <img class="profile-image" [src]="cloudUrl" (click)="getPicture()">
+          </div>
       </div>
 
         <ion-item-divider no-lines color="light">Yeni şifre belirleyin:</ion-item-divider>

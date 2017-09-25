@@ -12,7 +12,10 @@ import { Storage } from '@ionic/storage';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+@IonicPage({
+  name: 'home',
+segment: 'home'
+})
 @Component({
   selector: 'page-ozgecmislerim',
   templateUrl: 'ozgecmislerim.html',

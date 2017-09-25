@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform  } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { UserSerProvider } from '../../providers/user-ser';
 import { LoginPage} from '../login/login';
-
 
 @IonicPage()
 @Component({
@@ -23,7 +22,7 @@ export class HesapPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public camera: Camera,
               public storage: Storage, public ozgecmisSer: OzgecmisSerProvider,
-              public authService: UserSerProvider) {
+              public authService: UserSerProvider,  public platform: Platform) {
 
     this.storage.get('user')
         .then((user) => { this.user = user;
@@ -66,12 +65,14 @@ export class HesapPage {
   }
 
   getPicture(url) {
-    if (Camera['installed']()) {
+    if (!this.platform.is('core')) {
       this.camera.getPicture({
+        sourceType : 0,
         destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 150,
-        targetHeight: 150,
-        allowEdit: true
+        targetWidth: 300,
+        targetHeight: 300,
+        allowEdit: true,
+        quality: 70
       }).then((data) => {
         console.log("camera");
         this.userUrl = 'data:image/jpg;base64,' + data;
@@ -80,27 +81,28 @@ export class HesapPage {
       }, (err) => {
         // alert('Unable to take photo');
       })
-    } else {
+    }
+    else {
       console.log("native");
            this.userFileInput.nativeElement.click();
-
     }
   }
 
   processWebImage(event) {
     let reader = new FileReader();
     let imageData = new Image();
-    const canvas = document.createElement('canvas');
-
+    var canvas = document.createElement('canvas');
+    let dataUrl = undefined;
     reader.onload = (readerEvent) => {
       console.log("event");
-      let imageData = (readerEvent.target as any).result;
-
-      // canvas.getContext("2d").drawImage(imageData, 0, 0, 150, 150);
-      // let dataUrl = canvas.toDataURL('image/jpeg');
-
-      this.userUrl = 'url(' + imageData + ')';
-      this.cloudUrl = imageData;
+      // dataUrl = (readerEvent.target as any).result;
+      // console.log(imageData.src+"src");
+      // canvas.getContext("2d").drawImage(imageData, 0, 0);
+      // let dataUrl = canvas.toDataURL('image/jpg');
+      console.log(dataUrl);
+      console.log(dataUrl.length);
+      this.userUrl = 'url(' + dataUrl + ')';
+      this.cloudUrl = dataUrl;
       // console.log(imageData);
       // console.log(JSON.stringify(readerEvent.target));
       // this.form.patchValue({ 'profilePic': imageData });

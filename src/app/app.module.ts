@@ -32,6 +32,7 @@ import { DatePipe } from '../pipes/date-pipe';
 import { CloudinaryModule } from '@cloudinary/angular-4.x';
 import * as  Cloudinary from 'cloudinary-core';
 import { Camera } from '@ionic-native/camera';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { Camera } from '@ionic-native/camera';
     OzgecmisSerProvider,
     UserSerProvider,
     AktiviteSerProvider,
-    Camera
-  ]
+    Camera,
+    Deeplinks
+    ]
 })
 export class AppModule {}

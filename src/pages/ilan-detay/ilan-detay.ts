@@ -24,6 +24,8 @@ export class IlanDetayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
               public ilanSer: IlanSerProvider, public storage: Storage) {
     this.ilan = this.navParams.get('ilan');
+    this.ilanId = this.navParams.get('ilanId') ? this.navParams.get('ilanId') : this.ilan._id;
+
     this.guncelleyen = this.navParams.get('guncelleyen');
     this.storage.get('user')
         .then((user) => {
@@ -40,7 +42,7 @@ export class IlanDetayPage {
     this.events.subscribe('ilan:ekle', () => {
       console.log('ilan ekle event çağrıldı');
       console.log(this.ilan._id+'  id  '+this.ilan.id);
-      this.ilanSer.getIlan(this.ilan._id)
+      this.ilanSer.getIlan(this.ilanId)
       .then(ilan => {
         this.ilan = ilan;
       });
