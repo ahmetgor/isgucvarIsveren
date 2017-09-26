@@ -34,7 +34,7 @@ import * as  Cloudinary from 'cloudinary-core';
 import { Camera } from '@ionic-native/camera';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { SocialSharing } from '@ionic-native/social-sharing';
-
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -94,7 +94,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     AktiviteSerProvider,
     Camera,
     Deeplinks,
-    SocialSharing
+    SocialSharing,
+    Facebook
     ]
 })
 export class AppModule {}

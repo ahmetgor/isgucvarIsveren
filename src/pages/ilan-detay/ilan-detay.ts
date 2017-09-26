@@ -5,6 +5,7 @@ import { IlanEklePage } from '../ilan-ekle/ilan-ekle';
 import { IlanSerProvider} from '../../providers/ilan-ser';
 import { Storage } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 /**
  * Generated class for the IlanDetayPage page.
@@ -25,7 +26,7 @@ export class IlanDetayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
               public ilanSer: IlanSerProvider, public storage: Storage,
               private socialSharing: SocialSharing, public actionSheetCtrl: ActionSheetController,
-              public plt: Platform) {
+              public plt: Platform, private face: Facebook) {
                 console.log("ilandetay");
     this.ilan = this.navParams.get('ilan');
     this.ilanId = this.navParams.get('ilanId') ? this.navParams.get('ilanId') : this.ilan._id;
@@ -77,6 +78,35 @@ export class IlanDetayPage {
   else this.presentActionSheet();
   }
 
+  shareFace() {
+    let options = 	{
+  method: "share",
+  href: "https://localhost:8000/#/ilanlar/"+this.ilan._id
+  // caption: "Such caption, very feed.",
+  // description: "Much description"
+  // picture: this.ilan.firma.resim
+}
+// let params: UIParams = {
+//   href: 'https://isgucvar.herokuapp.com/#/ilan/'+this.ilan._id,
+//   method: 'share'
+// };
+
+// if(this.plt.is('ios') || this.plt.is('android')) {
+    this.face.showDialog( options)
+    .then((res) => console.log(res)+"res")
+    .catch((e: any) => console.error(e)+"error");
+    // this.fb.ui(params)
+    // .then((res: UIResponse) => console.log(res))
+    // .catch((e: any) => console.error(e));
+  // }
+  //
+  // else {
+  //     this.fb.ui(params)
+  //     .then((res: UIResponse) => console.log(res))
+  //     .catch((e: any) => console.error(e));
+  //   }
+  }
+
   presentActionSheet() {
       let actionSheet = this.actionSheetCtrl.create({
         title: 'İlan Paylaş',
@@ -84,7 +114,7 @@ export class IlanDetayPage {
           {
             text: 'Facebook',icon: 'logo-facebook',
             handler: () => {
-              // this.shareFace();
+              this.shareFace();
             }
           },{
             text: 'LinkedIn',icon: 'logo-linkedin',
