@@ -36,9 +36,10 @@ export class LoginPage {
         this.showLoader('Bilgiler yükleniyor...');
         //Check if already authenticated
         this.authService.checkAuthentication().then((res) => {
-            // console.log("Already authorized");
+            console.log("Already authorized");
             this.loading.dismiss();
-            this.navCtrl.setRoot(IlanlarimPage);
+            if (this.navCtrl.canGoBack()) return;
+            else this.navCtrl.setRoot(IlanlarimPage);
         }, (err) => {
             // console.log("Not already authorized");
             this.loading.dismiss();

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ActionSheetController, Platform } from 'ionic-angular';
 import { OzgecmislerimPage } from '../ozgecmislerim/ozgecmislerim';
 import { IlanEklePage } from '../ilan-ekle/ilan-ekle';
 import { IlanSerProvider} from '../../providers/ilan-ser';
 import { Storage } from '@ionic/storage';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /**
  * Generated class for the IlanDetayPage page.
@@ -22,7 +23,10 @@ export class IlanDetayPage {
   guncelleyen: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
-              public ilanSer: IlanSerProvider, public storage: Storage) {
+              public ilanSer: IlanSerProvider, public storage: Storage,
+              private socialSharing: SocialSharing, public actionSheetCtrl: ActionSheetController,
+              public plt: Platform) {
+                console.log("ilandetay");
     this.ilan = this.navParams.get('ilan');
     this.ilanId = this.navParams.get('ilanId') ? this.navParams.get('ilanId') : this.ilan._id;
 
@@ -38,7 +42,10 @@ export class IlanDetayPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad IlanDetayPage');
-
+    this.ilanSer.getIlan(this.ilanId)
+    .then(ilan => {
+      this.ilan = ilan;
+    });
     this.events.subscribe('ilan:ekle', () => {
       console.log('ilan ekle event çağrıldı');
       console.log(this.ilan._id+'  id  '+this.ilan.id);
@@ -48,6 +55,52 @@ export class IlanDetayPage {
       });
     });
   }
+
+  share() {
+    if(!this.plt.is('core') && !this.plt.is('mobileweb')) {
+  var options = {
+    message: "Yeni bir İşgüçvar ilanı paylaşıldı: "+this.ilan.baslik+"\n", // not supported on some apps (Facebook, Instagram)
+    subject: 'işgüçvar ilanı '+this.ilan.baslik, // fi. for email
+    // files: [this.ilan.resim], // an array of filenames either locally or remotely
+    url: "http://localhost:8100/#/ilanlar/"+this.ilan._id,
+    chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
+  }
+  // this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")
+  this.socialSharing.shareWithOptions(options)
+  .then((result) => {
+      console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+      console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+  }).catch((msg) => {
+      console.log("Sharing failed with message: " + msg);
+  });
+  }
+  else this.presentActionSheet();
+  }
+
+  presentActionSheet() {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: 'İlan Paylaş',
+        buttons: [
+          {
+            text: 'Facebook',icon: 'logo-facebook',
+            handler: () => {
+              // this.shareFace();
+            }
+          },{
+            text: 'LinkedIn',icon: 'logo-linkedin',
+            handler: () => {
+              console.log('Archive clicked');
+            }
+          },{
+            text: 'İptal',role: 'cancel',icon: 'close',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+      actionSheet.present();
+    }
 
   toOzgecmis() {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');

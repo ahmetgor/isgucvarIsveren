@@ -15,6 +15,7 @@ import { Storage } from '@ionic/storage';
 import { HesapPage } from '../pages/hesap/hesap';
 import { FirmaHesapPage } from '../pages/firma-hesap/firma-hesap';
 import { IlanDetayPage } from '../pages/ilan-detay/ilan-detay';
+import { OzgecmisDetayPage } from '../pages/ozgecmis-detay/ozgecmis-detay';
 
 
 @Component({
@@ -59,15 +60,6 @@ export class MyApp {
           // str.substring(0, str.indexOf(":"));
         });
     this.platform.ready().then(() => {
-      this.deeplinks.routeWithNavController(this.nav, {
-        '/ozgec': OzgecmislerimPage,
-        // '/universal-links-test': AboutPage,
-        // '/products/:productId': ProductPage
-      }).subscribe((match) => {
-        console.log('Successfully routed', match);
-      }, (nomatch) => {
-        console.warn('Unmatched Route', nomatch);
-      });
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
@@ -85,6 +77,16 @@ export class MyApp {
       this.presentLogout('Uygulama kapansın mı?');
      }
   }
+});
+
+this.deeplinks.routeWithNavController(this.nav, {
+  '/ilanlar/:ilanId': IlanDetayPage,
+  '/ozgecmisler/:ozgecmisId': OzgecmisDetayPage
+  // '/products/:productId': ProductPage
+}).subscribe((match) => {
+  console.log('Successfully routed', match);
+}, (nomatch) => {
+  console.warn('Unmatched Route', nomatch);
 });
     });
   }

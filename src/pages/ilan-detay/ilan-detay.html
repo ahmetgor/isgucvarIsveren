@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-buttons end>
-  <button ion-button icon-only>
+  <button ion-button icon-only (click)="share()">
     <ion-icon name="share"></ion-icon>
   </button>
 </ion-buttons>
@@ -18,7 +18,7 @@
 
 <ion-content>
 
-  <div *ngIf="ilan">
+  <div *ngIf="ilan && ilan.baslik">
 
   <ion-item text-wrap no-lines class="item">
     <ion-thumbnail item-left>
