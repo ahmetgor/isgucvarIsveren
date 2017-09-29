@@ -15,8 +15,8 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class IlanSerProvider {
 
-  url : string = 'https://serverisgucvar.herokuapp.com/api/ilanlar/';
-  // url : string = 'http://127.0.0.1:8080/api/ilanlar/';
+  // url : string = 'https://serverisgucvar.herokuapp.com/api/ilanlar/';
+  url : string = 'http://127.0.0.1:8080/api/ilanlar/';
   // ilanlar: Array<any>;
   // basvurKaydetList: any;
   loading: any;

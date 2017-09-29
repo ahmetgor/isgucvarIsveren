@@ -34,15 +34,15 @@ export class SignupFirmaPage {
 
   registerFirma(){
 
-    this.ozgecmisSer.updateAvatar(this.userUrl)
-    .then( (resUrl: any) => {
-      this.userUrl = resUrl.secure_url;
-      console.log(resUrl.secure_url+"user cloud url");
-
-      this.ozgecmisSer.updateAvatar(this.firmaUrl)
-      .then( (resUrlfirma: any) => {
-        this.firmaUrl = resUrlfirma.secure_url;
-        console.log(resUrlfirma.secure_url + "firma cloud url");
+    // this.ozgecmisSer.updateAvatar(this.userUrl)
+    // .then( (resUrl: any) => {
+    //   this.userUrl = resUrl.secure_url;
+    //   console.log(resUrl.secure_url+"user cloud url");
+    //
+    //   this.ozgecmisSer.updateAvatar(this.firmaUrl)
+    //   .then( (resUrlfirma: any) => {
+    //     this.firmaUrl = resUrlfirma.secure_url;
+    //     console.log(resUrlfirma.secure_url + "firma cloud url");
       // console.log(resUrl.secure_url+'secure');
 
     let details = {
@@ -61,8 +61,8 @@ export class SignupFirmaPage {
       // console.log(msg.error+'asdasd');
 
     });
-  });
-});
+//   });
+// });
 
   }
 

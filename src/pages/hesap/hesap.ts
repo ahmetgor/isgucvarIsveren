@@ -16,8 +16,8 @@ export class HesapPage {
   userUrl: string;
   user: any;
   password: string;
-  newpassword: string;
-  newpassword1: string;
+  newpassword: string = "";
+  newpassword1: string = "";
   @ViewChild('userFileInput') userFileInput;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public camera: Camera,
@@ -34,13 +34,15 @@ export class HesapPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HesapPage');
+    this.newpassword = "";
+    this.newpassword1 = "";
   }
 
   updateUser(){
-    this.ozgecmisSer.updateAvatar(this.cloudUrl)
-    .then( (resUrl: any) => {
-      this.cloudUrl = resUrl.secure_url;
-      console.log(resUrl.secure_url+"user cloud url");
+    // this.ozgecmisSer.updateAvatar(this.cloudUrl)
+    // .then( (resUrl: any) => {
+    //   this.cloudUrl = resUrl.secure_url;
+    //   console.log(resUrl.secure_url+"user cloud url");
 
       let details : any = {
           email: this.user.email,
@@ -48,7 +50,7 @@ export class HesapPage {
           password: this.password
       };
 
-      if(this.newpassword) {
+      if(this.newpassword.trim() && this.newpassword.trim()!= "") {
         details.newpassword = this.newpassword;
       }
 
@@ -61,7 +63,7 @@ export class HesapPage {
         // let msg = JSON.parse(err._body);
         // console.log(msg.error+'asdasd');
       });
-    });
+    // });
   }
 
   getPicture(url) {
@@ -95,7 +97,7 @@ export class HesapPage {
     let dataUrl = undefined;
     reader.onload = (readerEvent) => {
       console.log("event");
-      // dataUrl = (readerEvent.target as any).result;
+      dataUrl = (readerEvent.target as any).result;
       // console.log(imageData.src+"src");
       // canvas.getContext("2d").drawImage(imageData, 0, 0);
       // let dataUrl = canvas.toDataURL('image/jpg');

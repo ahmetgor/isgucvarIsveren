@@ -6,6 +6,8 @@ import { IlanSerProvider} from '../../providers/ilan-ser';
 import { Storage } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { LinkedInService } from 'angular-linkedin-sdk';
+// declare var IN;
 
 /**
  * Generated class for the IlanDetayPage page.
@@ -26,7 +28,7 @@ export class IlanDetayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
               public ilanSer: IlanSerProvider, public storage: Storage,
               private socialSharing: SocialSharing, public actionSheetCtrl: ActionSheetController,
-              public plt: Platform, private face: Facebook) {
+              public plt: Platform, private face: Facebook, private linkedIn: LinkedInService) {
                 console.log("ilandetay");
     this.ilan = this.navParams.get('ilan');
     this.ilanId = this.navParams.get('ilanId') ? this.navParams.get('ilanId') : this.ilan._id;
@@ -57,19 +59,24 @@ export class IlanDetayPage {
     });
   }
 
+  shareface() {
+
+    this.socialSharing.shareViaFacebook
+    ('İşgüçvar ilanına göz atın:', null, "https://isgucvar.herokuapp.com/")
+
+  }
+
   share() {
-    if(!this.plt.is('core') && !this.plt.is('mobileweb')) {
+    if(!this.plt.is('core') && !this.plt.is('mobilebrowser')) {
   var options = {
-    message: "Yeni bir İşgüçvar ilanı paylaşıldı: "+this.ilan.baslik+"\n", // not supported on some apps (Facebook, Instagram)
-    subject: 'işgüçvar ilanı '+this.ilan.baslik, // fi. for email
+    message: "İşgüçvar ilanına göz atın:\n\n", // not supported on some apps (Facebook, Instagram)
+    // subject: 'the subject', // fi. for email
     // files: [this.ilan.resim], // an array of filenames either locally or remotely
-    url: "http://localhost:8100/#/ilanlar/"+this.ilan._id,
+    url: "https://isgucvar.herokuapp.com/#/ilan/"+this.ilan._id,
     chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
   }
-  // this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")
   this.socialSharing.shareWithOptions(options)
   .then((result) => {
-      console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
       console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
   }).catch((msg) => {
       console.log("Sharing failed with message: " + msg);
@@ -78,35 +85,32 @@ export class IlanDetayPage {
   else this.presentActionSheet();
   }
 
-  shareFace() {
-    let options = 	{
-  method: "share",
-  href: "https://localhost:8000/#/ilanlar/"+this.ilan._id
-  // caption: "Such caption, very feed.",
-  // description: "Much description"
-  // picture: this.ilan.firma.resim
-}
-// let params: UIParams = {
-//   href: 'https://isgucvar.herokuapp.com/#/ilan/'+this.ilan._id,
-//   method: 'share'
+  public sharelinked(){
+//     var payload = {
+//   "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
+//   "visibility": {
+//     "code": "anyone"
+//   }
 // };
-
-// if(this.plt.is('ios') || this.plt.is('android')) {
-    this.face.showDialog( options)
-    .then((res) => console.log(res)+"res")
-    .catch((e: any) => console.error(e)+"error");
-    // this.fb.ui(params)
-    // .then((res: UIResponse) => console.log(res))
-    // .catch((e: any) => console.error(e));
-  // }
-  //
-  // else {
-  //     this.fb.ui(params)
-  //     .then((res: UIResponse) => console.log(res))
-  //     .catch((e: any) => console.error(e));
-  //   }
+// console.log('linked');
+//       const url = '/people/~/shares?format=json';
+//       this.linkedIn.raw(url)
+//         // .asObservable()
+//         // .method('POST')
+//         // .body(JSON.stringify(payload))
+//         .asObservable()
+//           .subscribe({
+//             next: (data) => {
+//               console.log(data);
+//             },
+//             error: (err) => {
+//               console.log(err);
+//             },
+//             complete: () => {
+//               console.log('RAW API call completed');
+//             }
+//           });
   }
-
   presentActionSheet() {
       let actionSheet = this.actionSheetCtrl.create({
         title: 'İlan Paylaş',
@@ -114,12 +118,13 @@ export class IlanDetayPage {
           {
             text: 'Facebook',icon: 'logo-facebook',
             handler: () => {
-              this.shareFace();
+              this.shareface();
             }
           },{
             text: 'LinkedIn',icon: 'logo-linkedin',
             handler: () => {
               console.log('Archive clicked');
+              this.sharelinked();
             }
           },{
             text: 'İptal',role: 'cancel',icon: 'close',
@@ -131,6 +136,7 @@ export class IlanDetayPage {
       });
       actionSheet.present();
     }
+
 
   toOzgecmis() {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');

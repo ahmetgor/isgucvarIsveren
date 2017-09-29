@@ -35,6 +35,8 @@ import { Camera } from '@ionic-native/camera';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { LinkedInSdkModule } from 'angular-linkedin-sdk';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +65,7 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
     HttpModule,
     CloudinaryModule.forRoot(Cloudinary,
     {cloud_name: 'isgucvar', upload_preset: 'cod9ui0a'}),
-
+    LinkedInSdkModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -95,7 +97,10 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
     Camera,
     Deeplinks,
     SocialSharing,
-    Facebook
+    Facebook,
+    { provide: 'apiKey', useValue: '86p3aqpfdryb6f' },
+    { provide: 'authorize', useValue: 'true' }, // OPTIONAL by default: false
+    { provide: 'isServer', useValue: 'true' }  // OPTIONAL by default: false
     ]
 })
 export class AppModule {}

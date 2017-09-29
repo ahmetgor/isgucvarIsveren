@@ -34,7 +34,7 @@
         <ion-item-divider no-lines color="light">Yeni şifre belirleyin:</ion-item-divider>
         <ion-item>
             <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-            <ion-input [(ngModel)]="newpassword" placeholder="Yeni Şifre" type="password" #pass="ngModel" name="pass" minlength="6">
+            <ion-input [(ngModel)]="newpassword" placeholder="Yeni Şifre" autocomplete="off" type="password" #pass="ngModel" name="pass" minlength="6">
             </ion-input>
         </ion-item>
         <ion-item no-lines *ngIf="pass.errors">
@@ -42,7 +42,7 @@
         </ion-item>
         <ion-item>
             <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-            <ion-input [(ngModel)]="newpassword1" placeholder="Yeni Şifre tekrar" type="password" #pass1="ngModel" name="pass1" minlength="6">
+            <ion-input [(ngModel)]="newpassword1" placeholder="Yeni Şifre tekrar" autocomplete="off" type="password" #pass1="ngModel" name="pass1" minlength="6">
             </ion-input>
         </ion-item>
         <ion-item no-lines *ngIf="pass1.value != pass.value">

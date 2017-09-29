@@ -15,7 +15,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <div *ngIf="detay && user">
     <form [formGroup]="ilanFormGroup">
@@ -44,7 +43,7 @@
 
     <ion-item>
       <ion-label floating>İl</ion-label>
-      <ion-select formControlName="il" [(ngModel)]="detay.il" interface="popover" cancelText="İptal" okText="Tamam">
+      <ion-select formControlName="il" [(ngModel)]="detay.il" cancelText="İptal" okText="Tamam">
         <!-- <ion-option value='Konumum'>Konumum</ion-option> -->
         <ion-option *ngFor="let item of sehirler" value='{{item.sehir}}'>{{item.sehir}}</ion-option>
         <!-- <ion-option value='İstanbul'>İstanbul</ion-option> -->

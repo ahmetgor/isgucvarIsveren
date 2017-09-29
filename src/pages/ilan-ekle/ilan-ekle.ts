@@ -74,7 +74,10 @@ export class IlanEklePage {
 
   add() {
     console.log(JSON.stringify(this.detay)+'detay');
+    console.log(JSON.stringify(this.user)+'detay');
+
     this.detay.guncelleyen = this.guncelleyen;
+    this.detay.firma = this.user.firmaId;
     if(!this.navParams.get('update')) {
       console.log('ilan yeni ekleniyor');
       this.detay.olusturan = this.guncelleyen;

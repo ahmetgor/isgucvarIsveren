@@ -18,8 +18,8 @@ export class FirmaHesapPage {
   user: any;
   userList: any;
   password: string;
-  newpassword: string;
-  newpassword1: string;
+  newpassword: string = "";
+  newpassword1: string = "";
   @ViewChild('userFileInput') userFileInput;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public camera: Camera,
@@ -40,13 +40,15 @@ export class FirmaHesapPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FirmaHesapPage');
+    this.newpassword = "";
+    this.newpassword1 = "";
   }
 
   updateUser(){
-    this.ozgecmisSer.updateAvatar(this.cloudUrl)
-    .then( (resUrl: any) => {
-      this.cloudUrl = resUrl.secure_url;
-      console.log(resUrl.secure_url+"user cloud url");
+    // this.ozgecmisSer.updateAvatar(this.cloudUrl)
+    // .then( (resUrl: any) => {
+    //   this.cloudUrl = resUrl.secure_url;
+    //   console.log(resUrl.secure_url+"user cloud url");
 
       let details : any = {
           firma: this.user.firma,
@@ -55,7 +57,7 @@ export class FirmaHesapPage {
           email: this.user.email
       };
 
-      if(this.newpassword) {
+      if(this.newpassword.trim() && this.newpassword.trim()!= "") {
         details.newpassword = this.newpassword;
       }
 
@@ -68,7 +70,7 @@ export class FirmaHesapPage {
         // let msg = JSON.parse(err._body);
         // console.log(msg.error+'asdasd');
       });
-    });
+    // });
   }
 
   getPicture(url) {

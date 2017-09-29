@@ -30,7 +30,7 @@
 
     <button ion-item *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
-      <ion-thumbnail item-left *ngIf="ilan && ilan.resim">
+      <ion-thumbnail item-left *ngIf="ilan && ilan.firma">
         <img class="img-circle" [src]="ilan.firma.resim">
       </ion-thumbnail>
       <ion-row>

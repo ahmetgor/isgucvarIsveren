@@ -11,11 +11,11 @@ import {ToastController, LoadingController } from 'ionic-angular';
 export class UserSerProvider {
   token: any = {};
   user: any = {};
-  url : string = 'https://serverisgucvar.herokuapp.com/api/firmaauth/';
-  url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
+  // url : string = 'https://serverisgucvar.herokuapp.com/api/firmaauth/';
+  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
 
-  // url : string = 'http://127.0.0.1:8080/api/firmaauth/';
-  // url1: string = 'http://127.0.0.1:8080/api/tools/';
+  url : string = 'http://127.0.0.1:8080/api/firmaauth/';
+  url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
   loading: any;
 
@@ -49,6 +49,7 @@ export class UserSerProvider {
   createFirmaAccount(details){
 
     return new Promise((resolve, reject) => {
+      this.showLoader();
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -60,10 +61,12 @@ export class UserSerProvider {
             // this.token = data.token;
             // this.storage.set('token', data.token);
             // this.storage.set('user', details);
+            this.loading.dismiss();
             this.presentToast("Firma hesabı oluşturuldu!");
             resolve(data);
 
           }, (err) => {
+            this.loading.dismiss();
             let erm = JSON.parse(err._body);
             this.presentToast("Firma hesabı oluşturulamadı! "+erm.error);
             reject(err);
@@ -74,7 +77,7 @@ export class UserSerProvider {
   createAccount(details){
 
     return new Promise((resolve, reject) => {
-
+      this.showLoader();
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -82,7 +85,7 @@ export class UserSerProvider {
         this.http.post(this.url+'register/user', JSON.stringify(details), {headers: headers})
           .subscribe(res => {
             let data = res.json();
-
+            this.loading.dismiss();
             this.presentToast("Çalışan hesabı oluşturuldu!");
             resolve(data);
 
@@ -90,9 +93,11 @@ export class UserSerProvider {
             // console.log(err+"hebe");
             // console.log(JSON.parse(err)+"adsasdad");
             if(err._body) {
+              this.loading.dismiss();
             this.presentToast("Çalışan hesabı oluşturulamadı! Firma bilgileri hatalı!");
             }
             else {
+              this.loading.dismiss();
             let erm = JSON.parse(err._body);
             this.presentToast("Çalışan hesabı oluşturulamadı! "+erm.error);
             reject(err);
@@ -104,7 +109,7 @@ export class UserSerProvider {
   login(credentials){
 
     return new Promise((resolve, reject) => {
-
+      this.showLoader();
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -118,10 +123,13 @@ export class UserSerProvider {
             this.currentUser = data.user;
             this.storage.set('token', data.token);
             this.storage.set('user', data.user);
+            this.loading.dismiss();
 
             resolve(data);
             // resolve(res.json());
           }, (err) => {
+            this.loading.dismiss();
+
             console.log(JSON.stringify(err)+'servis err');
             reject(err);
           });
