@@ -53,7 +53,6 @@ export class FirmaHesapPage {
       let details : any = {
           firma: this.user.firma,
           userUrl: this.cloudUrl,
-          password: this.password,
           email: this.user.email
       };
 

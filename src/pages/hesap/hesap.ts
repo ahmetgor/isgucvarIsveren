@@ -46,8 +46,7 @@ export class HesapPage {
 
       let details : any = {
           email: this.user.email,
-          userUrl: this.cloudUrl,
-          password: this.password
+          userUrl: this.cloudUrl
       };
 
       if(this.newpassword.trim() && this.newpassword.trim()!= "") {
