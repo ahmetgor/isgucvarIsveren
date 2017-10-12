@@ -28,7 +28,7 @@ export class IlanDetayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
               public ilanSer: IlanSerProvider, public storage: Storage,
               private socialSharing: SocialSharing, public actionSheetCtrl: ActionSheetController,
-              public plt: Platform, private face: Facebook, private linkedIn: LinkedInService) {
+              public plt: Platform, private face: Facebook) {
                 console.log("ilandetay");
     this.ilan = this.navParams.get('ilan');
     this.ilanId = this.navParams.get('ilanId') ? this.navParams.get('ilanId') : this.ilan._id;

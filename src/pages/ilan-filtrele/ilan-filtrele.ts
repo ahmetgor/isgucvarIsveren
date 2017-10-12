@@ -16,7 +16,7 @@ import { IlanSerProvider} from '../../providers/ilan-ser';
 export class IlanFiltrelePage {
   detayAra: any;
   sirala: any;
-  ilanlarim: boolean;
+  ilanlarim: String;
   sehirler = [
   //   {"sehir":"İstanbul"},{"sehir":"Ankara"},{"sehir":"İzmir"},{"sehir":"Adana"},{"sehir":"Adıyaman"},{"sehir":"Afyonkarahisar"}
   //  ,{"sehir":"Ağrı"},{"sehir":"Aksaray"},{"sehir":"Amasya"},{"sehir":"Antalya"},{"sehir":"Ardahan"},{"sehir":"Artvin"}
@@ -54,7 +54,7 @@ export class IlanFiltrelePage {
     console.log(this.sirala+'kapatfiltre');
     console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
       // console.log(JSON.stringify(this.sirala)+'parsefiltre');
-    this.events.publish('ilan:filtered');
+    this.events.publish('ilan:filtered'+this.ilanlarim);
     this.navCtrl.pop();
    }
 

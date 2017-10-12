@@ -61,11 +61,11 @@ export class IlanlarimPage {
     console.log('searchkontrol çağrıldı');
   // }
 });
-this.events.subscribe('ilan:filtered', (a) => {
+this.events.subscribe('ilan:filteredilan', (a) => {
   this.scrollEnable = true;
   // this.infiniteScroll.enable(true);
   this.skip = 0;
-  if(a) {
+  if(a == "clear") {
     // console.log('filtre true');
     this.detayAra = {};
     this.detayAra.olusturan = this.user.email;
@@ -88,7 +88,7 @@ this.events.subscribe('ilan:ekle', () => {
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
       this.ilanList = ilanlar;
-      console.log(JSON.stringify(this.ilanList));
+      // console.log(JSON.stringify(this.ilanList));
       this.searching = false;
     });
   }
@@ -108,7 +108,7 @@ this.events.subscribe('ilan:ekle', () => {
     this.navCtrl.push(IlanFiltrelePage, {
       detayAra: this.detayAra,
       sirala: this.sirala,
-      ilanlarim: true
+      ilanlarim: 'ilan'
     });
   }
 

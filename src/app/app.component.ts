@@ -26,39 +26,43 @@ export class MyApp {
 
   rootPage: any = LoginPage;
   alert: any;
-  user: any;
+  user: any = {};
   pages: Array<{title: string, component: any, icon: string}>;
+  username: String = "";
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public alertCtrl: AlertController, public authService: UserSerProvider,
               public storage: Storage,  public events: Events, public deeplinks: Deeplinks) {
     this.initializeApp();
-
-    this.events.subscribe('login:event', (a) => {
-      this.storage.get('user')
-          .then((user) => { this.user = user;
-            console.log(JSON.stringify('login fired'));
-            // str.substring(0, str.indexOf(":"));
-          });
-});
     // used for an example of ngFor and navigation
     this.pages = [
 
       { title: 'İlan Ekle', component: IlanEklePage, icon: "add-circle"  },
-      { title: 'Özgeçmişlerim', component: OzgecmislerimPage, icon: "person"  },
       { title: 'İlanlarım', component: IlanlarimPage, icon: "clipboard" },
-      { title: 'Tüm Özgeçmişler', component: TumOzgecmislerPage, icon: "people" },
-      { title: 'Tüm İlanlar', component: TumIlanlarPage, icon: "filing" }
+      { title: 'Tüm İlanlar', component: TumIlanlarPage, icon: "filing" },
+      { title: 'Özgeçmişlerim', component: OzgecmislerimPage, icon: "person"  },
+      { title: 'Tüm Özgeçmişler', component: TumOzgecmislerPage, icon: "people" }
     ];
 
   }
 
   initializeApp() {
-    this.storage.get('user')
-        .then((user) => { this.user = user;
-          console.log(JSON.stringify(user));
-          // str.substring(0, str.indexOf(":"));
-        });
+    this.events.subscribe('login:event', () => {
+      // this.storage.get('user')
+      //     .then((user) => { this.user = user;
+      //       this.username = user.email.substring(0, user.email.indexOf('@'));
+      //       console.log(JSON.stringify(this.user)+"initial");
+      //       // str.substring(0, str.indexOf(":"));
+      //     });
+      this.user = this.authService.currentUser;
+      this.username = this.user.email.substring(0, this.user.email.indexOf('@'));
+});
+    // this.storage.get('user')
+    //     .then((user) => { this.user = user;
+    //       this.username = user.email.substring(0, user.email.indexOf('@'));
+    //       console.log(JSON.stringify(user));
+    //       // str.substring(0, str.indexOf(":"));
+    //     });
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

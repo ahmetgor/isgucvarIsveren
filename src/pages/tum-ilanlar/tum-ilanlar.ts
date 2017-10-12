@@ -60,17 +60,17 @@ export class TumIlanlarPage {
   // }
 });
 
-this.events.subscribe('ilan:filtered', (a) => {
+this.events.subscribe('ilan:filteredtumilan', (a) => {
   this.scrollEnable = true;
   // this.infiniteScroll.enable(true);
   this.skip = 0;
-  if(a) {
+  if(a == "clear") {
     // console.log('filtre true');
     this.detayAra = {};
     this.detayAra.firma = this.user.firma;
     this.sirala = '{}';
   }
-  console.log('ilanlistele filtre çağrıldı');
+  console.log('tümilanlistele filtre çağrıldı');
   this.ilanListele();
 });
   }
@@ -80,7 +80,7 @@ this.events.subscribe('ilan:filtered', (a) => {
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
       this.ilanList = ilanlar;
-      console.log(JSON.stringify(this.ilanList));
+      // console.log(JSON.stringify(this.ilanList));
       this.searching = false;
     });
   }
@@ -98,7 +98,8 @@ this.events.subscribe('ilan:filtered', (a) => {
   presentFilter(myEvent) {
     this.navCtrl.push(IlanFiltrelePage, {
       detayAra: this.detayAra,
-      sirala: this.sirala
+      sirala: this.sirala,
+      ilanlarim: 'tumilan'
     });
   }
 

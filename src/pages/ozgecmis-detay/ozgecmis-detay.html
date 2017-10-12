@@ -29,6 +29,7 @@
     <h1>{{ozgecmis.isim}}</h1>
     <p>{{ozgecmis.unvan}}</p>
     <p>{{getAge()}} yaşında, {{ozgecmis.yilTecrube}} yıl tecrübe</p>
+    <p>{{ozgecmis.enabled | datePipe: 'aktif'}}</p>
   </ion-item>
 </ion-card>
 

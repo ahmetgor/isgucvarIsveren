@@ -129,7 +129,7 @@ export class UserSerProvider {
             // resolve(res.json());
           }, (err) => {
             this.loading.dismiss();
-
+            this.presentToast('Bilgileriniz hatalı veya hesabınız aktif değil!');
             console.log(JSON.stringify(err)+'servis err');
             reject(err);
           });
@@ -142,7 +142,7 @@ export class UserSerProvider {
       let en = user.en ? user.en : "";
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      // headers.append('Authorization', this.authService.token);
+      headers.append('Authorization', this.token);
       console.log(JSON.stringify(user)+'order service update user');
 
       this.http.put(this.url + 'updateuser'+en, JSON.stringify(user), {headers: headers})
@@ -163,14 +163,14 @@ export class UserSerProvider {
     });
   }
 
-  updateFirma(user: any){
+  updateFirma(user){
     this.showLoader();
     return new Promise((resolve, reject) => {
+      console.log(JSON.stringify(user)+'order service update firma');
 
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      // headers.append('Authorization', this.authService.token);
-      console.log(JSON.stringify(user)+'order service update firma');
+      headers.append('Authorization', this.token);
 
       this.http.put(this.url + 'updatefirma', JSON.stringify(user), {headers: headers})
         .map(res => res.json())

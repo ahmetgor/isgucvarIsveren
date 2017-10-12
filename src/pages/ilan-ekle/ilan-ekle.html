@@ -17,6 +17,8 @@
 
 <ion-content padding>
   <div *ngIf="detay && user">
+    <div [class.ilan]="!detay.enabled">
+
     <form [formGroup]="ilanFormGroup">
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
@@ -27,7 +29,7 @@
     </ion-item>
     <ion-item>
         <ion-label floating>Firma</ion-label>
-        <ion-input formControlName="firma" disabled type="text" [(ngModel)]="user.firma"></ion-input>
+        <ion-input formControlName="firma" disabled type="text" [(ngModel)]="detay.firmaAdi"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -68,8 +70,7 @@
     <ion-select formControlName="egitimdurum" [(ngModel)]="detay.egitim" multiple="true"  cancelText="İptal" okText="Tamam">
       <ion-option value='Lise'>Lise</ion-option>
       <ion-option value='Lisans'>Lisans</ion-option>
-      <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans</ion-option>
-      <ion-option value='Doktora'>Doktora</ion-option>
+      <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans - Doktora</ion-option>
     </ion-select>
     </ion-item>
 
@@ -92,7 +93,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Aktif</ion-label>
+      <ion-label>Aktiflik</ion-label>
       <ion-toggle [ngModelOptions]="{standalone: true}" [(ngModel)]="detay.enabled"></ion-toggle>
     </ion-item>
 
@@ -122,6 +123,7 @@
     </ion-row>
   </div> -->
 </form>
+</div>
   </div>
 
 </ion-content>

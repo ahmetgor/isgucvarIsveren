@@ -59,7 +59,7 @@ export class IlanSerProvider {
       , {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
-          console.log(JSON.stringify(data));
+          // console.log(JSON.stringify(data));
           resolve(data);
         }, (err) => {
           // reject(err);

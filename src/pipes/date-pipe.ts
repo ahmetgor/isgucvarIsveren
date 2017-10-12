@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 pure: false})
 export class DatePipe implements PipeTransform {
   transform(items: any, arg:any) {
-    console.log("datepipe"+arg);
+    // console.log("datepipe"+arg);
 
     if (arg != undefined && arg == 'seviye') {
       switch(items) {
@@ -33,6 +33,16 @@ export class DatePipe implements PipeTransform {
           return 'Yüksek Lisans';
           case 5:
           return 'Doktora';
+      }
+    }
+
+    else if (arg != undefined && arg == 'aktif') {
+      switch(items) {
+          case true:
+              return 'Aktif';
+          case false:
+          return 'Pasif';
+
       }
     }
 

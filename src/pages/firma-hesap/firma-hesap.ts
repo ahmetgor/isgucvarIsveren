@@ -34,7 +34,7 @@ export class FirmaHesapPage {
           this.ilanService.getUsers(user.firmaId)
           .then((userList) => {this.userList = userList;
         });
-          console.log(JSON.stringify(user));
+          // console.log(JSON.stringify(user));
         });
   }
 
@@ -59,7 +59,7 @@ export class FirmaHesapPage {
       if(this.newpassword.trim() && this.newpassword.trim()!= "") {
         details.newpassword = this.newpassword;
       }
-
+      console.log(JSON.stringify(details));
       this.authService.updateFirma(details).then((result) => {
         // this.presentToast('Kaydınız yapıldı, giriş yapabilirsiniz');
           this.authService.logout();

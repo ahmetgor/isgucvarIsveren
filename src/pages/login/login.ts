@@ -37,6 +37,7 @@ export class LoginPage {
         //Check if already authenticated
         this.authService.checkAuthentication().then((res) => {
             console.log("Already authorized");
+            this.events.publish('login:event');
             this.loading.dismiss();
             if (this.navCtrl.canGoBack()) return;
             else this.navCtrl.setRoot(IlanlarimPage);

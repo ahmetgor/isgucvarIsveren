@@ -33,10 +33,11 @@ export class IlanEklePage {
     public toastCtrl: ToastController,public storage: Storage, public events: Events) {
 
       this.sehirler = ilanSer.sehirler;
-      console.log(JSON.stringify(this.sehirler));
+      // console.log(JSON.stringify(this.sehirler));
       this.detayId = this.navParams.get('ilanDetayId');
       this.storage.get('user')
           .then((user) => { this.user = user;
+            this.detay.firmaAdi = this.user.firma;
             this.guncelleyen = this.user.email;
           });
       // this.guncelleyen = this.navParams.get('guncelleyen');
@@ -51,6 +52,7 @@ export class IlanEklePage {
       ilanSer.getIlan(this.detayId)
       .then(ilan => {
         this.detay = ilan;
+        this.detay.firmaAdi = this.user.firma;
       });
 
       }
