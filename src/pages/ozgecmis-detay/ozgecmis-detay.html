@@ -111,7 +111,7 @@
   <b>Tecrübe</b>
 </ion-card-header>
 <button ion-item *ngFor="let tecrube of (ozgecmis.tecrube | datePipe)">
-<h4><b>{{tecrube.firma}}</b> <span ion-text style="float:right;">{{tecrube.sehir}}</span></h4>
+<h4><b>{{tecrube.firma}}</b></h4> <h4><span style="float:right;">{{tecrube.sehir}}</span></h4>
 <h4>{{tecrube.pozisyon}}</h4>
 <h4>{{tecrube.isTanimiKisa}}</h4>
 <h4>{{tecrube.giris | date:'MM/yyyy'}} - {{tecrube.cikis | date:'MM/yyyy'}}</h4>
@@ -125,7 +125,7 @@
 <button ion-item *ngFor="let egitim of (ozgecmis.egitim | datePipe)" >
 <h4><b>{{egitim.okul}}</b> <span ion-text style="float:right;">{{egitim.sehir}}</span></h4>
 <h4>{{egitim.bolum}}</h4>
-<h4>{{egitim.cikis | date:'MM/yyyy'}} - {{egitim.derece}}</h4>
+<h4>{{egitim.cikis | date:'MM/yyyy'}} - {{egitim.derece | datePipe:'egitimdurum'}}</h4>
 </button>
 </ion-card>
 
