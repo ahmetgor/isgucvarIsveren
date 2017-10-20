@@ -87,7 +87,10 @@ export class IlanEklePage {
       // this.detay.firma = this.firmaInfo.firma;
       this.ilanSer.createIlan(this.detay)
         .then((res) =>{
-      this.navCtrl.setRoot(IlanlarimPage);
+      if (this.navCtrl.canGoBack()) {this.navCtrl.pop();
+        this.events.publish('ilan:guncelle');
+      }
+      else this.navCtrl.setRoot(IlanlarimPage);
 
         })
         .catch((err) => {
@@ -100,8 +103,11 @@ export class IlanEklePage {
     console.log(this.detay+'ilan yeni ekleniyor');
     this.ilanSer.updateIlan(this.detay)
       .then((res) =>{
-        this.navCtrl.setRoot(IlanlarimPage);
-        // this.storage.set('ozgecmis', this.basvurulist)
+        if (this.navCtrl.canGoBack())  { this.navCtrl.pop();
+          this.events.publish('ilan:guncelle');
+        }
+        else this.navCtrl.setRoot(IlanlarimPage);
+      // this.storage.set('ozgecmis', this.basvurulist)
       // this.orgDetay = this.detay;
       // console.log(JSON.stringify(this.orgDetay)+'orgDetay');
       // this.events.publish('ilan:ekle');

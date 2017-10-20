@@ -39,7 +39,7 @@ export class MyApp {
 
       { title: 'İlan Ekle', component: IlanEklePage, icon: "add-circle"  },
       { title: 'İlanlarım', component: IlanlarimPage, icon: "clipboard" },
-      { title: 'Tüm İlanlar', component: TumIlanlarPage, icon: "filing" },
+      { title: 'Firmanın İlanları', component: TumIlanlarPage, icon: "filing" },
       { title: 'Özgeçmişlerim', component: OzgecmislerimPage, icon: "person"  },
       { title: 'Tüm Özgeçmişler', component: TumOzgecmislerPage, icon: "people" }
     ];

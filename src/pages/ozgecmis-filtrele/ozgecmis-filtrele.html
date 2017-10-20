@@ -48,6 +48,14 @@
   </ion-item>
 
   <ion-item>
+  <ion-label [hidden]="page != 'tüm'" floating color="primary">Özgeçmiş Çeşidi</ion-label>
+  <ion-select [(ngModel)]="detayAra.tumfirma" cancelText="İptal" okText="Tamam">
+    <ion-option value="f">Sadece Firma Özgeçmişleri</ion-option>
+    <ion-option value="t">Tüm Özgeçmişler</ion-option>
+  </ion-select>
+  </ion-item>
+
+  <ion-item>
       <ion-label floating color="primary">Minimum Tecrübe (yıl)</ion-label>
       <ion-input  type="number" [(ngModel)]="detayAra.yilTecrube"></ion-input>
   </ion-item>

@@ -15,6 +15,7 @@ import { IonicPage, NavController, NavParams, ViewController, Events } from 'ion
 export class OzgecmisFiltrelePage {
   detayAra: any;
   sirala: any;
+  page: string;
   sehirler = [
     {"sehir":"İstanbul"},{"sehir":"Ankara"},{"sehir":"İzmir"},{"sehir":"Adana"},{"sehir":"Adıyaman"},{"sehir":"Afyonkarahisar"}
    ,{"sehir":"Ağrı"},{"sehir":"Aksaray"},{"sehir":"Amasya"},{"sehir":"Antalya"},{"sehir":"Ardahan"},{"sehir":"Artvin"}
@@ -37,6 +38,7 @@ export class OzgecmisFiltrelePage {
     this.detayAra = navParams.get('detayAra');
     console.log(JSON.stringify(this.detayAra) + 'detay')
     this.sirala = navParams.get('sirala');
+    this.page = this.navParams.get('page');
   }
 
   ionViewDidLoad() {

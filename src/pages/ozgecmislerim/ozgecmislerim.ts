@@ -41,7 +41,7 @@ export class OzgecmislerimPage {
               public ozgecmisSer: OzgecmisSerProvider, public storage: Storage,
               public events: Events) {
     this.searchControl = new FormControl();
-    // this.ilanId = this.navParams.get('ilanId');
+    this.ilanId = this.navParams.get('ilanId');
     this.storage.get('user')
         .then((user) => {
           console.log(user._id+'userid');
@@ -96,7 +96,7 @@ this.events.subscribe('ozgecmis:filtered_tek', (a) => {
   ozgecmisListele(){
     // let basvurular = [];
     // basvurular.push(this.ilanId);
-    // this.detayAra.basvuruId = this.ilanId;
+    this.detayAra.basvuruId = this.ilanId;
     this.detayAra.olusturan = this.olusturan;
     this.detayAra.segment = this.aktivite;
     this.detayAra.userId = this.userId;

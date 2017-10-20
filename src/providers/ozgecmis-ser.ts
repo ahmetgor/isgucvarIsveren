@@ -50,12 +50,12 @@ export class OzgecmisSerProvider {
   getOzgecmisler(searchTerm, searchKayit, orderBy, skip, limit) {
     let headers = new Headers();
     headers.append('Authorization', this.authService.token);
-    let order = JSON.parse(orderBy);
-    console.log(JSON.stringify(order)+'order service');
-    console.log(order+'order service string');
+    // let order = JSON.parse(orderBy);
+    // console.log(JSON.stringify(order)+'order service');
+    // console.log(order+'order service string');
+    let uri = encodeURI(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${orderBy}&skip=${skip}&limit=${limit}`);
 
     return new Promise((resolve, reject) => {
-      let uri = encodeURI(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}&skip=${skip}&limit=${limit}`);
     this.http.get(uri
     , {headers: headers})
       .map(res => res.json())

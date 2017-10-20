@@ -29,7 +29,7 @@ export class TumOzgecmislerPage {
   limit: number = 20;
   scrollEnable: boolean = true;
   detayAra: any = {};
-  sirala: any = '{}';
+  sirala: any = {};
   showSearchbar: boolean = true;
   @ViewChild('content') content: Content;
 
@@ -38,9 +38,7 @@ export class TumOzgecmislerPage {
               public events: Events) {
                 this.searchControl = new FormControl();
                 // this.ilanId = this.navParams.get('ilanId');
-
-              // this.firma = 'I2I-Systems';
-              // this.userId = "59163aa74be8d6e2c51b8647";
+                this.detayAra.tumfirma = 't';
   }
 
   ionViewDidLoad() {
@@ -54,7 +52,7 @@ export class TumOzgecmislerPage {
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
     this.skip = 0;
-    // this.infiniteScroll.enable(true);
+    this.ozgecmisListele();
     console.log('ilanlistele searchkontrol çağrıldı');
 });
 
@@ -74,7 +72,7 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
     // console.log('filtre true');
     this.detayAra = {};
     // this.firma = 'I2I-Systems';
-    this.sirala = '{}';
+    this.sirala = {};
   }
   console.log('ozgecmislistele filtre çağrıldı');
   this.ozgecmisListele();
@@ -88,7 +86,8 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
     this.detayAra.userId = this.userId;
     // this.detayAra.basvuruId = this.ilanId;
     this.detayAra.segment = this.aktivite;
-    this.detayAra.firma = this.firma;
+    if (this.detayAra.tumfirma == 'f')  this.detayAra.firma = this.firma;
+    else this.detayAra.firma = undefined;
     this.searching = true;
     this.ozgecmisSer.getOzgecmisler(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ozgecmisler => {

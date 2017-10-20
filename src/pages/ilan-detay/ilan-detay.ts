@@ -49,7 +49,7 @@ export class IlanDetayPage {
     .then(ilan => {
       this.ilan = ilan;
     });
-    this.events.subscribe('ilan:ekle', () => {
+    this.events.subscribe('ilan:guncelle', () => {
       console.log('ilan ekle event çağrıldı');
       console.log(this.ilan._id+'  id  '+this.ilan.id);
       this.ilanSer.getIlan(this.ilanId)
@@ -142,7 +142,7 @@ export class IlanDetayPage {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(this.ilan)+'ilan');
     this.navCtrl.push(OzgecmislerimPage, {
-      ilanId: this.ilan._id,
+        ilanId: this.ilan._id,
       guncelleyen: this.guncelleyen
     });
   }

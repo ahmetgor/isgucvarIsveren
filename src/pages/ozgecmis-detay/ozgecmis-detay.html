@@ -113,7 +113,7 @@
 <button ion-item *ngFor="let tecrube of (ozgecmis.tecrube | datePipe)">
 <h4><b>{{tecrube.firma}}</b></h4> <h4><span style="float:right;">{{tecrube.sehir}}</span></h4>
 <h4>{{tecrube.pozisyon}}</h4>
-<h4>{{tecrube.isTanimiKisa}}</h4>
+<h4 style="white-space: pre-wrap;">{{tecrube.isTanimiKisa}}</h4>
 <h4>{{tecrube.giris | date:'MM/yyyy'}} - {{tecrube.cikis | date:'MM/yyyy'}}</h4>
 </button>
 </ion-card>

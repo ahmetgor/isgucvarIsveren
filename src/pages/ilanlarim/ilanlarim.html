@@ -22,7 +22,7 @@
 
 
 <ion-content>
-  <ion-searchbar  [(ngModel)]="searchTerm"  [formControl]="searchControl" autocomplete="on"></ion-searchbar>
+  <ion-searchbar  [(ngModel)]="searchTerm"  [formControl]="searchControl" placeholder="Anahtar kelime"></ion-searchbar>
   <div *ngIf="searching" class="spinner-container">
       <ion-spinner></ion-spinner>
   </div>
