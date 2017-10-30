@@ -37,11 +37,11 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
 
-      { title: 'İlan Ekle', component: IlanEklePage, icon: "add-circle"  },
-      { title: 'İlanlarım', component: IlanlarimPage, icon: "clipboard" },
-      { title: 'Firmanın İlanları', component: TumIlanlarPage, icon: "filing" },
-      { title: 'Özgeçmişlerim', component: OzgecmislerimPage, icon: "person"  },
-      { title: 'Tüm Özgeçmişler', component: TumOzgecmislerPage, icon: "people" }
+      { title: 'İlan Ekle', component: 'IlanEklePage', icon: "add-circle"  },
+      { title: 'İlanlarım', component: 'IlanlarimPage', icon: "clipboard" },
+      { title: 'Firmanın İlanları', component: 'TumIlanlarPage', icon: "filing" },
+      { title: 'Özgeçmişlerim', component: 'OzgecmislerimPage', icon: "person"  },
+      { title: 'Tüm Özgeçmişler', component: 'TumOzgecmislerPage', icon: "people" }
     ];
 
   }
@@ -83,15 +83,15 @@ export class MyApp {
   }
 });
 
-this.deeplinks.routeWithNavController(this.nav, {
-  '/ilanlar/:ilanId': IlanDetayPage,
-  '/ozgecmisler/:ozgecmisId': OzgecmisDetayPage
-  // '/products/:productId': ProductPage
-}).subscribe((match) => {
-  console.log('Successfully routed', match);
-}, (nomatch) => {
-  console.warn('Unmatched Route', nomatch);
-});
+// this.deeplinks.routeWithNavController(this.nav, {
+//   '/ilanlar/:ilanId': IlanDetayPage,
+//   '/ozgecmisler/:ozgecmisId': OzgecmisDetayPage
+//   // '/products/:productId': ProductPage
+// }).subscribe((match) => {
+//   console.log('Successfully routed', match);
+// }, (nomatch) => {
+//   console.warn('Unmatched Route', nomatch);
+// });
     });
   }
 
@@ -129,9 +129,9 @@ this.deeplinks.routeWithNavController(this.nav, {
     this.nav.setRoot(page.component);
   }
   goHesap() {
-    this.nav.push(HesapPage);
+    this.nav.push('HesapPage');
   }
   goFirmaHesap() {
-    this.nav.push(FirmaHesapPage);
+    this.nav.push('FirmaHesapPage');
   }
 }

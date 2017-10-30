@@ -72,7 +72,7 @@ export class IlanDetayPage {
     message: "İşgüçvar ilanına göz atın:\n\n", // not supported on some apps (Facebook, Instagram)
     // subject: 'the subject', // fi. for email
     // files: [this.ilan.resim], // an array of filenames either locally or remotely
-    url: "https://isgucvar.herokuapp.com/#/ilan/"+this.ilan._id,
+    url: "https://localhost:8100/#/detay/"+this.ilan._id,
     chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
   }
   this.socialSharing.shareWithOptions(options)
@@ -116,18 +116,22 @@ export class IlanDetayPage {
         title: 'İlan Paylaş',
         buttons: [
           {
-            text: 'Facebook',icon: 'logo-facebook',
+            text: 'Facebook',
+            icon: 'logo-facebook',
             handler: () => {
               this.shareface();
             }
           },{
-            text: 'LinkedIn',icon: 'logo-linkedin',
+            text: 'LinkedIn',
+            icon: 'logo-linkedin',
             handler: () => {
               console.log('Archive clicked');
               this.sharelinked();
             }
           },{
-            text: 'İptal',role: 'cancel',icon: 'close',
+            text: 'İptal',
+            role: 'cancel',
+            icon: 'close',
             handler: () => {
               console.log('Cancel clicked');
             }

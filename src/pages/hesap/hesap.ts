@@ -24,12 +24,20 @@ export class HesapPage {
               public storage: Storage, public ozgecmisSer: OzgecmisSerProvider,
               public authService: UserSerProvider,  public platform: Platform) {
 
+      if (!this.authService.currentUser) {
+      this.authService.checkAuthentication().then((res) => {
+      }, (err) => {
+        this.navCtrl.setRoot(LoginPage);
+      });
+    }
+    else {
     this.storage.get('user')
         .then((user) => { this.user = user;
           this.userUrl = 'url(' + user.resim + ')';
           this.cloudUrl = user.resim;
           console.log(JSON.stringify(user));
         });
+      }
   }
 
   ionViewDidLoad() {

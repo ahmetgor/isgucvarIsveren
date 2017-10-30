@@ -26,6 +26,13 @@ export class FirmaHesapPage {
               public storage: Storage, public ozgecmisSer: OzgecmisSerProvider,
               public authService: UserSerProvider, public ilanService: IlanSerProvider) {
 
+      if (!this.authService.currentUser) {
+      this.authService.checkAuthentication().then((res) => {
+      }, (err) => {
+        this.navCtrl.setRoot(LoginPage);
+      });
+    }
+    else {
     this.storage.get('user')
         .then((user) => { this.user = user;
           this.userUrl = 'url(' + user.firmaresim + ')';
@@ -36,6 +43,7 @@ export class FirmaHesapPage {
         });
           // console.log(JSON.stringify(user));
         });
+      }
   }
 
   ionViewDidLoad() {

@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { IlanSerProvider} from '../../providers/ilan-ser';
 import { IlanlarimPage } from '../ilanlarim/ilanlarim';
+import { UserSerProvider } from '../../providers/user-ser';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the IlanEklePage page.
@@ -30,8 +32,16 @@ export class IlanEklePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder, public ilanSer: IlanSerProvider,
-    public toastCtrl: ToastController,public storage: Storage, public events: Events) {
+    public toastCtrl: ToastController,public storage: Storage, public events: Events,
+    public userAuth: UserSerProvider) {
 
+      if (!this.userAuth.currentUser) {
+      this.userAuth.checkAuthentication().then((res) => {
+      }, (err) => {
+        this.navCtrl.setRoot(LoginPage);
+      });
+    }
+    else{
       this.sehirler = ilanSer.sehirler;
       // console.log(JSON.stringify(this.sehirler));
       this.detayId = this.navParams.get('ilanDetayId');
@@ -68,6 +78,7 @@ export class IlanEklePage {
             egitimdurum: [this.detay.egitimdurum, [Validators.required]],
             aciklama: [this.detay.yilTecrube, [Validators.required]]
           });
+        }
   }
 
   ionViewDidLoad() {

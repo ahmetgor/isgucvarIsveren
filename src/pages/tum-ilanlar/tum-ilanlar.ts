@@ -6,6 +6,7 @@ import { FormControl } from '@angular/forms';
 import { UserSerProvider} from '../../providers/user-ser';
 import { IlanFiltrelePage } from '../ilan-filtrele/ilan-filtrele';
 import { Storage } from '@ionic/storage';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the TumIlanlarPage page.
@@ -34,7 +35,15 @@ export class TumIlanlarPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ilanSer: IlanSerProvider, public modalCtrl: ModalController,
     public events: Events, public userAuth: UserSerProvider, public storage: Storage) {
+      this.searchControl = new FormControl();
 
+      if (!this.userAuth.currentUser) {
+      this.userAuth.checkAuthentication().then((res) => {
+      }, (err) => {
+        this.navCtrl.setRoot(LoginPage);
+      });
+    }
+    else {
       this.storage.get('user')
           .then((user) => { this.user = user;
             console.log(JSON.stringify(user));
@@ -43,7 +52,7 @@ export class TumIlanlarPage {
           });
       // this.detayAra.firma = this.userAuth.user.firma;
       // this.detayAra.firma = "I2I-Systems";
-      this.searchControl = new FormControl();
+    }
   }
 
   ionViewDidLoad() {

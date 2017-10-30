@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { UserSerProvider} from '../../providers/user-ser';
 import 'rxjs/add/operator/debounceTime';
 import { Storage } from '@ionic/storage';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the IlanlarimPage page.
@@ -36,17 +37,22 @@ export class IlanlarimPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ilanSer: IlanSerProvider, public modalCtrl: ModalController,
     public events: Events, public userAuth: UserSerProvider, public storage: Storage) {
+      this.searchControl = new FormControl();
 
-      // this.detayAra.olusturan = this.userAuth.user.email;
-      // TODO: storage
+      if (!this.userAuth.currentUser) {
+      this.userAuth.checkAuthentication().then((res) => {
+      }, (err) => {
+        this.navCtrl.setRoot(LoginPage);
+      });
+    }
+    else{
       this.storage.get('user')
           .then((user) => { this.user = user;
             console.log(JSON.stringify(user));
             this.detayAra.olusturan = this.user.email;
             this.ilanListele();
           });
-      this.searchControl = new FormControl();
-
+}
   }
 
   ionViewDidLoad() {

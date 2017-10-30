@@ -5,6 +5,8 @@ import { FormControl } from '@angular/forms';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
 import { OzgecmisFiltrelePage } from '../ozgecmis-filtrele/ozgecmis-filtrele';
 import { Storage } from '@ionic/storage';
+import { UserSerProvider } from '../../providers/user-ser';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the OzgecmislerimPage page.
@@ -12,10 +14,7 @@ import { Storage } from '@ionic/storage';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage({
-  name: 'home',
-segment: 'home'
-})
+@IonicPage({})
 @Component({
   selector: 'page-ozgecmislerim',
   templateUrl: 'ozgecmislerim.html',
@@ -39,8 +38,16 @@ export class OzgecmislerimPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ozgecmisSer: OzgecmisSerProvider, public storage: Storage,
-              public events: Events) {
-    this.searchControl = new FormControl();
+              public events: Events, public userAuth: UserSerProvider) {
+                this.searchControl = new FormControl();
+
+      if (!this.userAuth.currentUser) {
+      this.userAuth.checkAuthentication().then((res) => {
+      }, (err) => {
+        this.navCtrl.setRoot(LoginPage);
+      });
+    }
+    else {
     this.ilanId = this.navParams.get('ilanId');
     this.storage.get('user')
         .then((user) => {
@@ -50,8 +57,8 @@ export class OzgecmislerimPage {
           console.log("constructor çağrıldı");
           this.ozgecmisListele();
         });
-    // this.userId = "59163aa74be8d6e2c51b8647";
-    // this.olusturan = "agor1@agor.com";
+
+      }
   }
 
   ionViewDidLoad() {
@@ -112,9 +119,10 @@ this.events.subscribe('ozgecmis:filtered_tek', (a) => {
   toOzgecmisDetay(ozgecmis: any) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ozgecmis)+'ozgecmisDetay');
-    this.navCtrl.push(OzgecmisDetayPage, {
+    this.navCtrl.push('OzgecmisDetayPage', {
       ozgecmisTapped: ozgecmis,
-      aktivite: this.aktivite
+      aktivite: this.aktivite,
+      ozgecmisId: ozgecmis._id
     });
   }
 

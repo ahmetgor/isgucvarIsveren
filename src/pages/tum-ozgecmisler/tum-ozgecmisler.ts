@@ -5,6 +5,9 @@ import { FormControl } from '@angular/forms';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
 import { OzgecmisFiltrelePage } from '../ozgecmis-filtrele/ozgecmis-filtrele';
 import { Storage } from '@ionic/storage';
+import { LoginPage } from '../login/login';
+import { UserSerProvider } from '../../providers/user-ser';
+
 /**
  * Generated class for the TumOzgecmislerPage page.
  *
@@ -35,20 +38,30 @@ export class TumOzgecmislerPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ozgecmisSer: OzgecmisSerProvider, public storage: Storage,
-              public events: Events) {
+              public events: Events, public userAuth: UserSerProvider ) {
                 this.searchControl = new FormControl();
+
+        if (!this.userAuth.currentUser) {
+        this.userAuth.checkAuthentication().then((res) => {
+        }, (err) => {
+          this.navCtrl.setRoot(LoginPage);
+        });
+      }
+      else {
+        this.storage.get('user')
+            .then((user) => {
+              this.firma = user.firmaId;
+              this.userId = user._id;
+              this.ozgecmisListele();
+            });
                 // this.ilanId = this.navParams.get('ilanId');
                 this.detayAra.tumfirma = 't';
+              }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TumOzgecmislerPage');
-    this.storage.get('user')
-        .then((user) => {
-          this.firma = user.firmaId;
-          this.userId = user._id;
-          this.ozgecmisListele();
-        });
+
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
     this.skip = 0;
@@ -100,9 +113,10 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
   toOzgecmisDetay(ozgecmis: any) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ozgecmis)+'ozgecmisDetay');
-    this.navCtrl.push(OzgecmisDetayPage, {
+    this.navCtrl.push('OzgecmisDetayPage', {
       ozgecmisTapped: ozgecmis,
-      aktivite: this.aktivite
+      aktivite: this.aktivite,
+      ozgecmisId: ozgecmis._id
     });
   }
 

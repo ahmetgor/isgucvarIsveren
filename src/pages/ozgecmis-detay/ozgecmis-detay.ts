@@ -10,7 +10,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+@IonicPage({segment: 'ozgecmisdetay/:ozgecmisId'})
 @Component({
   selector: 'page-ozgecmis-detay',
   templateUrl: 'ozgecmis-detay.html',

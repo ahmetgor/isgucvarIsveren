@@ -23,6 +23,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public authService: UserSerProvider,
     public loadingCtrl: LoadingController, public storage: Storage, public events: Events) {
+      console.log("loginpage");
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -30,8 +31,11 @@ export class LoginPage {
     this.storage.get('user')
         .then((user) => {this.email = user.email;
           this.password = user.password;
+          console.log("storage user");
         })
-        .catch((err) => {return;
+        .catch((err) => {
+          console.log("hata");
+          return;
         });
         this.showLoader('Bilgiler yükleniyor...');
         //Check if already authenticated
@@ -40,7 +44,7 @@ export class LoginPage {
             this.events.publish('login:event');
             this.loading.dismiss();
             if (this.navCtrl.canGoBack()) return;
-            else this.navCtrl.setRoot(IlanlarimPage);
+            else this.navCtrl.setRoot('IlanlarimPage');
         }, (err) => {
             // console.log("Not already authorized");
             this.loading.dismiss();
@@ -59,7 +63,7 @@ export class LoginPage {
 
         console.log(JSON.stringify(result)+"result");
         this.loading.dismiss();
-        this.navCtrl.setRoot(IlanlarimPage);
+        this.navCtrl.setRoot('IlanlarimPage');
 
       }, (err) => {
           this.loading.dismiss();

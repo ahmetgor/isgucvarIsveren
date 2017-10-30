@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { OzgecmisDetayPage } from './ozgecmis-detay';
+import { DatePipeModule } from '../../pipes/date-pipe.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { OzgecmisDetayPage } from './ozgecmis-detay';
   ],
   imports: [
     IonicPageModule.forChild(OzgecmisDetayPage),
+    DatePipeModule
   ],
   exports: [
     OzgecmisDetayPage
