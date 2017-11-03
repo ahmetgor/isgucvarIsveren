@@ -41,17 +41,19 @@ export class IlanlarimPage {
 
       if (!this.userAuth.currentUser) {
       this.userAuth.checkAuthentication().then((res) => {
+        this.detayAra.olusturan = this.userAuth.currentUser.email;
+        this.ilanListele();
       }, (err) => {
         this.navCtrl.setRoot(LoginPage);
       });
     }
     else{
-      this.storage.get('user')
-          .then((user) => { this.user = user;
-            console.log(JSON.stringify(user));
-            this.detayAra.olusturan = this.user.email;
+      // this.storage.get('user')
+      //     .then((user) => { this.user = user;
+            // console.log(JSON.stringify(user));
+            this.detayAra.olusturan = this.userAuth.currentUser.email;
             this.ilanListele();
-          });
+          // });
 }
   }
 
@@ -74,7 +76,7 @@ this.events.subscribe('ilan:filteredilan', (a) => {
   if(a == "clear") {
     // console.log('filtre true');
     this.detayAra = {};
-    this.detayAra.olusturan = this.user.email;
+    this.detayAra.olusturan = this.userAuth.currentUser.email;
     this.sirala = '{}';
   }
   console.log('ilanlistele filtre çağrıldı');
@@ -102,9 +104,10 @@ this.events.subscribe('ilan:ekle', () => {
   itemTapped(ev, ilan) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ilan)+'ilan');
-    this.navCtrl.push(IlanDetayPage, {
+    this.navCtrl.push('IlanDetayPage', {
       ilan: ilan,
-      guncelleyen: this.detayAra.olusturan
+      guncelleyen: this.detayAra.olusturan,
+      ilanId: ilan._id
       // basvurulist: this.basvuruSer.basvuruList,
       // kaydedilenlist: this.basvuruSer.kaydedilenList
     });

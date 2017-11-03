@@ -39,20 +39,28 @@ export class TumIlanlarPage {
 
       if (!this.userAuth.currentUser) {
       this.userAuth.checkAuthentication().then((res) => {
+        console.log('tumilan constructor1');
+        this.ilanListele();
+        this.detayAra.firma = this.userAuth.currentUser.firma;
       }, (err) => {
+
+        console.log('tumilan constructor1');
         this.navCtrl.setRoot(LoginPage);
       });
     }
     else {
-      this.storage.get('user')
-          .then((user) => { this.user = user;
-            console.log(JSON.stringify(user));
-            this.detayAra.firma = this.user.firma;
+      // this.storage.get('user')
+      //     .then((user) => { this.user = user;
+            console.log(this.userAuth.currentUser.firma);
+            this.detayAra.firma = this.userAuth.currentUser.firma;
             this.ilanListele();
-          });
+            console.log('tumilan constructor');
+
+          // });
       // this.detayAra.firma = this.userAuth.user.firma;
       // this.detayAra.firma = "I2I-Systems";
     }
+    console.log('tumilan constructor3');
   }
 
   ionViewDidLoad() {
@@ -76,7 +84,7 @@ this.events.subscribe('ilan:filteredtumilan', (a) => {
   if(a == "clear") {
     // console.log('filtre true');
     this.detayAra = {};
-    this.detayAra.firma = this.user.firma;
+    this.detayAra.firma = this.userAuth.currentUser.firma;
     this.sirala = '{}';
   }
   console.log('tümilanlistele filtre çağrıldı');

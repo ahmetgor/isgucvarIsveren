@@ -41,7 +41,6 @@ export class LoginPage {
         //Check if already authenticated
         this.authService.checkAuthentication().then((res) => {
             console.log("Already authorized");
-            this.events.publish('login:event');
             this.loading.dismiss();
             if (this.navCtrl.canGoBack()) return;
             else this.navCtrl.setRoot('IlanlarimPage');
@@ -59,7 +58,6 @@ export class LoginPage {
       };
         console.log(JSON.stringify(credentials)+'credentials');
       this.authService.login(credentials).then((result: any) => {
-        this.events.publish('login:event');
 
         console.log(JSON.stringify(result)+"result");
         this.loading.dismiss();

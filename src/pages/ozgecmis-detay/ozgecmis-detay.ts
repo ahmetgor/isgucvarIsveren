@@ -4,6 +4,8 @@ import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { Storage } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
+declare var IN;
+declare var FB;
 /**
  * Generated class for the OzgecmisDetayPage page.
  *
@@ -54,13 +56,47 @@ export class OzgecmisDetayPage {
 
   }
 
+  shareFace() {
+    let options = 	{
+  method: "share",
+  href: window.location.origin+'/#/ozgecmisdetay/'+this.ozgecmis._id,
+  caption: "Such caption, very feed.",
+  description: "Much description"
+  // picture: this.ilan.resim
+}
+
+console.log("share face");
+
+  FB.ui({
+  method: 'share',
+  href: window.location.origin+'/#/ozgecmisdetay/'+this.ozgecmis._id,
+}, function(response){});
+
+  }
+
+  public shareLinked(){
+
+  var payload = {
+    "comment": "Yeni bir İşgüçvar ilanı!" + window.location.origin+'/#/ozgecmisdetay/'+this.ozgecmis._id,
+    "visibility": {
+      "code": "anyone"
+    }
+  };
+
+  IN.API.Raw("/people/~/shares?format=json")
+    .method("POST")
+    .body(JSON.stringify(payload))
+    .result((onSuccess) =>{})
+    .error((onError) =>{});
+    }
+
   share() {
     if(!this.plt.is('core') && !this.plt.is('mobileweb')) {
   var options = {
     message: "Yeni bir İşgüçvar özgeçmişi paylaşıldı: "+this.ozgecmis.isim+"\n", // not supported on some apps (Facebook, Instagram)
     subject: 'işgüçvar özgeçmiş '+this.ozgecmis.isim, // fi. for email
     // files: [this.ilan.resim], // an array of filenames either locally or remotely
-    url: "http://localhost:8100/#/ozgecmisler/"+this.ozgecmis._id,
+    url: window.location.origin+"/#/ozgecmisdetay/"+this.ozgecmis._id,
     chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
   }
   // this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")
@@ -82,11 +118,12 @@ export class OzgecmisDetayPage {
           {
             text: 'Facebook',icon: 'logo-facebook',
             handler: () => {
-              // this.shareFace();
+              this.shareFace();
             }
           },{
             text: 'LinkedIn',icon: 'logo-linkedin',
             handler: () => {
+              this.shareLinked();
               console.log('Archive clicked');
             }
           },{

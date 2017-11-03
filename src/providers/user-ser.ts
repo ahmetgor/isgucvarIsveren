@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
-import {ToastController, LoadingController } from 'ionic-angular';
+import {ToastController, LoadingController, Events } from 'ionic-angular';
 
 
 @Injectable()
@@ -20,8 +20,10 @@ export class UserSerProvider {
   loading: any;
 
   constructor(public http: Http, public storage: Storage,
-              public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+              public toastCtrl: ToastController, public loadingCtrl: LoadingController,
+              public events: Events) {
     console.log('Hello UserSerProvider Provider');
+    this.checkAuthentication();
   }
 
   checkAuthentication(){
@@ -38,6 +40,7 @@ export class UserSerProvider {
             headers.append('Authorization', this.token);
             this.http.get(this.url+'protected', {headers: headers})
                 .subscribe(res => {
+                  this.events.publish('login:event');
                     resolve(res);
                 }, (err) => {
                     reject(err);

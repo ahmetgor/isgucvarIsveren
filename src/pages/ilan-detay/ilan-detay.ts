@@ -7,15 +7,16 @@ import { Storage } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { LinkedInService } from 'angular-linkedin-sdk';
-// declare var IN;
 
+declare var IN;
+declare var FB;
 /**
  * Generated class for the IlanDetayPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+ @IonicPage({segment: 'ilandetay/:ilanId'})
 @Component({
   selector: 'page-ilan-detay',
   templateUrl: 'ilan-detay.html',
@@ -59,10 +60,21 @@ export class IlanDetayPage {
     });
   }
 
-  shareface() {
+  shareFace() {
+//     let options = 	{
+//   method: "share",
+// 	href: window.location.origin+'/#/ilandetay/'+this.ilan._id,
+// 	caption: "Such caption, very feed.",
+// 	description: "Much description"
+// 	// picture: this.ilan.resim
+// }
 
-    this.socialSharing.shareViaFacebook
-    ('İşgüçvar ilanına göz atın:', null, "https://isgucvar.herokuapp.com/")
+console.log("share face");
+
+  FB.ui({
+  method: 'share',
+  href: 'https://isgucvarisarayan.herokuapp.com'+'/#/detay/'+this.ilan._id,
+}, function(response){});
 
   }
 
@@ -72,7 +84,7 @@ export class IlanDetayPage {
     message: "İşgüçvar ilanına göz atın:\n\n", // not supported on some apps (Facebook, Instagram)
     // subject: 'the subject', // fi. for email
     // files: [this.ilan.resim], // an array of filenames either locally or remotely
-    url: "https://localhost:8100/#/detay/"+this.ilan._id,
+    url: 'https://isgucvarisarayan.herokuapp.com'+"/#/detay/"+this.ilan._id,
     chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
   }
   this.socialSharing.shareWithOptions(options)
@@ -85,32 +97,22 @@ export class IlanDetayPage {
   else this.presentActionSheet();
   }
 
-  public sharelinked(){
-//     var payload = {
-//   "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
-//   "visibility": {
-//     "code": "anyone"
-//   }
-// };
-// console.log('linked');
-//       const url = '/people/~/shares?format=json';
-//       this.linkedIn.raw(url)
-//         // .asObservable()
-//         // .method('POST')
-//         // .body(JSON.stringify(payload))
-//         .asObservable()
-//           .subscribe({
-//             next: (data) => {
-//               console.log(data);
-//             },
-//             error: (err) => {
-//               console.log(err);
-//             },
-//             complete: () => {
-//               console.log('RAW API call completed');
-//             }
-//           });
-  }
+  // public shareLinked(){
+  //
+  // var payload = {
+  //   "comment": "Yeni bir İşgüçvar ilanı!" + window.location.origin+'/#/ilandetay/'+this.ilan._id,
+  //   "visibility": {
+  //     "code": "anyone"
+  //   }
+  // };
+  //
+  // IN.API.Raw("/people/~/shares?format=json")
+  //   .method("POST")
+  //   .body(JSON.stringify(payload))
+  //   .result((onSuccess) =>{})
+  //   .error((onError) =>{});
+  //   }
+
   presentActionSheet() {
       let actionSheet = this.actionSheetCtrl.create({
         title: 'İlan Paylaş',
@@ -119,16 +121,18 @@ export class IlanDetayPage {
             text: 'Facebook',
             icon: 'logo-facebook',
             handler: () => {
-              this.shareface();
+              this.shareFace();
             }
-          },{
-            text: 'LinkedIn',
-            icon: 'logo-linkedin',
-            handler: () => {
-              console.log('Archive clicked');
-              this.sharelinked();
-            }
-          },{
+          },
+          // {
+          //   text: 'LinkedIn',
+          //   icon: 'logo-linkedin',
+          //   handler: () => {
+          //     console.log('Archive clicked');
+          //     this.shareLinked();
+          //   }
+          // },
+          {
             text: 'İptal',
             role: 'cancel',
             icon: 'close',

@@ -43,20 +43,26 @@ export class OzgecmislerimPage {
 
       if (!this.userAuth.currentUser) {
       this.userAuth.checkAuthentication().then((res) => {
+        this.ilanId = this.navParams.get('ilanId');
+        this.userId = this.userAuth.currentUser._id;
+        this.olusturan = this.userAuth.currentUser.email;
+        console.log("constructor çağrıldı");
+        this.ozgecmisListele();
+
       }, (err) => {
         this.navCtrl.setRoot(LoginPage);
       });
     }
     else {
     this.ilanId = this.navParams.get('ilanId');
-    this.storage.get('user')
-        .then((user) => {
-          console.log(user._id+'userid');
-          this.userId = user._id;
-          this.olusturan = user.email;
+    // this.storage.get('user')
+    //     .then((user) => {
+          console.log(this.userAuth.currentUser._id+'userid');
+          this.userId = this.userAuth.currentUser._id;
+          this.olusturan = this.userAuth.currentUser.email;
           console.log("constructor çağrıldı");
           this.ozgecmisListele();
-        });
+        // });
 
       }
   }

@@ -43,17 +43,20 @@ export class TumOzgecmislerPage {
 
         if (!this.userAuth.currentUser) {
         this.userAuth.checkAuthentication().then((res) => {
+          this.firma = this.userAuth.currentUser.firmaId;
+          this.userId = this.userAuth.currentUser._id;
+          this.ozgecmisListele();
         }, (err) => {
           this.navCtrl.setRoot(LoginPage);
         });
       }
       else {
-        this.storage.get('user')
-            .then((user) => {
-              this.firma = user.firmaId;
-              this.userId = user._id;
+        // this.storage.get('user')
+        //     .then((user) => {
+              this.firma = this.userAuth.currentUser.firmaId;
+              this.userId = this.userAuth.currentUser._id;
               this.ozgecmisListele();
-            });
+            // });
                 // this.ilanId = this.navParams.get('ilanId');
                 this.detayAra.tumfirma = 't';
               }
