@@ -129,9 +129,9 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
   goHesap() {
-    this.nav.push('HesapPage');
+    this.nav.push(HesapPage);
   }
   goFirmaHesap() {
-    this.nav.push('FirmaHesapPage');
+    this.nav.push(FirmaHesapPage);
   }
 }

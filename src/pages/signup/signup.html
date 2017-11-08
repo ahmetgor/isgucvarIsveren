@@ -17,12 +17,15 @@
     <ion-list>
       <ion-item-divider no-lines color="light">Bilgileriniz:</ion-item-divider>
       <input type="file" #userFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event, 'user')" required/>
-      <div class="profile-image-wrapper" (click)="getPicture('user')">
-        <div class="profile-image-placeholder" *ngIf="!userUrl">
+      <div class="profile-image-wrapper">
+        <div class="profile-image-placeholder" *ngIf="!userUrl" (click)="getPicture('user')">
           <ion-icon name="add"></ion-icon>
           <div>Profil Resmi</div>
         </div>
-        <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(userUrl)" *ngIf="userUrl"></div>
+        <!-- <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(userUrl)" *ngIf="userUrl"></div> -->
+        <div *ngIf="userUrl" >
+            <img class="profile-image" [src]="userUrl" (click)="getPicture('user')">
+        </div>
       </div>
       <ion-item>
           <ion-label><ion-icon name="mail"></ion-icon></ion-label>

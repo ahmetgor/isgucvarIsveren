@@ -26,12 +26,15 @@
             <ion-list>
               <ion-item-divider no-lines color="light">Yönetici Bilgileri:</ion-item-divider>
               <input type="file" #userFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event, 'user')" required />
-              <div class="profile-image-wrapper" (click)="getPicture('user')">
-                <div class="profile-image-placeholder" *ngIf="!userUrl">
+              <div class="profile-image-wrapper">
+                <div class="profile-image-placeholder" *ngIf="!userUrl" (click)="getPicture('user')">
                   <ion-icon name="add"></ion-icon>
                   <div>Profil Resmi</div>
                 </div>
-                <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(userUrl)" *ngIf="userUrl"></div>
+                <!-- <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(userUrl)" *ngIf="userUrl"></div> -->
+                <div *ngIf="userUrl" >
+                    <img class="profile-image" [src]="userUrl" (click)="getPicture('user')">
+                </div>
               </div>
                 <ion-item>
                     <ion-label><ion-icon name="mail"></ion-icon></ion-label>
@@ -63,12 +66,15 @@
                 </p>
                 <ion-item-divider no-lines color="light">Firma Bilgileri:</ion-item-divider>
                 <input type="file" #firmaFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event, 'firma')" required/>
-                <div class="profile-image-wrapper" (click)="getPicture('firma')">
-                  <div class="profile-image-placeholder" *ngIf="!firmaUrl">
+                <div class="profile-image-wrapper">
+                  <div class="profile-image-placeholder" *ngIf="!firmaUrl" (click)="getPicture('firma')">
                     <ion-icon name="add"></ion-icon>
                     <div>Firma Logosu</div>
                   </div>
-                  <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(firmaUrl)" *ngIf="firmaUrl"></div>
+                  <!-- <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(firmaUrl)" *ngIf="firmaUrl"></div> -->
+                  <div *ngIf="firmaUrl" >
+                      <img class="profile-image" [src]="firmaUrl" (click)="getPicture('firma')">
+                  </div>
                 </div>
                 <ion-item>
                     <ion-label><ion-icon name="power"></ion-icon></ion-label>

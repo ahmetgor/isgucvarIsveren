@@ -54,9 +54,9 @@ import { LinkedInSdkModule } from 'angular-linkedin-sdk';
     LoginPage,
     SignupPage,
     SignupFirmaPage,
-    ResetPage
-    // HesapPage,
-    // FirmaHesapPage
+    ResetPage,
+    HesapPage,
+    FirmaHesapPage
   ],
   imports: [
     BrowserModule,
@@ -82,9 +82,9 @@ import { LinkedInSdkModule } from 'angular-linkedin-sdk';
     LoginPage,
     SignupPage,
     SignupFirmaPage,
-    ResetPage
-    // HesapPage,
-    // FirmaHesapPage
+    ResetPage,
+    HesapPage,
+    FirmaHesapPage
   ],
   providers: [
     StatusBar,

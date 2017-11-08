@@ -11,11 +11,11 @@ import {ToastController, LoadingController, Events } from 'ionic-angular';
 export class UserSerProvider {
   token: any = {};
   user: any = {};
-  // url : string = 'https://serverisgucvar.herokuapp.com/api/firmaauth/';
-  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
+  url : string = window.location.origin+'/api/firmaauth/';
+  url1 : string = window.location.origin+'/api/tools/';
 
-  url : string = 'http://127.0.0.1:8080/api/firmaauth/';
-  url1: string = 'http://127.0.0.1:8080/api/tools/';
+  // url : string = 'http://127.0.0.1:8080/api/firmaauth/';
+  // url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
   loading: any;
 
@@ -23,7 +23,7 @@ export class UserSerProvider {
               public toastCtrl: ToastController, public loadingCtrl: LoadingController,
               public events: Events) {
     console.log('Hello UserSerProvider Provider');
-    this.checkAuthentication();
+    // this.checkAuthentication();
   }
 
   checkAuthentication(){
@@ -34,13 +34,17 @@ export class UserSerProvider {
             this.token = value;
 
         this.storage.get('user')
-            .then((user) => this.currentUser = user);
+            .then((user) => {this.currentUser = user;
+              this.events.publish('login:event');
+            })
+            .catch((err) => {
+              console.log("hata");
+            });
 
             let headers = new Headers();
             headers.append('Authorization', this.token);
             this.http.get(this.url+'protected', {headers: headers})
                 .subscribe(res => {
-                  this.events.publish('login:event');
                     resolve(res);
                 }, (err) => {
                     reject(err);
@@ -126,6 +130,8 @@ export class UserSerProvider {
             this.currentUser = data.user;
             this.storage.set('token', data.token);
             this.storage.set('user', data.user);
+            this.events.publish('login:event');
+
             this.loading.dismiss();
 
             resolve(data);

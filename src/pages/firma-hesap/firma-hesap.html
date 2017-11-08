@@ -19,12 +19,15 @@
     <ion-list>
       <ion-item-divider no-lines color="light">Firma profil resmi değiştirin</ion-item-divider>
       <input type="file" #userFileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" required />
-      <div class="profile-image-wrapper" (click)="getPicture()">
+      <div class="profile-image-wrapper">
         <div class="profile-image-placeholder" *ngIf="!userUrl">
           <ion-icon name="add"></ion-icon>
           <div>Profil Resmi</div>
         </div>
-        <div class="profile-image" [style.backgroundImage]= "userUrl" *ngIf="userUrl"></div>
+        <!-- <div class="profile-image" [style.backgroundImage]= "userUrl" *ngIf="userUrl"></div> -->
+        <div *ngIf="userUrl" >
+            <img class="profile-image" [src]="cloudUrl" (click)="getPicture()">
+        </div>
       </div>
 
         <ion-item-divider no-lines color="light">Yeni firma ismi veya şifresi belirleyin</ion-item-divider>
