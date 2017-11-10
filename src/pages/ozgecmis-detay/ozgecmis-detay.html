@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-buttons end>
   <button ion-button icon-only (click)="share()">
     <ion-icon name="share"></ion-icon>
@@ -112,9 +115,9 @@
 </ion-card-header>
 <button ion-item *ngFor="let tecrube of (ozgecmis.tecrube | datePipe)">
 <h4><b>{{tecrube.firma}}</b></h4> <h4><span style="float:right;">{{tecrube.sehir}}</span></h4>
-<h4>{{tecrube.pozisyon}}</h4>
+<h4><b>{{tecrube.pozisyon}}</b></h4>
 <h4 style="white-space: pre-wrap;">{{tecrube.isTanimiKisa}}</h4>
-<h4>{{tecrube.giris | date:'MM/yyyy'}} - {{tecrube.cikis | date:'MM/yyyy'}}</h4>
+<h4><b>{{tecrube.giris | date:'MM/yyyy'}} - {{tecrube.cikis | date:'MM/yyyy'}}</b></h4>
 </button>
 </ion-card>
 

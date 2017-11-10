@@ -22,6 +22,7 @@ export class SignupFirmaPage {
   loading: any;
   userUrl: string;
   firmaUrl: string;
+  telefon: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
       public authService: UserSerProvider, public loadingCtrl: LoadingController,
@@ -51,7 +52,8 @@ export class SignupFirmaPage {
         firma: this.firma,
         firmaPass: this.firmaPass,
         userUrl: this.userUrl,
-        firmaUrl: this.firmaUrl
+        firmaUrl: this.firmaUrl,
+        telefon: this.telefon
     };
     this.authService.createFirmaAccount(details).then((result) => {
       // this.presentToast('Kaydınız yapıldı, giriş yapabilirsiniz');

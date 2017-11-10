@@ -41,7 +41,6 @@ export class IlanEklePage {
         this.navCtrl.setRoot(LoginPage);
       });
     }
-    else{
       this.sehirler = ilanSer.sehirler;
       // console.log(JSON.stringify(this.sehirler));
       this.detayId = this.navParams.get('ilanDetayId');
@@ -78,7 +77,6 @@ export class IlanEklePage {
             egitimdurum: [this.detay.egitimdurum, [Validators.required]],
             aciklama: [this.detay.yilTecrube, [Validators.required]]
           });
-        }
   }
 
   ionViewDidLoad() {

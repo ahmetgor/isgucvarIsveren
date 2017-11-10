@@ -100,6 +100,14 @@
                     <p style="color:red;">Girilen firma şifreleri aynı değil</p>
                 </ion-item>
 
+                <ion-item>
+                    <ion-label><ion-icon name="call"></ion-icon></ion-label>
+                    <ion-input  type="number" [(ngModel)]="telefon" placeholder="İrtibat Telefonu" #tel="ngModel" name="telef" required></ion-input>
+                </ion-item>
+                <ion-item no-lines *ngIf="tel.errors">
+                    <p style="color:red;">Lütfen geçerli telefon giriniz</p>
+                </ion-item>
+
             </ion-list>
             <div class="g-recaptcha" data-sitekey="6LeWBS4UAAAAAAvIlSnwKqhUq2u4gPuTdLAU6UOZ"></div>
 

@@ -39,9 +39,9 @@ export class TumIlanlarPage {
 
       if (!this.userAuth.currentUser) {
       this.userAuth.checkAuthentication().then((res) => {
-        console.log('tumilan constructor1');
-        this.ilanListele();
+        console.log('tumilan constructor');
         this.detayAra.firma = this.userAuth.currentUser.firma;
+        this.ilanListele();
       }, (err) => {
 
         console.log('tumilan constructor1');

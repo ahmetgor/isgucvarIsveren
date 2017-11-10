@@ -149,7 +149,7 @@ console.log("share face");
   toOzgecmis() {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(this.ilan)+'ilan');
-    this.navCtrl.push(OzgecmislerimPage, {
+    this.navCtrl.push('OzgecmislerimPage', {
         ilanId: this.ilan._id,
       guncelleyen: this.guncelleyen
     });
@@ -157,7 +157,7 @@ console.log("share face");
 
   guncelleIlan() {
     console.log(JSON.stringify(this.ilan)+'ilan');
-    this.navCtrl.push(IlanEklePage, {
+    this.navCtrl.push('IlanEklePage', {
       ilanDetayId: this.ilan._id,
       update: 'Y'
     });

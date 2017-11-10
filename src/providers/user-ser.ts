@@ -45,8 +45,10 @@ export class UserSerProvider {
             headers.append('Authorization', this.token);
             this.http.get(this.url+'protected', {headers: headers})
                 .subscribe(res => {
+                  console.log(JSON.stringify(res)+"success");
                     resolve(res);
                 }, (err) => {
+                  console.log(JSON.stringify(err)+"err");
                     reject(err);
                 });
         });
