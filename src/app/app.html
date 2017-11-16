@@ -8,10 +8,17 @@
   <ion-content>
     <ion-list>
       <div *ngIf="user">
-      <ion-item no-lines>
+        <ion-item no-lines>
+          <!-- <ion-thumbnail item-start> -->
+          <img item-start width="30" height="30" src="/assets/icon/happy.png">
+          <!-- </ion-thumbnail> -->
+          <p text-wrap style="color:lightgrey;">İşgüçvar İşveren</p>
+        </ion-item>
+      <ion-item no-lines text-wrap>
         <ion-thumbnail item-start>
         <img class="img-circle" [src]="user.resim">
         </ion-thumbnail>
+        <p>Merhaba</p>
         <h2 text-wrap>{{username}}</h2>
       </ion-item>
       <button menuClose ion-item no-lines (click)="goHesap()">

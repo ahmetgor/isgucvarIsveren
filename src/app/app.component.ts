@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Deeplinks } from '@ionic-native/deeplinks';
+// import { Deeplinks } from '@ionic-native/deeplinks';
 
 import { OzgecmislerimPage } from '../pages/ozgecmislerim/ozgecmislerim';
 import { TumOzgecmislerPage } from '../pages/tum-ozgecmisler/tum-ozgecmisler';
@@ -16,6 +16,7 @@ import { HesapPage } from '../pages/hesap/hesap';
 import { FirmaHesapPage } from '../pages/firma-hesap/firma-hesap';
 import { IlanDetayPage } from '../pages/ilan-detay/ilan-detay';
 import { OzgecmisDetayPage } from '../pages/ozgecmis-detay/ozgecmis-detay';
+import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public alertCtrl: AlertController, public authService: UserSerProvider,
-              public storage: Storage,  public events: Events, public deeplinks: Deeplinks) {
+              public storage: Storage,  public events: Events) {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
@@ -41,7 +42,8 @@ export class MyApp {
       { title: 'İlanlarım', component: 'IlanlarimPage', icon: "clipboard" },
       { title: 'Firmanın İlanları', component: 'TumIlanlarPage', icon: "filing" },
       { title: 'Özgeçmişlerim', component: 'OzgecmislerimPage', icon: "person"  },
-      { title: 'Tüm Özgeçmişler', component: 'TumOzgecmislerPage', icon: "people" }
+      { title: 'Tüm Özgeçmişler', component: 'TumOzgecmislerPage', icon: "people" },
+      { title: 'Ayarlar', component: 'AyarlarPage', icon: "settings" }
     ];
 
   }

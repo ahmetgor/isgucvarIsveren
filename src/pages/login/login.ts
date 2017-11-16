@@ -51,7 +51,7 @@ export class LoginPage {
     }
 
   login(){
-      this.showLoader('Giriş Yapılıyor...');
+      // this.showLoader('Giriş Yapılıyor...');
       let credentials = {
           email: this.email,
           password: this.password
@@ -60,11 +60,11 @@ export class LoginPage {
       this.authService.login(credentials).then((result: any) => {
 
         console.log(JSON.stringify(result)+"result");
-        this.loading.dismiss();
+        // this.loading.dismiss();
         this.navCtrl.setRoot('IlanlarimPage');
 
       }, (err) => {
-          this.loading.dismiss();
+          // this.loading.dismiss();
             console.log(JSON.stringify(err._body)+'asdasd');
           // let msg = JSON.parse(err._body);
       });
