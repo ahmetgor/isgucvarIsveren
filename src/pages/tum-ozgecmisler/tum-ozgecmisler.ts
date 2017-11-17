@@ -8,12 +8,6 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
 import { UserSerProvider } from '../../providers/user-ser';
 
-/**
- * Generated class for the TumOzgecmislerPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-tum-ozgecmisler',
@@ -34,6 +28,7 @@ export class TumOzgecmislerPage {
   detayAra: any = {};
   sirala: any = {};
   showSearchbar: boolean = true;
+  isEmpty: boolean = false;
   @ViewChild('content') content: Content;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -100,7 +95,7 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
     // let basvurular = [];
     // basvurular.push(this.ilanId);
     this.detayAra.userId = this.userId;
-    // this.detayAra.basvuruId = this.ilanId;
+    this.isEmpty = false;
     this.detayAra.segment = this.aktivite;
     if (this.detayAra.tumfirma == 'f')  this.detayAra.firma = this.firma;
     else this.detayAra.firma = undefined;
@@ -108,6 +103,9 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
     this.ozgecmisSer.getOzgecmisler(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ozgecmisler => {
       this.ozgecmisList = ozgecmisler;
+      if (Object.keys(this.ozgecmisList).length <= 0) {
+        this.isEmpty = true;
+      }
       console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
       this.searching = false;
     });

@@ -16,7 +16,7 @@ import { Storage } from '@ionic/storage';
 export class IlanSerProvider {
 
   // url : string = window.location.origin+'/api/ilanlar/';
-  url : string = '  https://isgucvarisarayan.herokuapp.com/api/ilanlar/';
+  url : string = 'https://isgucvarisveren.herokuapp.com/api/ilanlar/';
 
   // url : string = 'http://127.0.0.1:8080/api/ilanlar/';
   // ilanlar: Array<any>;

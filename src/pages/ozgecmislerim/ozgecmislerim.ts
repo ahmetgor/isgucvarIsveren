@@ -35,6 +35,7 @@ export class OzgecmislerimPage {
   sirala: any = '{}';
   showSearchbar: boolean = true;
   @ViewChild('content') content: Content;
+  isEmpty: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ozgecmisSer: OzgecmisSerProvider, public storage: Storage,
@@ -107,8 +108,8 @@ this.events.subscribe('ozgecmis:filtered_tek', (a) => {
   }
 
   ozgecmisListele(){
-    // let basvurular = [];
-    // basvurular.push(this.ilanId);
+
+    this.isEmpty = false;
     this.detayAra.basvuruId = this.ilanId;
     this.detayAra.olusturan = this.olusturan;
     this.detayAra.segment = this.aktivite;
@@ -118,6 +119,9 @@ this.events.subscribe('ozgecmis:filtered_tek', (a) => {
     .then(ozgecmisler => {
       this.ozgecmisList = ozgecmisler;
       console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
+      if (Object.keys(this.ozgecmisList).length <= 0) {
+        this.isEmpty = true;
+      }
       this.searching = false;
     });
   }

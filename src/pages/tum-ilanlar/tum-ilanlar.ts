@@ -31,6 +31,7 @@ export class TumIlanlarPage {
   limit: number = 20;
   scrollEnable: boolean = true;
   user: any;
+  isEmpty: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ilanSer: IlanSerProvider, public modalCtrl: ModalController,
@@ -94,9 +95,13 @@ this.events.subscribe('ilan:filteredtumilan', (a) => {
 
   ilanListele() {
     this.searching = true;
+    this.isEmpty = false;
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
       this.ilanList = ilanlar;
+      if (Object.keys(this.ilanList).length <= 0) {
+        this.isEmpty = true;
+      }
       // console.log(JSON.stringify(this.ilanList));
       this.searching = false;
     });
@@ -105,7 +110,7 @@ this.events.subscribe('ilan:filteredtumilan', (a) => {
   itemTapped(ev, ilan) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ilan)+'ilan');
-    this.navCtrl.push(IlanDetayPage, {
+    this.navCtrl.push('IlanDetayPage', {
       ilan: ilan
       // basvurulist: this.basvuruSer.basvuruList,
       // kaydedilenlist: this.basvuruSer.kaydedilenList

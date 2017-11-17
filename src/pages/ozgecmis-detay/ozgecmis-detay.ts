@@ -120,13 +120,15 @@ console.log("share face");
             handler: () => {
               this.shareFace();
             }
-          },{
-            text: 'LinkedIn',icon: 'logo-linkedin',
-            handler: () => {
-              this.shareLinked();
-              console.log('Archive clicked');
-            }
-          },{
+          },
+          // {
+          //   text: 'LinkedIn',icon: 'logo-linkedin',
+          //   handler: () => {
+          //     this.shareLinked();
+          //     console.log('Archive clicked');
+          //   }
+          // }
+          {
             text: 'İptal',role: 'cancel',icon: 'close',
             handler: () => {
               console.log('Cancel clicked');

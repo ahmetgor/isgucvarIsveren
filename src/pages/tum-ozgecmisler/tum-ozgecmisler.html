@@ -46,6 +46,11 @@
       <ion-spinner></ion-spinner>
     </div>
 
+    <div *ngIf="isEmpty" color="light">
+      <p text-center color="light">
+        Kayıt bulunamadı
+      </p>
+    </div>
     <!-- <div [ngSwitch]="aktivite">
     <div  *ngSwitchCase="'okunmadı'"> -->
     <ion-list text-wrap>

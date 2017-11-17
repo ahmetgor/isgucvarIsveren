@@ -42,6 +42,7 @@ export class IlanFiltrelePage {
     console.log(JSON.stringify(this.detayAra) + 'detay')
     this.sirala = navParams.get('sirala');
     this.ilanlarim = navParams.get('ilanlarim');
+    console.log(this.ilanlarim);
   }
 
   ionViewDidLoad() {
@@ -54,13 +55,24 @@ export class IlanFiltrelePage {
     console.log(this.sirala+'kapatfiltre');
     console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
       // console.log(JSON.stringify(this.sirala)+'parsefiltre');
-    this.events.publish('ilan:filtered'+this.ilanlarim);
+      if (this.ilanlarim == "ilan") {
+        console.log("ilan filter");
+    this.events.publish('ilan:filteredilan', "");
+  }
+  else {this.events.publish('ilan:filteredtumilan', "");
+        console.log("tumilan filter");
+        }
     this.navCtrl.pop();
    }
 
    clear() {
    console.log(JSON.stringify(this.detayAra)+'clearfiltre');
-   this.events.publish('ilan:filtered', 'clear');
-   this.navCtrl.pop();
+   if (this.ilanlarim == "ilan") {
+     console.log("ilan clear");
+ this.events.publish('ilan:filteredilan', "clear");
+}
+  else {this.events.publish('ilan:filteredtumilan', "clear");
+     console.log("tumilan clear");
+     }   this.navCtrl.pop();
   }
 }
