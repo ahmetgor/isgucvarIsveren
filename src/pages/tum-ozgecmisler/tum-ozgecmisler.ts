@@ -7,6 +7,7 @@ import { OzgecmisFiltrelePage } from '../ozgecmis-filtrele/ozgecmis-filtrele';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
 import { UserSerProvider } from '../../providers/user-ser';
+import 'rxjs/add/operator/debounceTime';
 
 @IonicPage()
 @Component({
@@ -23,7 +24,7 @@ export class TumOzgecmislerPage {
   searchTerm: string = '';
   searchControl: FormControl;
   skip: number = 0;
-  limit: number = 20;
+  limit: number = 10;
   scrollEnable: boolean = true;
   detayAra: any = {};
   sirala: any = {};
@@ -36,42 +37,43 @@ export class TumOzgecmislerPage {
               public events: Events, public userAuth: UserSerProvider ) {
                 this.searchControl = new FormControl();
 
-        if (!this.userAuth.currentUser) {
-        this.userAuth.checkAuthentication().then((res) => {
-          this.firma = this.userAuth.currentUser.firmaId;
-          this.userId = this.userAuth.currentUser._id;
-          this.ozgecmisListele();
-        }, (err) => {
-          this.navCtrl.setRoot(LoginPage);
-        });
-      }
-      else {
-        // this.storage.get('user')
-        //     .then((user) => {
-              this.firma = this.userAuth.currentUser.firmaId;
-              this.userId = this.userAuth.currentUser._id;
-              this.ozgecmisListele();
-            // });
-                // this.ilanId = this.navParams.get('ilanId');
-                this.detayAra.tumfirma = 't';
-              }
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TumOzgecmislerPage');
+
+    if (!this.userAuth.currentUser) {
+    this.userAuth.checkAuthentication().then((res) => {
+      this.firma = this.userAuth.currentUser.firmaId;
+      this.userId = this.userAuth.currentUser._id;
+      this.ozgecmisListele();
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
+  else {
+    // this.storage.get('user')
+    //     .then((user) => {
+          this.firma = this.userAuth.currentUser.firmaId;
+          this.userId = this.userAuth.currentUser._id;
+          this.ozgecmisListele();
+        // });
+            // this.ilanId = this.navParams.get('ilanId');
+            this.detayAra.tumfirma = 't';
+          }
+    //cı.log('ionViewDidLoad TumOzgecmislerPage');
 
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
     this.skip = 0;
     this.ozgecmisListele();
-    console.log('ilanlistele searchkontrol çağrıldı');
+    //cı.log('ilanlistele searchkontrol çağrıldı');
 });
 
   this.events.subscribe('ozgecmis:begen', (a) => {
   this.scrollEnable = true;
   // this.infiniteScroll.enable(true);
   this.skip = 0;
-  console.log('ozgecmis begen event çağrıldı');
+  //cı.log('ozgecmis begen event çağrıldı');
   this.ozgecmisListele();
 });
 
@@ -85,7 +87,7 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
     // this.firma = 'I2I-Systems';
     this.sirala = {};
   }
-  console.log('ozgecmislistele filtre çağrıldı');
+  //console.log('ozgecmislistele filtre çağrıldı');
   this.ozgecmisListele();
 
 });
@@ -106,14 +108,14 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
       if (Object.keys(this.ozgecmisList).length <= 0) {
         this.isEmpty = true;
       }
-      console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
+      //console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
       this.searching = false;
     });
   }
 
   toOzgecmisDetay(ozgecmis: any) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
-    console.log(JSON.stringify(ozgecmis)+'ozgecmisDetay');
+    //console.log(JSON.stringify(ozgecmis)+'ozgecmisDetay');
     this.navCtrl.push('OzgecmisDetayPage', {
       ozgecmisTapped: ozgecmis,
       aktivite: this.aktivite,

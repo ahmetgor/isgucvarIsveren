@@ -24,7 +24,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IlanSerProvider } from '../providers/ilan-ser';
 import { OzgecmisSerProvider } from '../providers/ozgecmis-ser';
 import { UserSerProvider } from '../providers/user-ser';
-import { AktiviteSerProvider } from '../providers/aktivite-ser';
+// import { AktiviteSerProvider } from '../providers/aktivite-ser';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -34,8 +34,8 @@ import * as  Cloudinary from 'cloudinary-core';
 import { Camera } from '@ionic-native/camera';
 // import { Deeplinks } from '@ionic-native/deeplinks';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import { LinkedInSdkModule } from 'angular-linkedin-sdk';
+// import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+// import { LinkedInSdkModule } from 'angular-linkedin-sdk';
 
 
 @NgModule({
@@ -64,8 +64,8 @@ import { LinkedInSdkModule } from 'angular-linkedin-sdk';
     IonicStorageModule.forRoot(),
     HttpModule,
     CloudinaryModule.forRoot(Cloudinary,
-    {cloud_name: 'isgucvar', upload_preset: 'cod9ui0a'}),
-    LinkedInSdkModule
+    {cloud_name: 'isgucvar', upload_preset: 'cod9ui0a'})
+    // LinkedInSdkModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -91,16 +91,16 @@ import { LinkedInSdkModule } from 'angular-linkedin-sdk';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserSerProvider,
-    AktiviteSerProvider,
+    // AktiviteSerProvider,
     IlanSerProvider,
     OzgecmisSerProvider,
     Camera,
     // Deeplinks,
     SocialSharing,
-    Facebook,
-    { provide: 'apiKey', useValue: '86p3aqpfdryb6f' },
-    { provide: 'authorize', useValue: 'true' }, // OPTIONAL by default: false
-    { provide: 'isServer', useValue: 'true' }  // OPTIONAL by default: false
+    // Facebook,
+    // { provide: 'apiKey', useValue: '86p3aqpfdryb6f' },
+    // { provide: 'authorize', useValue: 'true' }, // OPTIONAL by default: false
+    // { provide: 'isServer', useValue: 'true' }  // OPTIONAL by default: false
     ]
 })
 export class AppModule {}

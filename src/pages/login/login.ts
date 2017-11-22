@@ -23,24 +23,24 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public authService: UserSerProvider,
     public loadingCtrl: LoadingController, public storage: Storage, public events: Events) {
-      console.log("loginpage");
+      //console.log("loginpage");
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    //console.log('ionViewDidLoad LoginPage');
 
     this.storage.get('user')
         .then((user) => {this.email = user.email;
           this.password = user.password;
-          console.log("storage user");
+          //console.log("storage user");
         })
         .catch((err) => {
-          console.log("hata");
+          //console.log("hata");
           return;
         });
         this.showLoader('Bilgiler yükleniyor...');
         //Check if already authenticated
         this.authService.checkAuthentication().then((res) => {
-            console.log("Already authorized");
+            //console.log("Already authorized");
             this.loading.dismiss();
             if (this.navCtrl.canGoBack()) return;
             else this.navCtrl.setRoot('IlanlarimPage');
@@ -56,16 +56,16 @@ export class LoginPage {
           email: this.email,
           password: this.password
       };
-        console.log(JSON.stringify(credentials)+'credentials');
+        //console.log(JSON.stringify(credentials)+'credentials');
       this.authService.login(credentials).then((result: any) => {
 
-        console.log(JSON.stringify(result)+"result");
+        //console.log(JSON.stringify(result)+"result");
         // this.loading.dismiss();
         this.navCtrl.setRoot('IlanlarimPage');
 
       }, (err) => {
           // this.loading.dismiss();
-            console.log(JSON.stringify(err._body)+'asdasd');
+            //console.log(JSON.stringify(err._body)+'asdasd');
           // let msg = JSON.parse(err._body);
       });
   }

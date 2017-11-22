@@ -80,26 +80,30 @@ export class IlanEklePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad IlanEklePage');
+    //console.log('ionViewDidLoad IlanEklePage');
   }
 
   add() {
-    console.log(JSON.stringify(this.detay)+'detay');
-    console.log(JSON.stringify(this.user)+'detay');
+    //console.log(JSON.stringify(this.detay)+'detay');
+    //console.log(JSON.stringify(this.user)+'detay');
 
     this.detay.guncelleyen = this.guncelleyen;
     this.detay.firma = this.user.firmaId;
     if(!this.navParams.get('update')) {
-      console.log('ilan yeni ekleniyor');
+      //console.log('ilan yeni ekleniyor');
       this.detay.olusturan = this.guncelleyen;
       // this.detay.resim = this.firmaInfo.resim;
       // this.detay.firma = this.firmaInfo.firma;
       this.ilanSer.createIlan(this.detay)
         .then((res) =>{
-      if (this.navCtrl.canGoBack()) {this.navCtrl.pop();
+      if (this.navCtrl.canGoBack()) {
         this.events.publish('ilan:guncelle');
+        this.navCtrl.pop();
       }
-      else this.navCtrl.setRoot(IlanlarimPage);
+      else {
+        this.events.publish('ilan:guncelle');
+        this.navCtrl.setRoot(IlanlarimPage);
+      }
 
         })
         .catch((err) => {
@@ -109,13 +113,17 @@ export class IlanEklePage {
     // this.detayList.push(this.detay);
     // this.des = this.des.replace('Ekle', '');
     else{
-    console.log(this.detay+'ilan yeni ekleniyor');
+    //console.log(this.detay+'ilan yeni ekleniyor');
     this.ilanSer.updateIlan(this.detay)
       .then((res) =>{
-        if (this.navCtrl.canGoBack())  { this.navCtrl.pop();
+        if (this.navCtrl.canGoBack())  {
           this.events.publish('ilan:guncelle');
+          this.navCtrl.pop();
         }
-        else this.navCtrl.setRoot(IlanlarimPage);
+        else {
+          this.events.publish('ilan:guncelle');
+          this.navCtrl.setRoot(IlanlarimPage);
+        }
       // this.storage.set('ozgecmis', this.basvurulist)
       // this.orgDetay = this.detay;
       // console.log(JSON.stringify(this.orgDetay)+'orgDetay');

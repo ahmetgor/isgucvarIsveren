@@ -45,15 +45,15 @@ export class IlanSerProvider {
   constructor(public http: Http, public authService: UserSerProvider,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController,
               public storage: Storage) {
-    console.log('Hello IlanSerProvider Provider');
+    //console.log('Hello IlanSerProvider Provider');
   }
 
   getIlanlar(searchTerm, searchKayit, orderBy, skip, limit){
       let headers = new Headers();
       headers.append('Authorization', this.authService.token);
       let order = JSON.parse(orderBy);
-      console.log(JSON.stringify(order)+'order service');
-      console.log(order+'order service string');
+      //console.log(JSON.stringify(order)+'order service');
+      //console.log(order+'order service string');
 
       return new Promise((resolve, reject) => {
         let uri = encodeURI(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}&skip=${skip}&limit=${limit}`)
@@ -77,14 +77,14 @@ export class IlanSerProvider {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authService.token);
-      console.log(JSON.stringify(kayit)+'order service add ilan');
+      //console.log(JSON.stringify(kayit)+'order service add ilan');
 
       this.http.put(this.url + kayit._id, JSON.stringify(kayit), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
           // this.ozgecmis = kayit;
           // this.storage.set('ozgecmis', kayit);
-          console.log(JSON.stringify(res)+"updateall");
+          //console.log(JSON.stringify(res)+"updateall");
           this.loading.dismiss();
           this.presentToast('İlan güncellendi!');
           resolve(res);
@@ -159,7 +159,7 @@ getUsers(id: string){
     .map(res => res.json())
     .subscribe(data => {
 
-      console.log(JSON.stringify(data)+"data123");
+      //console.log(JSON.stringify(data)+"data123");
       resolve(data);
     }, (err) => {
       // reject(err);

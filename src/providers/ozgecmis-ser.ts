@@ -29,7 +29,7 @@ export class OzgecmisSerProvider {
   constructor(public http: Http, public storage: Storage,
               public authService: UserSerProvider,
                 public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
-    console.log('Hello OzgecmisSerProvider Provider');
+    //console.log('Hello OzgecmisSerProvider Provider');
   }
 
   getOzgecmis(ozgecmisId: string){
@@ -41,7 +41,7 @@ export class OzgecmisSerProvider {
         .subscribe(data => {
           this.ozgecmis = data;
           this.storage.set('ozgecmis', data);
-          console.log(JSON.stringify(data)+"data123");
+          //console.log(JSON.stringify(data)+"data123");
           resolve(data);
         }, (err) => {
           // reject(err);
@@ -63,7 +63,7 @@ export class OzgecmisSerProvider {
     , {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         resolve(data);
       }, (err) => {
         // reject(err);

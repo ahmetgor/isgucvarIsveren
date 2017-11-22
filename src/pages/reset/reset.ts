@@ -28,7 +28,7 @@ export class ResetPage {
       public toastCtrl: ToastController,) {}
 
     ionViewDidLoad() {
-      console.log('ionViewDidLoad PassResetPage');
+      //console.log('ionViewDidLoad PassResetPage');
     }
 
     resetle(){
@@ -44,7 +44,7 @@ export class ResetPage {
           // this.navCtrl.setRoot(SonucPage);
         }, (err) => {
             // this.loading.dismiss();
-              console.log(JSON.stringify(err._body)+'asdasd');
+              //console.log(JSON.stringify(err._body)+'asdasd');
             // this.presentToast('Girdiğiniz kullanıcı geçersiz veya bağ');
         });
     }
@@ -65,7 +65,7 @@ export class ResetPage {
         // this.navCtrl.setRoot(SonucPage);
       }, (err) => {
           // this.loading.dismiss();
-            console.log(JSON.stringify(err._body)+'asdasd');
+            //console.log(JSON.stringify(err._body)+'asdasd');
           // this.presentToast('Girdiğiniz kullanıcı geçersiz veya bağ');
       });
     }

@@ -39,7 +39,7 @@ export class OzgecmisDetayPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OzgecmisDetayPage');
+    //console.log('ionViewDidLoad OzgecmisDetayPage');
     this.ozgecmisSer.getOzgecmis(this.ozgecmisId)
     .then(ozgecmis => {
       this.ozgecmis = ozgecmis;
@@ -65,7 +65,7 @@ export class OzgecmisDetayPage {
   // picture: this.ilan.resim
 }
 
-console.log("share face");
+//console.log("share face");
 
   FB.ui({
   method: 'share',
@@ -102,10 +102,10 @@ console.log("share face");
   // this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")
   this.socialSharing.shareWithOptions(options)
   .then((result) => {
-      console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
-      console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+      //console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+      //console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
   }).catch((msg) => {
-      console.log("Sharing failed with message: " + msg);
+      //console.log("Sharing failed with message: " + msg);
   });
   }
   else this.presentActionSheet();
@@ -131,7 +131,7 @@ console.log("share face");
           {
             text: 'İptal',role: 'cancel',icon: 'close',
             handler: () => {
-              console.log('Cancel clicked');
+              //console.log('Cancel clicked');
             }
           }
         ]

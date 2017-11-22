@@ -5,8 +5,8 @@ import { IlanEklePage } from '../ilan-ekle/ilan-ekle';
 import { IlanSerProvider} from '../../providers/ilan-ser';
 import { Storage } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import { LinkedInService } from 'angular-linkedin-sdk';
+// import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+// import { LinkedInService } from 'angular-linkedin-sdk';
 
 declare var IN;
 declare var FB;
@@ -29,8 +29,8 @@ export class IlanDetayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
               public ilanSer: IlanSerProvider, public storage: Storage,
               private socialSharing: SocialSharing, public actionSheetCtrl: ActionSheetController,
-              public plt: Platform, private face: Facebook) {
-                console.log("ilandetay");
+              public plt: Platform) {
+                //console.log("ilandetay");
     this.ilan = this.navParams.get('ilan');
     this.ilanId = this.navParams.get('ilanId') ? this.navParams.get('ilanId') : this.ilan._id;
 
@@ -45,14 +45,14 @@ export class IlanDetayPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad IlanDetayPage');
+    //console.log('ionViewDidLoad IlanDetayPage');
     this.ilanSer.getIlan(this.ilanId)
     .then(ilan => {
       this.ilan = ilan;
     });
     this.events.subscribe('ilan:guncelle', () => {
-      console.log('ilan ekle event çağrıldı');
-      console.log(this.ilan._id+'  id  '+this.ilan.id);
+      //console.log('ilan ekle event çağrıldı');
+      //console.log(this.ilan._id+'  id  '+this.ilan.id);
       this.ilanSer.getIlan(this.ilanId)
       .then(ilan => {
         this.ilan = ilan;
@@ -69,7 +69,7 @@ export class IlanDetayPage {
 // 	// picture: this.ilan.resim
 // }
 
-console.log("share face");
+//console.log("share face");
 
   FB.ui({
   method: 'share',
@@ -89,9 +89,9 @@ console.log("share face");
   }
   this.socialSharing.shareWithOptions(options)
   .then((result) => {
-      console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+      //console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
   }).catch((msg) => {
-      console.log("Sharing failed with message: " + msg);
+      //console.log("Sharing failed with message: " + msg);
   });
   }
   else this.presentActionSheet();
@@ -137,7 +137,7 @@ console.log("share face");
             role: 'cancel',
             icon: 'close',
             handler: () => {
-              console.log('Cancel clicked');
+              //console.log('Cancel clicked');
             }
           }
         ]
@@ -148,7 +148,7 @@ console.log("share face");
 
   toOzgecmis() {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
-    console.log(JSON.stringify(this.ilan)+'ilan');
+    //console.log(JSON.stringify(this.ilan)+'ilan');
     this.navCtrl.push('OzgecmislerimPage', {
         ilanId: this.ilan._id,
       guncelleyen: this.guncelleyen
@@ -156,7 +156,7 @@ console.log("share face");
   }
 
   guncelleIlan() {
-    console.log(JSON.stringify(this.ilan)+'ilan');
+    //console.log(JSON.stringify(this.ilan)+'ilan');
     this.navCtrl.push('IlanEklePage', {
       ilanDetayId: this.ilan._id,
       update: 'Y'

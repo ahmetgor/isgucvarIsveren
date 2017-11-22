@@ -7,6 +7,7 @@ import { UserSerProvider} from '../../providers/user-ser';
 import { IlanFiltrelePage } from '../ilan-filtrele/ilan-filtrele';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
+import 'rxjs/add/operator/debounceTime';
 
 /**
  * Generated class for the TumIlanlarPage page.
@@ -28,7 +29,7 @@ export class TumIlanlarPage {
   searchTerm: string = '';
   searchControl: FormControl;
   skip: number = 0;
-  limit: number = 20;
+  limit: number = 10;
   scrollEnable: boolean = true;
   user: any;
   isEmpty: boolean = false;
@@ -38,43 +39,37 @@ export class TumIlanlarPage {
     public events: Events, public userAuth: UserSerProvider, public storage: Storage) {
       this.searchControl = new FormControl();
 
-      if (!this.userAuth.currentUser) {
-      this.userAuth.checkAuthentication().then((res) => {
-        console.log('tumilan constructor');
-        this.detayAra.firma = this.userAuth.currentUser.firma;
-        this.ilanListele();
-      }, (err) => {
-
-        console.log('tumilan constructor1');
-        this.navCtrl.setRoot(LoginPage);
-      });
-    }
-    else {
-      // this.storage.get('user')
-      //     .then((user) => { this.user = user;
-            console.log(this.userAuth.currentUser.firma);
-            this.detayAra.firma = this.userAuth.currentUser.firma;
-            this.ilanListele();
-            console.log('tumilan constructor');
-
-          // });
-      // this.detayAra.firma = this.userAuth.user.firma;
-      // this.detayAra.firma = "I2I-Systems";
-    }
-    console.log('tumilan constructor3');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TumIlanlarPage');
-    console.log('ionViewDidLoad SonucPage çağrıldı');
+    if (!this.userAuth.currentUser) {
+    this.userAuth.checkAuthentication().then((res) => {
+      //console.log('tumilan constructor');
+      this.detayAra.firma = this.userAuth.currentUser.firma;
+      this.ilanListele();
+    }, (err) => {
+
+      //console.log('tumilan constructor1');
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
+  else {
+    // this.storage.get('user')
+    //     .then((user) => { this.user = user;
+          //console.log(this.userAuth.currentUser.firma);
+          this.detayAra.firma = this.userAuth.currentUser.firma;
+          this.ilanListele();
+  }
+    //console.log('ionViewDidLoad TumIlanlarPage');
+    //console.log('ionViewDidLoad SonucPage çağrıldı');
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
     this.skip = 0;
     // this.infiniteScroll.enable(true);
-    console.log('ilanlistele searchkontrol çağrıldı');
+    //console.log('ilanlistele searchkontrol çağrıldı');
     this.ilanListele();
 
-    console.log('searchkontrol çağrıldı');
+    //console.log('searchkontrol çağrıldı');
   // }
 });
 
@@ -83,12 +78,18 @@ this.events.subscribe('ilan:filteredtumilan', (a) => {
   // this.infiniteScroll.enable(true);
   this.skip = 0;
   if(a == "clear") {
-    // console.log('filtre true');
+    // //console.log('filtre true');
     this.detayAra = {};
     this.detayAra.firma = this.userAuth.currentUser.firma;
     this.sirala = '{}';
   }
-  console.log('tümilanlistele filtre çağrıldı');
+  //console.log('tümilanlistele filtre çağrıldı');
+  this.ilanListele();
+});
+
+this.events.subscribe('ilan:guncelle', () => {
+  this.scrollEnable = true;
+  this.skip = 0;
   this.ilanListele();
 });
   }
@@ -109,7 +110,7 @@ this.events.subscribe('ilan:filteredtumilan', (a) => {
 
   itemTapped(ev, ilan) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
-    console.log(JSON.stringify(ilan)+'ilan');
+    //console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push('IlanDetayPage', {
       ilan: ilan
       // basvurulist: this.basvuruSer.basvuruList,
@@ -126,7 +127,7 @@ this.events.subscribe('ilan:filteredtumilan', (a) => {
   }
 
   doInfinite(infiniteScroll) {
-  console.log('Begin async operation');
+  //console.log('Begin async operation');
   // this.infiniteScroll = infiniteScroll;
   // infiniteScroll.enable(true);
   // infiniteScroll.enable(false);
@@ -135,22 +136,22 @@ this.events.subscribe('ilan:filteredtumilan', (a) => {
     this.skip = this.skip + 1;
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
-      console.log(JSON.stringify(ilanlar)+"ilanlar");
+      //console.log(JSON.stringify(ilanlar)+"ilanlar");
 
       if(Object.keys(ilanlar).length < this.limit) {
-        console.log('true');
+        //console.log('true');
         // infiniteScroll.enable(false);
         this.scrollEnable = false;
         ;}
 
-      console.log('false');
+      //console.log('false');
       // infiniteScroll.enable(true);
       // this.scrollEnable = true;
       for( var key in ilanlar ) {
     this.ilanList.push(ilanlar[key]);
   }
     });
-    console.log('Async operation has ended');
+    //console.log('Async operation has ended');
     infiniteScroll.complete();
   }, 500);
 }

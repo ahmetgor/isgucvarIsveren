@@ -27,7 +27,7 @@ export class SignupPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
+    //console.log('ionViewDidLoad SignupPage');
   }
 
   register(){
@@ -61,7 +61,7 @@ export class SignupPage {
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-        console.log("camera");
+        //console.log("camera");
         if(url == 'user')
         {this.userUrl = 'data:image/jpg;base64,' + data;}
         else {this.firmaUrl = 'data:image/jpg;base64,' + data;}
@@ -70,7 +70,7 @@ export class SignupPage {
         // alert('Unable to take photo');
       })
     } else {
-      console.log("native");
+      //console.log("native");
       if(url == 'user')
       {      this.userFileInput.nativeElement.click();
       }
@@ -81,7 +81,7 @@ export class SignupPage {
   processWebImage(event, url) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-      console.log("event");
+      //console.log("event");
       let imageData = (readerEvent.target as any).result;
       if(url == 'user')
       {this.userUrl = imageData;}

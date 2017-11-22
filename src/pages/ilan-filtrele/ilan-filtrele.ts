@@ -39,40 +39,40 @@ export class IlanFiltrelePage {
 
     this.sehirler = ilanSer.sehirler;
     this.detayAra = navParams.get('detayAra');
-    console.log(JSON.stringify(this.detayAra) + 'detay')
+    //console.log(JSON.stringify(this.detayAra) + 'detay')
     this.sirala = navParams.get('sirala');
     this.ilanlarim = navParams.get('ilanlarim');
-    console.log(this.ilanlarim);
+    //console.log(this.ilanlarim);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad IlanFiltrelePage'+this.ilanlarim);
+    //console.log('ionViewDidLoad IlanFiltrelePage'+this.ilanlarim);
 
   }
 
   filtrele() {
 
-    console.log(this.sirala+'kapatfiltre');
-    console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
+    //console.log(this.sirala+'kapatfiltre');
+    //console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
       // console.log(JSON.stringify(this.sirala)+'parsefiltre');
       if (this.ilanlarim == "ilan") {
-        console.log("ilan filter");
+        //console.log("ilan filter");
     this.events.publish('ilan:filteredilan', "");
   }
   else {this.events.publish('ilan:filteredtumilan', "");
-        console.log("tumilan filter");
+        // console.log("tumilan filter");
         }
     this.navCtrl.pop();
    }
 
    clear() {
-   console.log(JSON.stringify(this.detayAra)+'clearfiltre');
+   //console.log(JSON.stringify(this.detayAra)+'clearfiltre');
    if (this.ilanlarim == "ilan") {
-     console.log("ilan clear");
+     //console.log("ilan clear");
  this.events.publish('ilan:filteredilan', "clear");
 }
   else {this.events.publish('ilan:filteredtumilan', "clear");
-     console.log("tumilan clear");
+     //console.log("tumilan clear");
      }   this.navCtrl.pop();
   }
 }

@@ -35,13 +35,13 @@ export class HesapPage {
         .then((user) => { this.user = user;
           this.userUrl = 'url(' + user.resim + ')';
           this.cloudUrl = user.resim;
-          console.log(JSON.stringify(user));
+          //console.log(JSON.stringify(user));
         });
       }
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HesapPage');
+    //console.log('ionViewDidLoad HesapPage');
     this.newpassword = "";
     this.newpassword1 = "";
   }
@@ -83,7 +83,7 @@ export class HesapPage {
         allowEdit: true,
         quality: 70
       }).then((data) => {
-        console.log("camera");
+        //console.log("camera");
         this.userUrl = 'data:image/jpg;base64,' + data;
         this.cloudUrl = this.userUrl;
         // this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
@@ -92,7 +92,7 @@ export class HesapPage {
       })
     }
     else {
-      console.log("native");
+      //console.log("native");
            this.userFileInput.nativeElement.click();
     }
   }
@@ -103,13 +103,13 @@ export class HesapPage {
     var canvas = document.createElement('canvas');
     let dataUrl = undefined;
     reader.onload = (readerEvent) => {
-      console.log("event");
+      //console.log("event");
       dataUrl = (readerEvent.target as any).result;
       // console.log(imageData.src+"src");
       // canvas.getContext("2d").drawImage(imageData, 0, 0);
       // let dataUrl = canvas.toDataURL('image/jpg');
-      console.log(dataUrl);
-      console.log(dataUrl.length);
+      //console.log(dataUrl);
+      //console.log(dataUrl.length);
       this.userUrl = 'url(' + dataUrl + ')';
       this.cloudUrl = dataUrl;
       // console.log(imageData);
@@ -117,7 +117,7 @@ export class HesapPage {
       // this.form.patchValue({ 'profilePic': imageData });
     };
     reader.readAsDataURL(event.target.files[0]);
-    console.log(event.target.files[0]);
+    //console.log(event.target.files[0]);
 
   }
 

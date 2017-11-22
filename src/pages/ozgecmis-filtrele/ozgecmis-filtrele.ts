@@ -36,27 +36,27 @@ export class OzgecmisFiltrelePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public viewCtrl: ViewController, public events: Events) {
     this.detayAra = navParams.get('detayAra');
-    console.log(JSON.stringify(this.detayAra) + 'detay')
+    //console.log(JSON.stringify(this.detayAra) + 'detay')
     this.sirala = navParams.get('sirala');
     this.page = this.navParams.get('page');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OzgecmisFiltrelePage');
+    //console.log('ionViewDidLoad OzgecmisFiltrelePage');
 
   }
 
   filtrele() {
 
-    console.log(this.sirala+'kapatfiltre');
-    console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
+    //console.log(this.sirala+'kapatfiltre');
+    //console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
       // console.log(JSON.stringify(this.sirala)+'parsefiltre');
     this.events.publish('ozgecmis:filtered_'+this.navParams.get('page'));
     this.navCtrl.pop();
    }
 
    clear() {
-   console.log(JSON.stringify(this.detayAra)+'clearfiltre');
+   //console.log(JSON.stringify(this.detayAra)+'clearfiltre');
    this.events.publish('ozgecmis:filtered_'+this.navParams.get('page'), 'clear');
    this.navCtrl.pop();
   }

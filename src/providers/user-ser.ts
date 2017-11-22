@@ -23,7 +23,7 @@ export class UserSerProvider {
   constructor(public http: Http, public storage: Storage,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController,
               public events: Events) {
-    console.log('Hello UserSerProvider Provider');
+    //console.log('Hello UserSerProvider Provider');
     // this.checkAuthentication();
   }
 
@@ -39,17 +39,17 @@ export class UserSerProvider {
               this.events.publish('login:event');
             })
             .catch((err) => {
-              console.log("hata");
+              //console.log("hata");
             });
 
             let headers = new Headers();
             headers.append('Authorization', this.token);
             this.http.get(this.url+'protected', {headers: headers})
                 .subscribe(res => {
-                  console.log(JSON.stringify(res)+"success");
+                  //console.log(JSON.stringify(res)+"success");
                     resolve(res);
                 }, (err) => {
-                  console.log(JSON.stringify(err)+"err");
+                  //console.log(JSON.stringify(err)+"err");
                     reject(err);
                 });
         });
@@ -91,7 +91,7 @@ export class UserSerProvider {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        console.log("createaccount");
+        //console.log("createaccount");
         this.http.post(this.url+'register/user', JSON.stringify(details), {headers: headers})
           .subscribe(res => {
             let data = res.json();
@@ -129,7 +129,7 @@ export class UserSerProvider {
             let data = res.json();
             this.token = data.token;
             // console.log(data+'data');
-            console.log(JSON.stringify(data)+'user');
+            //console.log(JSON.stringify(data)+'user');
             this.currentUser = data.user;
             this.storage.set('token', data.token);
             this.storage.set('user', data.user);
@@ -142,7 +142,7 @@ export class UserSerProvider {
           }, (err) => {
             this.loading.dismiss();
             this.presentToast('Bilgileriniz hatalı veya hesabınız aktif değil!');
-            console.log(JSON.stringify(err)+'servis err');
+            //console.log(JSON.stringify(err)+'servis err');
             reject(err);
           });
     });
@@ -155,21 +155,21 @@ export class UserSerProvider {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.token);
-      console.log(JSON.stringify(user)+'order service update user');
+      //console.log(JSON.stringify(user)+'order service update user');
 
       this.http.put(this.url + 'updateuser'+en, JSON.stringify(user), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
           // this.ozgecmis = kayit;
           // this.storage.set('ozgecmis', kayit);
-          console.log(JSON.stringify(res)+"updateuser");
+          //console.log(JSON.stringify(res)+"updateuser");
           this.loading.dismiss();
           this.presentToast('Kullanıcı güncellendi!');
           resolve(res);
         }, (err) => {
           // reject(err);
           this.loading.dismiss();
-          console.log(JSON.stringify(err));
+          //console.log(JSON.stringify(err));
           this.presentToast('Kullanıcı güncellenemedi. Bağlantı problemi veya şifre hatalı olabilir!');
         });
     });
@@ -178,7 +178,7 @@ export class UserSerProvider {
   updateFirma(user){
     this.showLoader();
     return new Promise((resolve, reject) => {
-      console.log(JSON.stringify(user)+'order service update firma');
+      //console.log(JSON.stringify(user)+'order service update firma');
 
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -188,13 +188,13 @@ export class UserSerProvider {
         .map(res => res.json())
         .subscribe(res => {
 
-          console.log(JSON.stringify(res)+"updatefirma");
+          //console.log(JSON.stringify(res)+"updatefirma");
           this.loading.dismiss();
           this.presentToast('Firma güncellendi. Tekrar giriş yaptığınızda geçerli olacak.');
           resolve(res);
         }, (err) => {
           // reject(err);
-          console.log(JSON.stringify(err));
+          //console.log(JSON.stringify(err));
           this.loading.dismiss();
           if(JSON.stringify(err).includes('duplicate'))
           this.presentToast('Firma ismi kullanılıyor. Firma güncellenemedi.');
@@ -220,7 +220,7 @@ export class UserSerProvider {
 
           }, (err) => {
             let erm = JSON.parse(err._body);
-            console.log(erm.error+'forgot err')
+            //console.log(erm.error+'forgot err')
             this.loading.dismiss();
             this.presentToast("Geçici şifre gönderilemedi. "+erm.error);
           });
@@ -243,7 +243,7 @@ export class UserSerProvider {
 
           }, (err) => {
             let erm = JSON.parse(err._body);
-            console.log(erm.error+'forgot err')
+            //console.log(erm.error+'forgot err')
             this.loading.dismiss();
             this.presentToast("Yeni şifre kaydedilemedi. "+erm.error);
           });

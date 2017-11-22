@@ -7,6 +7,7 @@ import { OzgecmisFiltrelePage } from '../ozgecmis-filtrele/ozgecmis-filtrele';
 import { Storage } from '@ionic/storage';
 import { UserSerProvider } from '../../providers/user-ser';
 import { LoginPage } from '../login/login';
+import 'rxjs/add/operator/debounceTime';
 
 /**
  * Generated class for the OzgecmislerimPage page.
@@ -29,7 +30,7 @@ export class OzgecmislerimPage {
   searchTerm: string = '';
   searchControl: FormControl;
   skip: number = 0;
-  limit: number = 20;
+  limit: number = 10;
   scrollEnable: boolean = true;
   detayAra: any = {};
   sirala: any = '{}';
@@ -42,41 +43,37 @@ export class OzgecmislerimPage {
               public events: Events, public userAuth: UserSerProvider) {
                 this.searchControl = new FormControl();
 
-      if (!this.userAuth.currentUser) {
-      this.userAuth.checkAuthentication().then((res) => {
-        this.ilanId = this.navParams.get('ilanId');
-        this.userId = this.userAuth.currentUser._id;
-        this.olusturan = this.userAuth.currentUser.email;
-        console.log("constructor çağrıldı");
-        this.ozgecmisListele();
-
-      }, (err) => {
-        this.navCtrl.setRoot(LoginPage);
-      });
-    }
-    else {
-    this.ilanId = this.navParams.get('ilanId');
-    // this.storage.get('user')
-    //     .then((user) => {
-          console.log(this.userAuth.currentUser._id+'userid');
-          this.userId = this.userAuth.currentUser._id;
-          this.olusturan = this.userAuth.currentUser.email;
-          console.log("constructor çağrıldı");
-          this.ozgecmisListele();
-        // });
-
-      }
   }
 
   ionViewDidLoad() {
+    if (!this.userAuth.currentUser) {
+    this.userAuth.checkAuthentication().then((res) => {
+      this.ilanId = this.navParams.get('ilanId');
+      this.userId = this.userAuth.currentUser._id;
+      this.olusturan = this.userAuth.currentUser.email;
+      //console.log("constructor çağrıldı");
+      this.ozgecmisListele();
 
-    console.log('ionViewDidLoad OzgecmislerimPage');
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
+  else {
+  this.ilanId = this.navParams.get('ilanId');
+
+        this.userId = this.userAuth.currentUser._id;
+        this.olusturan = this.userAuth.currentUser.email;
+        //console.log("constructor çağrıldı");
+        this.ozgecmisListele();
+      // });
+    }
+    //console.log('ionViewDidLoad OzgecmislerimPage');
 
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
     this.skip = 0;
     // this.infiniteScroll.enable(true);
-    console.log('ilanlistele searchkontrol çağrıldı');
+    //console.log('ilanlistele searchkontrol çağrıldı');
     this.ozgecmisListele();
 });
 
@@ -88,7 +85,7 @@ this.events.subscribe('ozgecmis:begen', (a) => {
   //   this.detayAra = {};
   //   this.sirala = '{}';
   // }
-  console.log('ozgecmis begen event çağrıldı');
+  //console.log('ozgecmis begen event çağrıldı');
   this.ozgecmisListele();
 });
 
@@ -97,11 +94,11 @@ this.events.subscribe('ozgecmis:filtered_tek', (a) => {
   // this.infiniteScroll.enable(true);
   this.skip = 0;
   if(a) {
-    console.log('filtre true');
+    //console.log('filtre true');
     this.detayAra = {};
     this.sirala = '{}';
   }
-  console.log('ozgecmislistele filtre çağrıldı');
+  //console.log('ozgecmislistele filtre çağrıldı');
   this.ozgecmisListele();
 
 });
@@ -118,7 +115,7 @@ this.events.subscribe('ozgecmis:filtered_tek', (a) => {
     this.ozgecmisSer.getOzgecmisler(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ozgecmisler => {
       this.ozgecmisList = ozgecmisler;
-      console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
+      //console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
       if (Object.keys(this.ozgecmisList).length <= 0) {
         this.isEmpty = true;
       }
@@ -127,8 +124,8 @@ this.events.subscribe('ozgecmis:filtered_tek', (a) => {
   }
 
   toOzgecmisDetay(ozgecmis: any) {
-    // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
-    console.log(JSON.stringify(ozgecmis)+'ozgecmisDetay');
+    // //console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
+    //console.log(JSON.stringify(ozgecmis)+'ozgecmisDetay');
     this.navCtrl.push('OzgecmisDetayPage', {
       ozgecmisTapped: ozgecmis,
       aktivite: this.aktivite,

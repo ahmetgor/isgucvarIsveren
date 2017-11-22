@@ -47,7 +47,7 @@ export class FirmaHesapPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FirmaHesapPage');
+    //console.log('ionViewDidLoad FirmaHesapPage');
     this.newpassword = "";
     this.newpassword1 = "";
   }
@@ -67,7 +67,7 @@ export class FirmaHesapPage {
       if(this.newpassword.trim() && this.newpassword.trim()!= "") {
         details.newpassword = this.newpassword;
       }
-      console.log(JSON.stringify(details));
+      //console.log(JSON.stringify(details));
       this.authService.updateFirma(details).then((result) => {
         // this.presentToast('Kaydınız yapıldı, giriş yapabilirsiniz');
           this.authService.logout();
@@ -87,7 +87,7 @@ export class FirmaHesapPage {
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {
-        console.log("camera");
+        //console.log("camera");
         this.userUrl = 'data:image/jpg;base64,' + data;
         this.cloudUrl = this.userUrl;
         // this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
@@ -95,7 +95,7 @@ export class FirmaHesapPage {
         // alert('Unable to take photo');
       })
     } else {
-      console.log("native");
+      //console.log("native");
            this.userFileInput.nativeElement.click();
     }
   }
@@ -103,7 +103,7 @@ export class FirmaHesapPage {
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-      console.log("event");
+      //console.log("event");
       let imageData = (readerEvent.target as any).result;
       this.userUrl = 'url(' + imageData + ')';
       this.cloudUrl = imageData;
