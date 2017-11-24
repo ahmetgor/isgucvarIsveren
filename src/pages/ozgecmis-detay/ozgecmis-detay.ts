@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, Events, Platform, ActionSheetContr
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { Storage } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { UserSerProvider } from '../../providers/user-ser';
+import { LoginPage } from '../login/login';
 
 declare var IN;
 declare var FB;
@@ -26,33 +28,44 @@ export class OzgecmisDetayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ozgecmisSer: OzgecmisSerProvider, public events: Events,
               public storage: Storage, private socialSharing: SocialSharing,
-              public plt: Platform, public actionSheetCtrl: ActionSheetController) {
+              public plt: Platform, public actionSheetCtrl: ActionSheetController, public userAuth: UserSerProvider) {
 
     this.ozgecmis = this.navParams.get('ozgecmisTapped');
     this.ozgecmisId = this.navParams.get('ozgecmisId') ? this.navParams.get('ozgecmisId') : this.ozgecmis._id
     this.aktivite = this.navParams.get('aktivite');
-    this.storage.get('user')
-        .then((user) => {
-          this.userId = user._id;
-        });
-    // this.userId = "59163aa74be8d6e2c51b8647";
+
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad OzgecmisDetayPage');
+    if (!this.userAuth.currentUser) {
+    this.userAuth.checkAuthentication().then((res) => {
+      this.userId = this.userAuth.currentUser._id;
+      this.ozgecmisSer.getOzgecmis(this.ozgecmisId)
+      .then(ozgecmis => {
+        this.ozgecmis = ozgecmis;
+      });
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
+  else {
+    this.userId = this.userAuth.currentUser._id;
     this.ozgecmisSer.getOzgecmis(this.ozgecmisId)
     .then(ozgecmis => {
       this.ozgecmis = ozgecmis;
     });
+    }
+    console.log(this.aktivite);
   }
 
   ozgecmisBegen(segment, begen) {
     this.begenBody.segment = segment;
     this.begenBody.userId = this.userId;
     this.ozgecmisSer.begenOzgecmis(this.ozgecmis._id, this.begenBody, begen);
-    if (this.aktivite=="okunmadı") this.aktivite = segment;
+    if (!this.aktivite || this.aktivite=="okunmadı") this.aktivite = segment;
     else this.aktivite = "okunmadı";
     this.events.publish('ozgecmis:begen');
+    console.log(this.aktivite+'begen');
 
   }
 

@@ -33,10 +33,11 @@
     <p>{{ozgecmis.unvan}}</p>
     <p>{{getAge()}} yaşında, {{ozgecmis.yilTecrube}} yıl tecrübe</p>
     <p>{{ozgecmis.enabled | datePipe: 'aktif'}}</p>
+    <p>Özgeçmiş No: {{ozgecmis.id}}</p>
   </ion-item>
 </ion-card>
 
-<div *ngIf="aktivite=='okunmadı'">
+<div *ngIf="!aktivite||aktivite=='okunmadı'">
 <ion-row>
   <ion-col>
 <button ion-button block icon-left color="danger" (click)="ozgecmisBegen('okundu', 'begen')">
@@ -68,7 +69,7 @@
 </ion-col>
 </ion-row>
 </div>
-<div *ngIf="aktivite!='okunmadı'">
+<div *ngIf="aktivite && aktivite!='okunmadı'">
 <button ion-button block icon-left color="primary" (click)="ozgecmisBegen(aktivite, 'begenme')">
   <ion-icon name="ios-arrow-dropleft"></ion-icon>
   Tercih iptal</button>

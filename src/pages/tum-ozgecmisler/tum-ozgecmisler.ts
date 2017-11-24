@@ -63,10 +63,11 @@ export class TumOzgecmislerPage {
     //cı.log('ionViewDidLoad TumOzgecmislerPage');
 
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      console.log('ilanlistele searchkontrol çağrıldı');
     this.scrollEnable = true;
     this.skip = 0;
+    console.log('ilanlistele searchkontrol çağrıldı');
     this.ozgecmisListele();
-    //cı.log('ilanlistele searchkontrol çağrıldı');
 });
 
   this.events.subscribe('ozgecmis:begen', (a) => {
@@ -105,10 +106,11 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
     this.ozgecmisSer.getOzgecmisler(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ozgecmisler => {
       this.ozgecmisList = ozgecmisler;
+      console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
       if (Object.keys(this.ozgecmisList).length <= 0) {
         this.isEmpty = true;
       }
-      //console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
+      console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
       this.searching = false;
     });
   }

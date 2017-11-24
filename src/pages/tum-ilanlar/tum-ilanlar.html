@@ -31,9 +31,9 @@
       Kayıt bulunamadı
     </p>
   </div>
-  
+
   <ion-list text-wrap>
-    <button ion-item *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
+    <button ion-item [class.ilan]="!ilan.enabled" *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-thumbnail item-left>
         <img class="img-circle" [src]="ilan.firma.resim">

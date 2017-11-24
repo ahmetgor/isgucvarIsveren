@@ -9,12 +9,6 @@ import { UserSerProvider } from '../../providers/user-ser';
 import { LoginPage } from '../login/login';
 import 'rxjs/add/operator/debounceTime';
 
-/**
- * Generated class for the OzgecmislerimPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage({})
 @Component({
   selector: 'page-ozgecmislerim',

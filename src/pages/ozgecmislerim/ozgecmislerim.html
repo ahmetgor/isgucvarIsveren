@@ -54,7 +54,7 @@
     <div  *ngSwitchCase="'okunmadı'"> -->
   <ion-list text-wrap>
     <button ion-item *ngFor="let ozgecmis of ozgecmisList" (click)="toOzgecmisDetay(ozgecmis)">
-      <ion-thumbnail item-left>
+      <ion-thumbnail item-left *ngIf="ozgecmis">
         <img class="img-circle" [src]="ozgecmis.resim">
       </ion-thumbnail>
 
@@ -64,6 +64,8 @@
 
     </button>
   </ion-list>
+</ion-content>
+
 <!-- </div> -->
 
 <!-- <div  *ngSwitchCase="'okundu'">
@@ -111,5 +113,3 @@
 </ion-list>
 </div>
 </div> -->
-
-</ion-content>

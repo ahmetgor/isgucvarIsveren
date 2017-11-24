@@ -5,6 +5,8 @@ import { IlanEklePage } from '../ilan-ekle/ilan-ekle';
 import { IlanSerProvider} from '../../providers/ilan-ser';
 import { Storage } from '@ionic/storage';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { UserSerProvider} from '../../providers/user-ser';
+import { LoginPage } from '../login/login';
 // import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 // import { LinkedInService } from 'angular-linkedin-sdk';
 
@@ -29,27 +31,39 @@ export class IlanDetayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
               public ilanSer: IlanSerProvider, public storage: Storage,
               private socialSharing: SocialSharing, public actionSheetCtrl: ActionSheetController,
-              public plt: Platform) {
+              public plt: Platform, public userAuth: UserSerProvider) {
                 //console.log("ilandetay");
     this.ilan = this.navParams.get('ilan');
     this.ilanId = this.navParams.get('ilanId') ? this.navParams.get('ilanId') : this.ilan._id;
-
     this.guncelleyen = this.navParams.get('guncelleyen');
-    this.storage.get('user')
-        .then((user) => {
-          this.guncelleyen = user.email;
-        });
+
     // this.basvuruList = this.navParams.get('basvurulist');
     // this.kaydedilenList = this.navParams.get('kaydedilenlist');
     // this.ilanId = this.navParams.get('ilanId');
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad IlanDetayPage');
+
+    if (!this.userAuth.currentUser) {
+    this.userAuth.checkAuthentication().then((res) => {
+      this.guncelleyen = this.userAuth.currentUser.email;
+      this.ilanSer.getIlan(this.ilanId)
+      .then(ilan => {
+        this.ilan = ilan;
+      });
+        }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
+  else{
+    this.guncelleyen = this.userAuth.currentUser.email;
     this.ilanSer.getIlan(this.ilanId)
     .then(ilan => {
       this.ilan = ilan;
     });
+}
+    //console.log('ionViewDidLoad IlanDetayPage');
+
     this.events.subscribe('ilan:guncelle', () => {
       //console.log('ilan ekle event çağrıldı');
       //console.log(this.ilan._id+'  id  '+this.ilan.id);

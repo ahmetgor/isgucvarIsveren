@@ -96,7 +96,7 @@ export class UserSerProvider {
           .subscribe(res => {
             let data = res.json();
             this.loading.dismiss();
-            this.presentToast("Çalışan hesabı oluşturuldu!");
+            this.presentToast("Çalışan hesabı oluşturuldu. Aktiflemek maille gönderilen linke tıklayın.");
             resolve(data);
 
           }, (err) => {

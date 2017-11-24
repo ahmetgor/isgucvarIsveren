@@ -54,8 +54,8 @@ export class OzgecmisSerProvider {
     let headers = new Headers();
     headers.append('Authorization', this.authService.token);
     // let order = JSON.parse(orderBy);
-    // console.log(JSON.stringify(order)+'order service');
-    // console.log(order+'order service string');
+    console.log('order service');
+    console.log('order service string');
     let uri = encodeURI(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${orderBy}&skip=${skip}&limit=${limit}`);
 
     return new Promise((resolve, reject) => {

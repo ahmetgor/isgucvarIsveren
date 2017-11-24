@@ -86,7 +86,7 @@ export class IlanSerProvider {
           // this.storage.set('ozgecmis', kayit);
           //console.log(JSON.stringify(res)+"updateall");
           this.loading.dismiss();
-          this.presentToast('İlan güncellendi!');
+          // this.presentToast('İlan güncellendi!');
           resolve(res);
         }, (err) => {
           // reject(err);
