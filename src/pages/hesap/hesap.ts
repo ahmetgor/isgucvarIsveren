@@ -6,7 +6,7 @@ import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { UserSerProvider } from '../../providers/user-ser';
 import { LoginPage} from '../login/login';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-hesap',
   templateUrl: 'hesap.html',

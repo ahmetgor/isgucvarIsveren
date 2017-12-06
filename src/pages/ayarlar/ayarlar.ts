@@ -30,4 +30,9 @@ export class AyarlarPage {
   }
   }
 
+  mailTo() {
+    var myWindow = window.open('mailto:destek.isgucvarisveren@isgucvar.com', '_system');
+    // window.location.href = "mailto:destek.isgucvarisveren@isgucvar.com";
+    myWindow.close();
+  }
 }

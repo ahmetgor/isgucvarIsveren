@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
 // import { PassResetPage } from '../pass-reset/pass-reset';
 
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',

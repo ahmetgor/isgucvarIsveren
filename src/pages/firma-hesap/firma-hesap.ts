@@ -7,7 +7,7 @@ import { UserSerProvider } from '../../providers/user-ser';
 import { IlanSerProvider } from '../../providers/ilan-ser';
 import { LoginPage} from '../login/login';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-firma-hesap',
   templateUrl: 'firma-hesap.html',

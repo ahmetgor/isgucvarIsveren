@@ -6,12 +6,6 @@ import { Observable } from 'rxjs';
 import { UserSerProvider } from './user-ser';
 import { Storage } from '@ionic/storage';
 
-/*
-  Generated class for the IlanSerProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class IlanSerProvider {
 
@@ -52,11 +46,12 @@ export class IlanSerProvider {
       let headers = new Headers();
       headers.append('Authorization', this.authService.token);
       let order = JSON.parse(orderBy);
-      //console.log(JSON.stringify(order)+'order service');
+      console.log(JSON.stringify(searchKayit)+'order service');
       //console.log(order+'order service string');
 
       return new Promise((resolve, reject) => {
         let uri = encodeURI(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}&skip=${skip}&limit=${limit}`)
+        console.log(uri);
       this.http.get(uri
       , {headers: headers})
         .map(res => res.json())

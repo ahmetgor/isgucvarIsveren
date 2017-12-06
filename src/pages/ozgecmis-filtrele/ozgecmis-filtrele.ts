@@ -7,7 +7,7 @@ import { IonicPage, NavController, NavParams, ViewController, Events } from 'ion
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-ozgecmis-filtrele',
   templateUrl: 'ozgecmis-filtrele.html',

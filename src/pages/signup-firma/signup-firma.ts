@@ -5,7 +5,7 @@ import { LoginPage } from '../login/login';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
 import { Camera } from '@ionic-native/camera';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-signup-firma',
   templateUrl: 'signup-firma.html',
