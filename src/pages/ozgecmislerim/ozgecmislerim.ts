@@ -31,6 +31,7 @@ export class OzgecmislerimPage {
   showSearchbar: boolean = true;
   @ViewChild('content') content: Content;
   isEmpty: boolean = false;
+  cv_count: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ozgecmisSer: OzgecmisSerProvider, public storage: Storage,
@@ -109,6 +110,8 @@ this.events.subscribe('ozgecmis:filtered_tek', (a) => {
     this.ozgecmisSer.getOzgecmisler(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ozgecmisler => {
       this.ozgecmisList = ozgecmisler;
+      console.log(this.ozgecmisList.length);
+      this.cv_count = this.ozgecmisList.length;
       //console.log(JSON.stringify(this.ozgecmisList)+"basvuruya ait özgecmislist");
       if (Object.keys(this.ozgecmisList).length <= 0) {
         this.isEmpty = true;

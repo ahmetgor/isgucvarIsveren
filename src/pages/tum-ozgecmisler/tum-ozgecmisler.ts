@@ -24,7 +24,7 @@ export class TumOzgecmislerPage {
   searchTerm: string = '';
   searchControl: FormControl;
   skip: number = 0;
-  limit: number = 10;
+  limit: number = 20;
   scrollEnable: boolean = true;
   detayAra: any = {};
   sirala: any = {};
@@ -133,6 +133,29 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
     });
   }
 
+  doInfinite(infiniteScroll) {
+
+  setTimeout(() => {
+    this.skip = this.skip + 1;
+    this.ozgecmisSer.getOzgecmisler(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
+    .then(ozgecmisler => {
+      //console.log(JSON.stringify(ilanlar)+"ilanlar");
+
+      if(Object.keys(ozgecmisler).length < this.limit) {
+
+        this.scrollEnable = false;
+        ;}
+
+      for( var key in ozgecmisler ) {
+    this.ozgecmisList.push(ozgecmisler[key]);
+  }
+    });
+    //console.log('Async operation has ended');
+    infiniteScroll.complete();
+  }, 500);
+
+}
+
   toggleSearchbar() {
     this.showSearchbar = !this.showSearchbar;
     // this.content.resize();
@@ -150,4 +173,6 @@ this.events.subscribe('ozgecmis:filtered_tüm', (a) => {
   onSearchInput(){
     this.searching = true;
   }
+
+
   }
