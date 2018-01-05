@@ -61,6 +61,7 @@ export class OzgecmisDetayPage {
   ozgecmisBegen(segment, begen) {
     this.begenBody.segment = segment;
     this.begenBody.userId = this.userId;
+    this.begenBody.firma = this.userAuth.currentUser.firma;
     this.ozgecmisSer.begenOzgecmis(this.ozgecmis._id, this.begenBody, begen);
     if (!this.aktivite || this.aktivite=="okunmadı") this.aktivite = segment;
     else this.aktivite = "okunmadı";

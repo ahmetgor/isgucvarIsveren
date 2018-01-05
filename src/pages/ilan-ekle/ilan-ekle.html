@@ -39,7 +39,7 @@
         <ion-option value='Yarı Z.'>Yarı Z.</ion-option>
         <ion-option value='Proje Bazlı'>Proje Bazlı</ion-option>
         <ion-option value='Staj'>Staj</ion-option>
-        <ion-option value='Günlük'>Günlük</ion-option>
+        <!-- <ion-option value='Günlük'>Günlük</ion-option> -->
       </ion-select>
     </ion-item>
 
@@ -52,18 +52,32 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
-    <ion-label floating>Askerlik</ion-label>
-    <ion-select formControlName="askerlik" [(ngModel)]="detay.askerlik" cancelText="İptal" okText="Tamam">
-      <ion-option value="Yapıldı/Muaf" >Yapıldı/Muaf</ion-option>
-      <ion-option value="Yapılmadı/Tecilli">Yapılmadı/Tecilli</ion-option>
-    </ion-select>
-    </ion-item>
+    <ion-grid>
+  <ion-row *ngFor="let tags of detay.tags">
+    <ion-col col-7>
+      <ion-item>
+          <ion-label floating>Teknik Beceri & Uzmanlık</ion-label>
+          <ion-input [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="tags.tag"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+          <ion-label floating>Çalışılan Yıl</ion-label>
+          <ion-input [ngModelOptions]="{standalone: true}" type="number" [(ngModel)]="tags.yil"></ion-input>
+      </ion-item>
+    </ion-col>
 
-    <ion-item>
-        <ion-label floating>Ehliyet</ion-label>
-        <ion-input formControlName="ehliyet" type="text" [(ngModel)]="detay.ehliyet"></ion-input>
-    </ion-item>
+    <button ion-button small clear icon-only (click)="removeTag(tags.tag)">
+  <ion-icon name="remove-circle"></ion-icon>
+</button>
+
+  </ion-row>
+</ion-grid>
+<button ion-button icon-start small clear align="center" color="primary"
+        style="text-transform: none;"  (click)="addTag()">
+<ion-icon name="add"></ion-icon>
+        Teknik Bilgi & Uzmanlık Ekle</button>
+
 
     <ion-item>
     <ion-label floating>Eğitim</ion-label>
@@ -83,13 +97,26 @@
         <ion-option value='Çok Tecrübeli (4-6 yıl)'>Çok Tecrübeli (4-6 yıl)</ion-option>
         <ion-option value='Yönetici - Eksper (6 yıl üstü)'>Yönetici - Eksper (6+ yıl)</ion-option>
         <ion-option value='Stajyer'>Stajyer</ion-option>
-        <ion-option value='Hizmet Personeli - İşçi'>Hizmet Personeli - İşçi</ion-option>
+        <!-- <ion-option value='Hizmet Personeli - İşçi'>Hizmet Personeli - İşçi</ion-option> -->
       </ion-select>
     </ion-item>
 
     <ion-item>
         <ion-label floating>Açıklama</ion-label>
         <ion-textarea rows="6" formControlName="aciklama" type="text" [(ngModel)]="detay.aciklama"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+    <ion-label floating>Askerlik</ion-label>
+    <ion-select formControlName="askerlik" [(ngModel)]="detay.askerlik" cancelText="İptal" okText="Tamam">
+      <ion-option value="Yapıldı/Muaf" >Yapıldı/Muaf</ion-option>
+      <ion-option value="Yapılmadı/Tecilli">Yapılmadı/Tecilli</ion-option>
+    </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Ehliyet</ion-label>
+        <ion-input formControlName="ehliyet" type="text" [(ngModel)]="detay.ehliyet"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -104,13 +131,14 @@
       <p></p> -->
   <button ion-button block icon-left color="secondary" [disabled]="!ilanFormGroup.valid" (click)="add()">
     <ion-icon name="add-circle"></ion-icon>
-    Ekle&Güncelle</button>
+    Ekle & Güncelle
+  </button>
   <!-- </div> -->
 
-  <!-- <div *ngIf="(des!='tecrubeEkle'&&des!='egitimEkle'&&des!='yabanciDilEkle'&&des!='sertifikaEkle')">
+  <!-- <div *ngIf="(des!='tecrubeEkle' && des!='egitimEkle' && des!='yabanciDilEkle' && des!='sertifikaEkle')">
     <p></p>
     <ion-row>
-      <ion-col *ngIf="(des!='kisisel'&&des!='iletisim'&&des!='bilgisayar')">
+      <ion-col *ngIf="(des!='kisisel' && des!='iletisim'&&des!='bilgisayar')">
     <button ion-button block icon-left color="danger" (click)="delete()">
       <ion-icon name="trash"></ion-icon>
       Sil</button>
@@ -122,6 +150,7 @@
     </ion-col>
     </ion-row>
   </div> -->
+
 </form>
 </div>
   </div>

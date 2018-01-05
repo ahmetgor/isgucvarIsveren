@@ -13,10 +13,10 @@ export class UserSerProvider {
   user: any = {};
   // url : string = window.location.origin+'/api/firmaauth/';
   // url1 : string = window.location.origin+'/api/tools/';
-  url : string = 'https://isgucvarisveren.herokuapp.com/api/firmaauth/';
-  url1: string = 'https://isgucvarisveren.herokuapp.com/api/tools/';
-  // url : string = 'http://127.0.0.1:8080/api/firmaauth/';
-  // url1: string = 'http://127.0.0.1:8080/api/tools/';
+  // url : string = 'https://isgucvarisveren.herokuapp.com/api/firmaauth/';
+  // url1: string = 'https://isgucvarisveren.herokuapp.com/api/tools/';
+  url : string = 'http://127.0.0.1:8080/api/firmaauth/';
+  url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
   loading: any;
 

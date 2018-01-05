@@ -133,7 +133,13 @@ export class IlanEklePage {
           return;
     });
     }
-      // this.navCtrl.setRoot(IlanlarimPage);
   }
 
+  addTag() {
+    this.detay.tags.push({});
+  }
+
+  removeTag(value) {
+    this.detay.tags = this.detay.tags.filter(item => item.tag !== value)
+  }
 }
