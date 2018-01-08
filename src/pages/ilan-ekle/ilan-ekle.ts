@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+  import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
@@ -55,7 +55,7 @@ export class IlanEklePage {
       // this.firmaInfo.resim =  'https://res.cloudinary.com/isgucvar/image/upload/v1496613774/indir_xexwkb.png'
       // this.firmaInfo.firma = 'I2I-System';
       this.detay.enabled = true;
-
+      this.detay.tags = [];
       // this.orgDetay = this.navParams.get('orgDetay') ? this.navParams.get('orgDetay') : {};
       if(this.detayId) {
       ilanSer.getIlan(this.detayId)
@@ -102,7 +102,7 @@ export class IlanEklePage {
       }
       else {
         this.events.publish('ilan:guncelle');
-        this.navCtrl.setRoot(IlanlarimPage);
+        this.navCtrl.setRoot('IlanlarimPage');
       }
 
         })
@@ -122,7 +122,7 @@ export class IlanEklePage {
         }
         else {
           this.events.publish('ilan:guncelle');
-          this.navCtrl.setRoot(IlanlarimPage);
+          this.navCtrl.setRoot('IlanlarimPage');
         }
       // this.storage.set('ozgecmis', this.basvurulist)
       // this.orgDetay = this.detay;

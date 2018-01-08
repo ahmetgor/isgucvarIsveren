@@ -22,7 +22,7 @@ export class HesapPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public camera: Camera,
               public storage: Storage, public ozgecmisSer: OzgecmisSerProvider,
-              public authService: UserSerProvider,  public platform: Platform) {
+              public authService: UserSerProvider,  public plt: Platform) {
 
       if (!this.authService.currentUser) {
       this.authService.checkAuthentication().then((res) => {
@@ -74,7 +74,7 @@ export class HesapPage {
   }
 
   getPicture(url) {
-    if (!this.platform.is('core')) {
+    if (this.plt.is('ios') || this.plt.is('android')) {
       this.camera.getPicture({
         sourceType : 0,
         destinationType: this.camera.DestinationType.DATA_URL,

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, Platform  } from 'ionic-angular';
 import { UserSerProvider } from '../../providers/user-ser';
 import { LoginPage } from '../login/login';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
@@ -26,7 +26,7 @@ export class SignupFirmaPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
       public authService: UserSerProvider, public loadingCtrl: LoadingController,
-      public toastCtrl: ToastController, public camera: Camera,
+      public toastCtrl: ToastController, public camera: Camera, public plt: Platform,
       public ozgecmisSer: OzgecmisSerProvider) {}
 
   ionViewDidLoad() {
@@ -69,7 +69,7 @@ export class SignupFirmaPage {
   }
 
   getPicture(url) {
-    if (Camera['installed']()) {
+    if (this.plt.is('ios') || this.plt.is('android')) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
         targetWidth: 96,

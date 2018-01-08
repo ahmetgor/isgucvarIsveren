@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 import { OzgecmisSerProvider } from '../../providers/ozgecmis-ser';
@@ -23,7 +23,7 @@ export class FirmaHesapPage {
   @ViewChild('userFileInput') userFileInput;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public camera: Camera,
-              public storage: Storage, public ozgecmisSer: OzgecmisSerProvider,
+              public storage: Storage, public ozgecmisSer: OzgecmisSerProvider, public plt: Platform,
               public authService: UserSerProvider, public ilanService: IlanSerProvider) {
 
       if (!this.authService.currentUser) {
@@ -81,7 +81,7 @@ export class FirmaHesapPage {
   }
 
   getPicture(url) {
-    if (Camera['installed']()) {
+    if (this.plt.is('ios') || this.plt.is('android')) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
         targetWidth: 96,
