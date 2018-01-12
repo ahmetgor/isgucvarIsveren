@@ -59,6 +59,7 @@ export class SignupPage {
     if (this.plt.is('ios') || this.plt.is('android')) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         targetWidth: 96,
         targetHeight: 96
       }).then((data) => {

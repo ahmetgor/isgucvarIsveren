@@ -76,8 +76,8 @@ export class HesapPage {
   getPicture(url) {
     if (this.plt.is('ios') || this.plt.is('android')) {
       this.camera.getPicture({
-        sourceType : 0,
         destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         targetWidth: 300,
         targetHeight: 300,
         allowEdit: true,
